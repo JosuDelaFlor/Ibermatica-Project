@@ -27,3 +27,7 @@
     -fx-text-fill: red;
     -fx-font-weight: bold;
 }
+
+.lbl-info {
+    -fx-font-weight: bold;
+}

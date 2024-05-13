@@ -6,6 +6,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 import java.io.IOException;
 
@@ -22,13 +23,14 @@ public class App extends Application {
     public void start(Stage stage) throws IOException {
         scene = new Scene(loadFXML("fxml/index"), 640, 480);
         scene.getStylesheets().add(getClass().getResource("css/style.css").toExternalForm());
-        stage.setTitle("GESTION IBERMATICA");
+        stage.setTitle("GESTIÓN IBERMÁTICA");
         stage.getIcons().add(new Image(getClass().getResourceAsStream("img/favicon.png")));
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.setScene(scene);
         stage.show();
     }
 
-    static void setRoot(String fxml) throws IOException {
+    public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }
 
