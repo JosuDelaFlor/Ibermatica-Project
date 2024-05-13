@@ -1,7 +1,19 @@
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@../css/style.css" 
-xmlns="http://javafx.com/javafx/21" 
-xmlns:fx="http://javafx.com/fxml/1"
-fx:controller="proposal.controller.admMenuController">
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proposal.controller.admMenuController">
     <children>
         <Label layoutX="180.0" layoutY="14.0" prefHeight="35.0" prefWidth="281.0" styleClass="lbl-tlt" text="GESTIÓN IBERMÁTICA" />
         <ImageView fitHeight="100.0" fitWidth="281.0" layoutX="345.0" layoutY="366.0">
@@ -10,7 +22,9 @@ fx:controller="proposal.controller.admMenuController">
             </image>
         </ImageView>
         <Button fx:id="btnExit" layoutX="30.0" layoutY="404.0" mnemonicParsing="false" onAction="#exit" prefHeight="29.0" prefWidth="54.0" styleClass="btn" text="Salir" />
-        <Label layoutX="206.0" layoutY="111.0" prefHeight="17.0" prefWidth="89.0" styleClass="lbl-info" text="Usuario" />
-        <Label layoutX="206.0" layoutY="211.0" prefHeight="17.0" prefWidth="89.0" styleClass="lbl-info" text="Contraseña" />
+    <Button fx:id="btnRegister" layoutX="253.0" layoutY="100.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="136.0" styleClass="btn" text="Dar de Alta" onAction="#loadRegisterScene" />
+    <Button fx:id="btnResign" layoutX="253.0" layoutY="185.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="136.0" styleClass="btn" text="Dar de Baja" onAction="#loadResignScene" />
+    <Button fx:id="btnReservation" layoutX="228.0" layoutY="267.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="185.0" styleClass="btn" text="Reservas de Maquinaria" onAction="#loadReservationScene" />
+    <Button fx:id="btnLogOut" layoutX="14.0" layoutY="19.0" mnemonicParsing="false" styleClass="btn" text="Cerrar Sesion" onAction="#logOut" />
     </children>
 </AnchorPane>

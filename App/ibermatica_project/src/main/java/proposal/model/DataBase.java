@@ -32,6 +32,12 @@ public class DataBase {
         return conection;
     }
 
+    /**
+     * Searches all the users in the database and saves them 
+     * along with their information in an arraylist
+     * @return
+     */
+
     public ArrayList<User> searchAllUsers() {
         ArrayList<User> userList = new ArrayList<User>();
         String sql = "SELECT * FROM users";
@@ -45,8 +51,9 @@ public class DataBase {
                 int tlfNumber = rs.getInt("tlf_num");
                 String username = rs.getString("username"), password = rs.getString("password");
                 LocalDate registerDate = rs.getTimestamp("register_date").toLocalDateTime().toLocalDate();
+                int type = rs.getInt("type");
 
-                User user = new User(userId, name, surname, email, tlfNumber, username, password, registerDate, tlfNumber);
+                User user = new User(userId, name, surname, email, tlfNumber, username, password, registerDate, type);
                 userList.add(user);
             }
         } catch (SQLException e) {

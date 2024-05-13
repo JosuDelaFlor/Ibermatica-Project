@@ -1,8 +1,10 @@
 package proposal.controller;
 
-import javafx.application.Platform;
+import java.io.IOException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import proposal.App;
 
 public class employeeMenuController {
     @FXML
@@ -10,7 +12,7 @@ public class employeeMenuController {
 
     
     @FXML
-    private void exit() {
-        Platform.exit();
+    private void exit() throws IOException {
+        App.setRoot("fxml/index");
     }
 }

@@ -25,7 +25,7 @@ public class App extends Application {
         scene.getStylesheets().add(getClass().getResource("css/style.css").toExternalForm());
         stage.setTitle("GESTIÓN IBERMÁTICA");
         stage.getIcons().add(new Image(getClass().getResourceAsStream("img/favicon.png")));
-        stage.initStyle(StageStyle.UNDECORATED);
+        stage.initStyle(StageStyle.DECORATED);
         stage.setScene(scene);
         stage.show();
     }
