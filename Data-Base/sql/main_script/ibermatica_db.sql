@@ -21,15 +21,15 @@ CREATE TABLE IF NOT EXISTS users (
     tlf_num INT(9) NOT NULL, -- All +34
     username VARCHAR(50) NOT NULL,
     password VARCHAR(50) NOT NULL,
-    register_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    register_date TIMESTAMP NOT NULL,
     type INT(1) NOT NULL, -- 0 admin / 1 occasional_employee
     PRIMARY KEY(user_id),
     FOREIGN KEY(type) REFERENCES role(role_id) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 INSERT INTO users (user_id, name, surname, email, tlf_num, username, password, register_date, type)
-VALUES ('78565234T', 'Test_employee', 'Test_employee', 'test_employee@gmail.com', 123456789, 'test_employee', 'Admin123', '2024-13-05', 1),
-        ('68565324T', 'Admin', 'Admin', 'admin@gmail.com', 987654321, 'admin', 'Admin123', '2024-13-05', 0);
+VALUES ('78565234T', 'Test_employee', 'Test_employee', 'test_employee@gmail.com', 123456789, 'test_employee', 'Admin123', '2024-05-13', 1),
+        ('68565324T', 'Admin', 'Admin', 'admin@gmail.com', 987654321, 'admin', 'Admin123', '2024-05-13', 0);
 
 CREATE TABLE IF NOT EXISTS machines (
     serial_num VARCHAR(50),
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS reservation_machines (
 );
 
 INSERT INTO reservation_machines (user_id, serial_num, start_date, end_date)
-VALUES ('78565234T', '637714620T', '2024-13-05 10:00:00', '2024-14-05 08:30:00');
+VALUES ('78565234T', '637714620T', '2024-05-13 10:00:00', '2024-05-14 08:30:00');
 
 CREATE TABLE IF NOT EXISTS reservation_machines_cancelled (
     user_id VARCHAR(10) NOT NULL,
