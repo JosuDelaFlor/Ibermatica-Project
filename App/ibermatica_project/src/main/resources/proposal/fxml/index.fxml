@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@../css/style.css"
+   xmlns="http://javafx.com/javafx/21" 
+   xmlns:fx="http://javafx.com/fxml/1" 
+   fx:controller="proposal.controller.IndexController">
+   <children>
+      <Label layoutX="180.0" layoutY="14.0" prefHeight="35.0" prefWidth="281.0" styleClass="lbl-tlt" text="GESTIÓN IBERMÁTICA" />
+      <ImageView fitHeight="100.0" fitWidth="281.0" layoutX="345.0" layoutY="366.0">
+         <image>
+            <Image url="@../img/img/logo.jpg" />
+         </image>
+      </ImageView>
+      <HBox layoutX="206.0" layoutY="141.0" prefHeight="57.0" prefWidth="255.0">
+         <children>
+            <TextField fx:id="lblUser" prefHeight="25.0" prefWidth="193.0" promptText="Inserta el nombre de usuario" />
+            <ImageView fitHeight="25.0" fitWidth="41.0">
+               <image>
+                  <Image url="@../img/img/person-outline.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <HBox layoutX="206.0" layoutY="240.0" prefHeight="35.0" prefWidth="255.0">
+         <children>
+            <PasswordField fx:id="lblPass" prefHeight="25.0" prefWidth="193.0" promptText="Inserte la contraseña" />
+            <ImageView fitHeight="25.0" fitWidth="41.0">
+               <image>
+                  <Image url="@../img/img/key-outline.png" />
+               </image>
+            </ImageView>
+         </children>
+      </HBox>
+      <Button fx:id="btnLogin" layoutX="206.0" layoutY="312.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" styleClass="btn" text="Iniciar Sesion" />
+      <Button fx:id="btnReset" layoutX="345.0" layoutY="312.0" mnemonicParsing="false" styleClass="btn" text="Reiniciar" />
+      <Label fx:id="lblError" layoutX="206.0" layoutY="268.0" prefHeight="35.0" prefWidth="255.0" styleClass="lbl-error" />
+      <Button fx:id="btnExit" layoutX="30.0" layoutY="404.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="54.0" styleClass="btn" text="Salir" />
+      <Label layoutX="206.0" layoutY="111.0" prefHeight="17.0" prefWidth="89.0" text="Usuario" />
+      <Label layoutX="206.0" layoutY="211.0" prefHeight="17.0" prefWidth="89.0" text="Contraseña" />
+   </children>
+</AnchorPane>

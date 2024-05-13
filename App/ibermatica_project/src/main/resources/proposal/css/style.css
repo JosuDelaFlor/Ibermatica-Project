@@ -1,0 +1,29 @@
+.root {
+    -fx-background-color: white;
+}
+
+.lbl-tlt {
+    -fx-font-weight: bold;
+    -fx-font-size: 24px;
+    -fx-text-fill: black;
+    -fx-alignment: center;
+}
+
+.btn {
+    -fx-background-color: rgb(80, 79, 79);
+    -fx-text-fill: white;
+    -fx-border-color: rgb(44, 44, 44);
+    -fx-border-width: 2px;
+    -fx-border-radius: 50px;
+    -fx-background-radius: 50px
+}
+
+.btn:pressed {
+    -fx-scale-y: 0.9;
+    -fx-scale-x: 0.9;
+}
+
+.lbl-error {
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+}
