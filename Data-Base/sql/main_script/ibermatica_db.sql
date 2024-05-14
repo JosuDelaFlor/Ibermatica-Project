@@ -135,3 +135,7 @@ END
 $$
 DELIMITER ;
 
+-----------------------------------User----------------------------------------------------------
+CREATE USER ibermaticaAdmin IDENTIFIED BY 'Pa$$W0rd';
+GRANT SELECT, INSERT ON ibermatica_db.* TO ibermaticaAdmin;
+
