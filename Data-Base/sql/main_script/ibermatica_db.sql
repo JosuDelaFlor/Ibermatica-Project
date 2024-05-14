@@ -135,7 +135,9 @@ END
 $$
 DELIMITER ;
 
------------------------------------User----------------------------------------------------------
-CREATE USER ibermaticaAdmin IDENTIFIED BY 'Pa$$W0rd';
-GRANT SELECT, INSERT ON ibermatica_db.* TO ibermaticaAdmin;
+
+
+DROP USER IF EXISTS 'ibermaticaAdmin'@'localhost';
+CREATE USER IF NOT EXISTS  'ibermaticaAdmin'@'localhost' IDENTIFIED BY 'Pa$$W0rd';
+GRANT ALL PRIVILEGES ON ibermatica_db.* TO 'ibermaticaAdmin'@'localhost';
 
