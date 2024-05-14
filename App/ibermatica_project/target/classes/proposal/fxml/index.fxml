@@ -22,7 +22,7 @@ fx:controller="proposal.controller.IndexController">
       </ImageView>
       <HBox layoutX="206.0" layoutY="141.0" prefHeight="57.0" prefWidth="255.0">
          <children>
-            <TextField fx:id="lblUser" prefHeight="25.0" prefWidth="193.0" promptText="Inserta el nombre de usuario" />
+            <TextField fx:id="txfUser" prefHeight="25.0" prefWidth="193.0" promptText="Inserta el nombre de usuario" />
             <ImageView fitHeight="25.0" fitWidth="41.0">
                <image>
                   <Image url="@../img/person-outline.png" />
@@ -32,7 +32,7 @@ fx:controller="proposal.controller.IndexController">
       </HBox>
       <HBox layoutX="206.0" layoutY="240.0" prefHeight="35.0" prefWidth="255.0">
          <children>
-            <PasswordField fx:id="lblPass" prefHeight="25.0" prefWidth="193.0" promptText="Inserte la contraseña" />
+            <PasswordField fx:id="psfPass" prefHeight="25.0" prefWidth="193.0" promptText="Inserte la contraseña" />
             <ImageView fitHeight="25.0" fitWidth="41.0">
                <image>
                   <Image url="@../img/key-outline.png" />

@@ -1,4 +1,4 @@
-package proposal.model;
+package proposal.model.base;
 
 import java.time.LocalDate;
 

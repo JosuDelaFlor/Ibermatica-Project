@@ -10,18 +10,18 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import proposal.App;
-import proposal.model.DataBase;
-import proposal.model.User;
+import proposal.model.base.DataBase;
+import proposal.model.base.User;
 
 public class IndexController {
     @FXML
     Button btnLogin, btnReset, btnExit;
 
     @FXML
-    TextField lblUser;
+    TextField txfUser;
 
     @FXML
-    PasswordField lblPass;
+    PasswordField psfPass;
 
     @FXML
     Label lblError;
@@ -32,7 +32,7 @@ public class IndexController {
     private void checkUser() throws IOException {
         ArrayList<User> userList = new ArrayList<User>();
         userList = db.searchAllUsers();
-        String username = lblUser.getText().replaceAll("\\s", ""), password = lblPass.getText().replaceAll("\\s", "");
+        String username = txfUser.getText().replaceAll("\\s", ""), password = psfPass.getText().replaceAll("\\s", "");
 
         for (User user : userList) {
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
@@ -51,8 +51,8 @@ public class IndexController {
 
     @FXML
     private void restartLabels() {
-        lblUser.setText(null);
-        lblPass.setText(null);
+        txfUser.setText(null);
+        psfPass.setText(null);
         lblError.setText(null);
     }
 
