@@ -28,6 +28,13 @@ public class IndexController {
 
     DataBase db = new DataBase("localhost", "ibermatica_db", null, "root", null);
 
+    /**
+     * Collects all the users in the database and compares the inserted data and if they match 
+     * those in the database the user will access, depending on the type of user, they will access 
+     * one scene or another
+     * @throws IOException
+     */
+
     @FXML
     private void checkUser() throws IOException {
         ArrayList<User> userList = new ArrayList<User>();
@@ -42,15 +49,15 @@ public class IndexController {
                     App.setRoot("fxml/employeeMenu");
                 }
             } else if (username.equals("") || password.equals("")) {
-                lblError.setText("Both fields must be completed");
+                lblError.setText("Los dos campos tienes que estar completados");
             } else {
-                lblError.setText("The username or password is incorrect");
+                lblError.setText("El nombre de usuario o la contraseña son incorrectos");
             }
         }
     }
 
     @FXML
-    private void restartLabels() {
+    private void restartLabels() { // Reset all labels
         txfUser.setText(null);
         psfPass.setText(null);
         lblError.setText(null);

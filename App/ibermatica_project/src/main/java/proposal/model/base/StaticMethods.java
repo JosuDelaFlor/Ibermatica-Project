@@ -11,8 +11,8 @@ import proposal.model.Validation;
  */
 
 public class StaticMethods {
-    static Pattern passPattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@#$%^&+=!])(?=\\S+$).{8,}$");
-    static Pattern userIdPattern = Pattern.compile("^(?=.*?[A-Z]).{1,9}$");
+    static Pattern passPattern = Pattern.compile("[?!¡@¿.,´)]"); // Check special characters
+    static Pattern userIdPattern = Pattern.compile("^(?=.*?[A-Z]).{1,9}$"); // Check if it contains a capital letter at the end and if it is composed of numbers
     static Pattern isNumeric = Pattern.compile("\\d");
     static Pattern tlfNumberPattern = Pattern.compile("^\\d{1,9}$");
     static Pattern emailPattern = Pattern.compile("@+");
@@ -100,14 +100,41 @@ public class StaticMethods {
         pass2.replaceAll("\\s", "");
         Validation validation = new Validation(false, null);
 
-        Matcher passMat = passPattern.matcher(pass1);
+        if (pass1.length() > 8) {
+            boolean upper = false, number = false, lettersOrSymbol = false, special = false;
 
-        if (!pass1.equals(pass2)) {
-            validation.setErrorMsg("La contraseña y la contraseña de validacion tienen que ser iguales");
-        } else if (passMat.matches()) {
-            validation.setErrorMsg("La contraseña tiene que contener minimo una mayuscula, un caracter especial y 8 digitos");
+            Matcher passMat = passPattern.matcher(pass1);
+    
+            int i;
+            char l;
+    
+            for (i = 0; i < pass1.length(); i++) {
+                l = pass1.charAt(i);
+    
+                if (Character.isDigit(l)) {
+                    number = true;
+                }
+                if (Character.isLetter(l)) {
+                    lettersOrSymbol = true;
+                }
+                if (Character.isUpperCase(l)) { 
+                    upper = true;
+                }
+                if (passMat.find()) {      
+                    special = true;
+                }
+            }
+    
+            if (number == false || upper == false || lettersOrSymbol == false || special == false) {
+                validation.setValid(false);
+                validation.setErrorMsg("La contraseña tiene que contener mayusculas, minusculas y caracteres especiales");
+            } else if (!pass1.equals(pass2)) {
+                validation.setErrorMsg("La contraseña y la contraseña de validacion tienen que coincidir");
+            } else {
+                validation.setValid(true);
+            }
         } else {
-            validation.setValid(true);
+            validation.setErrorMsg("La contraseña tiene que contener mas de 8 caracteres");
         }
 
         return validation;

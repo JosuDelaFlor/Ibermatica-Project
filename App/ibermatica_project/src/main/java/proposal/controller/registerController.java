@@ -19,7 +19,7 @@ import proposal.model.base.StaticMethods;
 
 public class registerController {
     @FXML
-    Button btnBack, btnLogOut, btnRegister;
+    Button btnBack, btnLogOut, btnRegister, btnGenerateEmail, btnGenerateUser;
 
     @FXML
     TextField txfId, txfName, txfSurname, txfEmail, txfTlfNumber, txfUser; 
@@ -32,19 +32,21 @@ public class registerController {
     ComboBox comboType;
 
     @FXML
-    Label lblError;
+    Label lblError, lblSuccess;
 
     DataBase db = new DataBase("localhost", "ibermatica_db", null, "root", null);
     
     @SuppressWarnings("unchecked")
     @FXML
-    protected void initialize() {
+    protected void initialize() { // Load ComboBox data
         List<String> roleNameList = new ArrayList<String>();
         roleNameList.addAll(Arrays.asList("Administrador", "Empleado"));
 
         for (int i = 0; i < roleNameList.size(); i++) {
             comboType.getItems().add(roleNameList.get(i));
         }
+
+        comboType.setValue(roleNameList.get(1));
     }
 
     @SuppressWarnings("exports")
@@ -57,6 +59,12 @@ public class registerController {
         return null;
     }
 
+    /**
+     * Checks if the data inserted by the user contains the required characteristics
+     * @return
+     * @throws IOException
+     */
+
     @FXML
     private boolean testValidations() throws IOException {
         Validation userIdValidation = StaticMethods.userIdValidation(txfId.getText());
@@ -64,6 +72,7 @@ public class registerController {
         Validation tlfNumberValidation = StaticMethods.tlfNumberValidation(txfTlfNumber.getText());
         Validation emailValidation = StaticMethods.emailValidation(txfEmail.getText());
         Validation passValidation = StaticMethods.passValidation(psfPass1.getText(), psfPass2.getText());
+        
         if (!userIdValidation.isValid()) {
             lblError.setText(userIdValidation.getErrorMsg());
         } else if (!nameSurnameUsernameValidation.isValid()) {
@@ -77,7 +86,6 @@ public class registerController {
         } else {
             return true;
         }
-
         return false;
     }
 

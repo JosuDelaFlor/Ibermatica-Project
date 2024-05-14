@@ -31,3 +31,8 @@
 .lbl-info {
     -fx-font-weight: bold;
 }
+
+.lbl-success {
+    -fx-text-fill: green;
+    -fx-font-weight: bold;
+}

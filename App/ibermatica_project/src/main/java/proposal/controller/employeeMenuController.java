@@ -10,7 +10,6 @@ public class employeeMenuController {
     @FXML
     Button btnExit;
 
-    
     @FXML
     private void exit() throws IOException {
         App.setRoot("fxml/index");
