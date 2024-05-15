@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import proposal.App;
 
-public class employeeMenuController {
+public class EmployeeMenuController {
     @FXML
     Button btnExit;
 

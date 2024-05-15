@@ -5,6 +5,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -88,6 +89,34 @@ public class DataBase {
             System.out.println(e.getMessage());
         }
         return roleList;
+    }
+
+    public int addNewUser(User user) {
+        String sql = "INSERT INTO users(user_id, name, surname, email, tlf_num, username, password, register_date, type) "+
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, user.getUserId());
+            pstmt.setString(2, user.getName());
+            pstmt.setString(3, user.getSurname());
+            pstmt.setString(4, user.getEmail());
+            pstmt.setInt(5, user.getTlfNum());
+            pstmt.setString(6, user.getUsername());
+            pstmt.setString(7, user.getPassword());
+            pstmt.setTimestamp(8, Timestamp.valueOf(user.getRegisterdate().atStartOfDay()));
+            pstmt.setInt(9, user.getType());
+
+            int rowUpdated = pstmt.executeUpdate();
+            if (rowUpdated > 0) {
+                return 1;
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
     }
 }
 

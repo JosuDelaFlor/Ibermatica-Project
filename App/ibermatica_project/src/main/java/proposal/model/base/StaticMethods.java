@@ -1,7 +1,12 @@
 package proposal.model.base;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.crypto.Cipher;
+import javax.crypto.spec.SecretKeySpec;
 
 import proposal.model.Validation;
 
@@ -11,6 +16,11 @@ import proposal.model.Validation;
  */
 
 public class StaticMethods {
+
+    /*
+     * Validation methods
+     */
+
     static Pattern passPattern = Pattern.compile("[?!¡@¿.,´)]"); // Check special characters
     static Pattern userIdPattern = Pattern.compile("^(?=.*?[A-Z]).{1,9}$"); // Check if it contains a capital letter at the end and if it is composed of numbers
     static Pattern isNumeric = Pattern.compile("\\d");
@@ -35,7 +45,6 @@ public class StaticMethods {
         username.replaceAll("\\s", "");
         Validation validation = new Validation(false, null);
         
-        
         Matcher nameMat = isNumeric.matcher(name);
         Matcher surnameMat = isNumeric.matcher(surname);
         Matcher usernameMat = isNumeric.matcher(username);
@@ -51,8 +60,8 @@ public class StaticMethods {
         } else if (usernameMat.find()) {
             validation.setErrorMsg("El nombre de usuario no puede contener valores numericos");
         } else {
-            validation.setValid(true);
-        }
+            validation.setValid(true);  
+        } 
         
         return validation;
     }
@@ -68,6 +77,8 @@ public class StaticMethods {
 
         if (valid) {
             validation.setErrorMsg("El numero de telefono solo puede tener un maximo de 9 digitos, solo valores numericos y estar completo");
+        } else if (tlfNumber.length() > 9 || tlfNumber.length() < 9) {
+            validation.setErrorMsg("El numero de telefono no cumple con los requisitos");
         } else {
             validation.setValid(true);
         }
@@ -138,5 +149,53 @@ public class StaticMethods {
         }
 
         return validation;
+    }
+
+    /*
+     * Encryption methods
+     */
+
+    public static byte[] encriptPass(String pass) throws Exception {
+        final byte[] bytes = pass.getBytes("UTF-8");
+        final Cipher aes = getCipher(true);
+        final byte[] encriptyon = aes.doFinal(bytes);
+
+        return encriptyon;
+    }
+
+    public static String decipher(byte[] encriptyon) throws Exception {
+        final Cipher aes = getCipher(false);
+        final byte[] bytes = aes.doFinal(encriptyon);
+        final String unencrypted = new String(bytes, "UTF-8");
+
+        return unencrypted;
+    }
+
+    private static Cipher getCipher(boolean toEncript) throws Exception {
+        final String keyText = "áÁéÉíÍóÓúÚüÜñÑ1234567890!#%$&()=%¡'+`´ç´-.,;:_¨Ç^*?¿poiuytrewqasdfghjklñmnbvcxz";
+        final MessageDigest digest = MessageDigest.getInstance("SHA");
+        digest.update(keyText.getBytes("UTF-8"));
+        final SecretKeySpec key = new SecretKeySpec(digest.digest(), 0, 16, "AES");
+
+        final Cipher aes = Cipher.getInstance("AES/ECB/PKCS5Padding");
+        if (toEncript) {
+            aes.init(Cipher.ENCRYPT_MODE, key);
+        } else {
+            aes.init(Cipher.DECRYPT_MODE, key);
+        }
+
+        return aes;
+    }
+
+    public static byte[] stringToByte(String str) {
+        byte[] bytes = str.getBytes(StandardCharsets.UTF_8);
+
+        return bytes;
+    }
+
+    public static String byteToString(byte[] bytes) {
+        String str = new String(bytes, StandardCharsets.UTF_8);
+
+        return str;
     }
 }

@@ -10,4 +10,5 @@ module proposal {
     exports proposal;
     exports proposal.controller;
     exports proposal.model;
+    exports proposal.tests;
 }

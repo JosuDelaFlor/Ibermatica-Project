@@ -57,4 +57,11 @@ public class User {
     public int getType() {
         return type;
     }
+
+    @Override
+    public String toString() {
+        return "User [userId=" + userId + ", name=" + name + ", surname=" + surname + ", email=" + email + ", tlfNum="
+                + tlfNum + ", username=" + username + ", password=" + password + ", registerdate=" + registerdate
+                + ", type=" + type + "]";
+    }
 }

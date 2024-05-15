@@ -1,6 +1,5 @@
 package proposal.controller;
 
-import java.io.IOException;
 import java.util.ArrayList;
 
 import javafx.application.Platform;
@@ -12,6 +11,7 @@ import javafx.scene.control.TextField;
 import proposal.App;
 import proposal.model.base.DataBase;
 import proposal.model.base.User;
+import proposal.model.base.StaticMethods;
 
 public class IndexController {
     @FXML
@@ -28,21 +28,28 @@ public class IndexController {
 
     DataBase db = new DataBase("localhost", "ibermatica_db", null, "root", null);
 
+    static User loggedUser;
+
     /**
      * Collects all the users in the database and compares the inserted data and if they match 
      * those in the database the user will access, depending on the type of user, they will access 
      * one scene or another
-     * @throws IOException
+     * @throws Exception 
      */
 
     @FXML
-    private void checkUser() throws IOException {
+    private void checkUser() throws Exception {
         ArrayList<User> userList = new ArrayList<User>();
         userList = db.searchAllUsers();
         String username = txfUser.getText().replaceAll("\\s", ""), password = psfPass.getText().replaceAll("\\s", "");
 
         for (User user : userList) {
-            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
+            byte[] passBytes = StaticMethods.stringToByte(user.getPassword());
+            String pass = StaticMethods.decipher(passBytes);
+
+            if (user.getUsername().equals(username) && pass.equals(password)) {
+                loggedUser = new User(user.getUserId(), user.getName(), user.getSurname(), user.getEmail(), user.getTlfNum(), 
+                        user.getUsername(), user.getPassword(), user.getRegisterdate(), user.getType());
                 if (user.getType() == 0) {
                     App.setRoot("fxml/admMenu");
                 } else {
@@ -54,6 +61,11 @@ public class IndexController {
                 lblError.setText("El nombre de usuario o la contraseña son incorrectos");
             }
         }
+    }
+
+    @SuppressWarnings("exports")
+    public static User getLoggedUser() {
+        return loggedUser;
     }
 
     @FXML

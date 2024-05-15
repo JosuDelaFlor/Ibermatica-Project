@@ -7,7 +7,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import proposal.App;
 
-public class admMenuController {
+public class AdmMenuController {
     @FXML
     Button btnExit, btnRegister, btnResign, btnReservation, btnLogOut;
 
@@ -30,6 +30,11 @@ public class admMenuController {
     @FXML
     private void loadReservationScene() throws IOException {
         App.setRoot("fxml/reservationMenu");
+    }
+
+    @FXML
+    private void loadUserDataScene() throws IOException {
+        App.setRoot("fxml/userData");
     }
 
     @FXML
