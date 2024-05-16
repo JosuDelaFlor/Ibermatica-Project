@@ -38,6 +38,11 @@ public class AdmMenuController {
     }
 
     @FXML
+    private void loadUserModifyScene() throws IOException {
+        App.setRoot("fxml/userModify");
+    }
+
+    @FXML
     private void exit() {
         Platform.exit();
     }

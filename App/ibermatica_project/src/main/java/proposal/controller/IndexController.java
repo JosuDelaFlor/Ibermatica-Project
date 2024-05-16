@@ -11,7 +11,6 @@ import javafx.scene.control.TextField;
 import proposal.App;
 import proposal.model.base.DataBase;
 import proposal.model.base.User;
-import proposal.model.base.StaticMethods;
 
 public class IndexController {
     @FXML
@@ -44,10 +43,10 @@ public class IndexController {
         String username = txfUser.getText().replaceAll("\\s", ""), password = psfPass.getText().replaceAll("\\s", "");
 
         for (User user : userList) {
-            byte[] passBytes = StaticMethods.stringToByte(user.getPassword());
-            String pass = StaticMethods.decipher(passBytes);
+            // byte[] passBytes = StaticMethods.stringToByte(user.getPassword());
+            // String pass = StaticMethods.decipher(passBytes);
 
-            if (user.getUsername().equals(username) && pass.equals(password)) {
+            if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 loggedUser = new User(user.getUserId(), user.getName(), user.getSurname(), user.getEmail(), user.getTlfNum(), 
                         user.getUsername(), user.getPassword(), user.getRegisterdate(), user.getType());
                 if (user.getType() == 0) {

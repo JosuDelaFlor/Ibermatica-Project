@@ -29,7 +29,7 @@
             <Label fx:id="lblUsername" layoutX="421.0" layoutY="206.0" prefHeight="17.0" prefWidth="129.0" text="username" />
             <Label layoutX="60.0" layoutY="240.0" prefHeight="17.0" prefWidth="145.0" style="-fx-alignment: center;" styleClass="lbl-info" text="Correo" />
             <Label layoutX="248.0" layoutY="240.0" prefHeight="17.0" prefWidth="145.0" style="-fx-alignment: center;" styleClass="lbl-info" text="Numero de Telefono" />
-            <Label layoutX="413.0" layoutY="240.0" prefHeight="17.0" prefWidth="145.0" style="-fx-alignment: center;" styleClass="lbl-info" text="Tipo" />
+            <Label layoutX="413.0" layoutY="240.0" prefHeight="17.0" prefWidth="145.0" style="-fx-alignment: center;" styleClass="lbl-info" text="Tipo de usuario" />
             <Label fx:id="lblEmail" layoutX="68.0" layoutY="278.0" prefHeight="17.0" prefWidth="163.0" text="email" />
             <Label fx:id="lblTlfNumber" layoutX="256.0" layoutY="278.0" prefHeight="17.0" prefWidth="129.0" text="tlfNumber" />
             <Label fx:id="lblType" layoutX="421.0" layoutY="278.0" prefHeight="17.0" prefWidth="129.0" text="type" />

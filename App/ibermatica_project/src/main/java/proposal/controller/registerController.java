@@ -50,9 +50,7 @@ public class RegisterController {
         comboType.setValue(roleNameList.get(1));
     }
 
-    @SuppressWarnings("exports")
-    @FXML
-    public User register() throws Exception {
+    public void register() throws IOException {
         boolean valid = testValidations();
         if (valid) {
             lblError.setText(null);
@@ -60,11 +58,11 @@ public class RegisterController {
             if ((String) comboType.getValue() == "Administrador") {
                 type = 0;
             }
-            byte[] passBytes = StaticMethods.encriptPass(psfPass1.getText());
-            String pass = StaticMethods.byteToString(passBytes);
+            // byte[] passBytes = StaticMethods.encriptPass(psfPass1.getText());
+            // String pass = StaticMethods.byteToString(passBytes);
 
             User user = new User(txfId.getText(), txfName.getText(), txfSurname.getText(), txfEmail.getText(),
-                    Integer.parseInt(txfTlfNumber.getText()), txfUser.getText(), pass, LocalDate.now(), type);
+                    Integer.parseInt(txfTlfNumber.getText()), txfUser.getText(), psfPass1.getText(), LocalDate.now(), type);
             int result = db.addNewUser(user);
             if (result == 1) {
                 lblSuccess.setText("El usuario se a agregado correctamente");
@@ -72,7 +70,6 @@ public class RegisterController {
                 lblError.setText("Hemos tenido problemas al agregar el usuario");
             }
         }
-        return null;
     }
 
     /**
