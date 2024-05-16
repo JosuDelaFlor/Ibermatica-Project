@@ -33,18 +33,23 @@ public class UserModifyController {
     @SuppressWarnings("unchecked")
     @FXML
     private void searchUser() throws IOException {
-        User user = db.searchSpecificUser(txfId.getText());
-        txfName.setText(user.getName());
-        txfSurname.setText(user.getSurname());
-        txfEmail.setText(user.getEmail());
-        txfUser.setText(user.getUsername());
-        txfTlfNumber.setText(Integer.toString(user.getTlfNum()));
-        lblRegisterday.setText(user.getRegisterdate().toString());
-        
-        if (user.getType() == 0) {
-            comboType.setValue("Administrador");
+        boolean validId = checkDbId(txfId.getText());
+        if (validId) {
+            User user = db.searchSpecificUser(txfId.getText());
+            txfName.setText(user.getName());
+            txfSurname.setText(user.getSurname());
+            txfEmail.setText(user.getEmail());
+            txfUser.setText(user.getUsername());
+            txfTlfNumber.setText(Integer.toString(user.getTlfNum()));
+            lblRegisterday.setText(user.getRegisterdate().toString());
+            
+            if (user.getType() == 0) {
+                comboType.setValue("Administrador");
+            } else {
+                comboType.setValue("Empleado");
+            }    
         } else {
-            comboType.setValue("Empleado");
+            lblError.setText("El DNI insertado no existe");
         }
     }
 

@@ -129,7 +129,6 @@ public class DataBase {
             pstmt.setString(1, data);
             ResultSet rs = pstmt.executeQuery();
             if (rs.next()) {
-
                 String userId = rs.getString("user_id"), name = rs.getString("name"),
                         surname = rs.getString("surname"), email = rs.getString("email");
                 int tlfNumber = rs.getInt("tlf_num");
