@@ -223,7 +223,7 @@ public class DataBase {
         String sql = "UPDATE reservation_machines SET user_id = ?, serial_num = ?, start_date = ?, end_date = ? WHERE reservation_id = ?";
         try (Connection connection = connect();
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
-            
+                
             pstmt.setString(1, reservation.getUserId());
             pstmt.setString(2, reservation.getSerialNumber());
             pstmt.setTimestamp(3, Timestamp.valueOf(reservation.getStartDate().atStartOfDay()));
