@@ -10,7 +10,7 @@ import javax.crypto.spec.SecretKeySpec;
 import proposal.model.base.DataBase;
 import proposal.model.base.User;
 
-public class Test {
+public class TestEncrypt {
 
     static DataBase db = new DataBase("localhost", "ibermatica_db", null, "root", null);
 

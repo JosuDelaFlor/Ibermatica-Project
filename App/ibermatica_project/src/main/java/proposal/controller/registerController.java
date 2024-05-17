@@ -46,7 +46,6 @@ public class RegisterController {
         for (int i = 0; i < roleNameList.size(); i++) {
             comboType.getItems().add(roleNameList.get(i));
         }
-
         comboType.setValue(roleNameList.get(1));
     }
 

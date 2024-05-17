@@ -35,6 +35,7 @@ public class UserModifyController {
     private void searchUser() throws IOException {
         boolean validId = checkDbId(txfId.getText());
         if (validId) {
+            lblError.setText(null);
             User user = db.searchSpecificUser(txfId.getText());
             txfName.setText(user.getName());
             txfSurname.setText(user.getSurname());
@@ -122,6 +123,7 @@ public class UserModifyController {
                 validId = true;
             }
         }
+
         return validId;
     }
 

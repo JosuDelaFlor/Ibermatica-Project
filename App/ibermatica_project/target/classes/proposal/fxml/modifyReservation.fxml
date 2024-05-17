@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
@@ -23,22 +22,21 @@
                 <Image url="@../img/loginIcon.jpg" />
             </image>
         </ImageView>
-    <Button fx:id="btnVisualize" layoutX="285.0" layoutY="66.0" mnemonicParsing="false" styleClass="btn" text="Visualizar" onAction="#loadResvervationMenuScene" />
-    <ComboBox fx:id="comboSearchType" layoutX="30.0" layoutY="120.0" prefHeight="25.0" prefWidth="195.0" promptText="Selecciona el tipo de filtrado" />
-    <TextField fx:id="txfId" layoutX="136.0" layoutY="182.0" promptText="DNI" />
-    <TextField fx:id="txfSerialNumber" layoutX="355.0" layoutY="182.0" promptText="Numero de serie" />
-    <TextField fx:id="txfStartDate" layoutX="136.0" layoutY="240.0" promptText="Fecha de inicio" />
-    <TextField fx:id="txfEndDate" layoutX="355.0" layoutY="240.0" promptText="Fecha final" />
-    <TextField fx:id="txfReserveId" layoutX="246.0" layoutY="289.0" promptText="Id de la reserva" />
-    <Label layoutX="134.0" layoutY="165.0" prefHeight="17.0" prefWidth="149.0" style="-fx-alignment: center;" styleClass="lbl-info" text="DNI" />
-    <Label layoutX="355.0" layoutY="165.0" prefHeight="17.0" prefWidth="149.0" style="-fx-alignment: center;" styleClass="lbl-info" text="Numero de serie" />
-    <Label layoutX="136.0" layoutY="223.0" prefHeight="17.0" prefWidth="149.0" style="-fx-alignment: center;" styleClass="lbl-info" text="Fecha de inicio" />
-    <Label layoutX="355.0" layoutY="223.0" prefHeight="17.0" prefWidth="149.0" style="-fx-alignment: center;" styleClass="lbl-info" text="Fecha final" />
-    <Label layoutX="246.0" layoutY="272.0" prefHeight="17.0" prefWidth="149.0" style="-fx-alignment: center;" styleClass="lbl-info" text="Id de la reserva" />
-    <TextField fx:id="txfSearchInput" layoutX="246.0" layoutY="120.0" promptText="Filtrar" />
-    <Button fx:id="btnModify" layoutX="266.0" layoutY="352.0" mnemonicParsing="false" prefHeight="29.0" prefWidth="108.0" styleClass="btn" text="Guardar" />
-    <Button fx:id="btnRestart" layoutX="473.0" layoutY="352.0" mnemonicParsing="false" styleClass="btn" text="Reiniciar" />
+    <Button fx:id="btnVisualize" layoutX="285.0" layoutY="66.0" mnemonicParsing="false" onAction="#loadResvervationMenuScene" styleClass="btn" text="Visualizar" />
+    <TextField fx:id="txfId" layoutX="136.0" layoutY="215.0" promptText="DNI" />
+    <TextField fx:id="txfSerialNumber" layoutX="355.0" layoutY="215.0" promptText="Numero de serie" />
+    <TextField fx:id="txfStartDate" layoutX="136.0" layoutY="283.0" promptText="Fecha de inicio" />
+    <TextField fx:id="txfEndDate" layoutX="355.0" layoutY="283.0" promptText="Fecha final" />
+    <Label layoutX="134.0" layoutY="199.0" prefHeight="17.0" prefWidth="149.0" style="-fx-alignment: center;" styleClass="lbl-info" text="DNI" />
+    <Label layoutX="355.0" layoutY="199.0" prefHeight="17.0" prefWidth="149.0" style="-fx-alignment: center;" styleClass="lbl-info" text="Numero de serie" />
+    <Label layoutX="134.0" layoutY="265.0" prefHeight="17.0" prefWidth="149.0" style="-fx-alignment: center;" styleClass="lbl-info" text="Fecha de inicio" />
+    <Label layoutX="355.0" layoutY="265.0" prefHeight="17.0" prefWidth="149.0" style="-fx-alignment: center;" styleClass="lbl-info" text="Fecha final" />
+    <TextField fx:id="txfSearchInput" layoutX="233.0" layoutY="154.0" prefHeight="25.0" prefWidth="175.0" promptText="Inserte el numero de reserva" />
+    <Button fx:id="btnModify" layoutX="266.0" layoutY="352.0" mnemonicParsing="false" onAction="#modify" prefHeight="29.0" prefWidth="108.0" styleClass="btn" text="Guardar" />
+    <Button fx:id="btnRestart" layoutX="473.0" layoutY="352.0" mnemonicParsing="false" onAction="#restartData" styleClass="btn" text="Reiniciar" />
     <Label fx:id="lblError" layoutX="30.0" layoutY="326.0" prefHeight="17.0" prefWidth="560.0" styleClass="lbl-error" />
-    <Label fx:id="lblSuccess" layoutX="30.0" layoutY="366.0" prefHeight="17.0" prefWidth="219.0" styleClass="lbl-success" />
+    <Label fx:id="lblSuccess" layoutX="27.0" layoutY="383.0" prefHeight="17.0" prefWidth="219.0" styleClass="lbl-success" />
+    <Label layoutX="236.0" layoutY="137.0" prefHeight="17.0" prefWidth="175.0" style="-fx-alignment: center;" styleClass="lbl-info" text="Numero de reserva" />
+    <Button fx:id="btnSearch" layoutX="79.0" layoutY="354.0" mnemonicParsing="false" onAction="#searchReservation" styleClass="btn" text="Buscar" />
 </children>
 </AnchorPane>
