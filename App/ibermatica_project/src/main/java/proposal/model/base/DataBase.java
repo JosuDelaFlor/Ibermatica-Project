@@ -248,12 +248,14 @@ public class DataBase {
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
             
             ResultSet rs = pstmt.executeQuery();
-            String serialNumber = rs.getString("serial_num"), name = rs.getString("name");
-            LocalDate adquisitionDate = rs.getTimestamp("adquisition_date").toLocalDateTime().toLocalDate();
-            String type = rs.getString("type"), status = rs.getString("status");
-
-            Machine machine = new Machine(serialNumber, name, adquisitionDate, type, status);
-            machineList.add(machine);
+            while (rs.next()) {
+                String serialNumber = rs.getString("serial_num"), name = rs.getString("name");
+                LocalDate adquisitionDate = rs.getTimestamp("adquisition_date").toLocalDateTime().toLocalDate();
+                String type = rs.getString("type"), status = rs.getString("status");
+                    
+                Machine machine = new Machine(serialNumber, name, adquisitionDate, type, status);
+                machineList.add(machine);   
+            }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
