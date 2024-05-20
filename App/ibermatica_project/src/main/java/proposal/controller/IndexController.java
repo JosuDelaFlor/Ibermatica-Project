@@ -43,9 +43,6 @@ public class IndexController {
         String username = txfUser.getText().replaceAll("\\s", ""), password = psfPass.getText().replaceAll("\\s", "");
 
         for (User user : userList) {
-            // byte[] passBytes = StaticMethods.stringToByte(user.getPassword());
-            // String pass = StaticMethods.decipher(passBytes);
-
             if (user.getUsername().equals(username) && user.getPassword().equals(password)) {
                 loggedUser = new User(user.getUserId(), user.getName(), user.getSurname(), user.getEmail(), user.getTlfNum(), 
                         user.getUsername(), user.getPassword(), user.getRegisterdate(), user.getType());

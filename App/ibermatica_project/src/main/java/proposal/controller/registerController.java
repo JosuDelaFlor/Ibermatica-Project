@@ -57,9 +57,6 @@ public class RegisterController {
             if ((String) comboType.getValue() == "Administrador") {
                 type = 0;
             }
-            // byte[] passBytes = StaticMethods.encriptPass(psfPass1.getText());
-            // String pass = StaticMethods.byteToString(passBytes);
-
             User user = new User(txfId.getText(), txfName.getText(), txfSurname.getText(), txfEmail.getText(),
                     Integer.parseInt(txfTlfNumber.getText()), txfUser.getText(), psfPass1.getText(), LocalDate.now(), type);
             int result = db.addNewUser(user);

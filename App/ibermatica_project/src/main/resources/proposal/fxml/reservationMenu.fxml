@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -22,7 +24,11 @@
                 <Image url="@../img/loginIcon.jpg" />
             </image>
         </ImageView>
-    <TableView fx:id="tbtReservation" layoutX="23.0" layoutY="112.0" prefHeight="270.0" prefWidth="595.0" />
-    <Button fx:id="btnModify" layoutX="285.0" layoutY="66.0" mnemonicParsing="false" onAction="#loadModifyReservationScene" styleClass="btn" text="Modificar" />
+    <TableView fx:id="tbtReservation" layoutX="23.0" layoutY="112.0" prefHeight="251.0" prefWidth="595.0" />
+    <Button fx:id="btnModify" layoutX="442.0" layoutY="66.0" mnemonicParsing="false" onAction="#loadModifyReservationScene" styleClass="btn" text="Modificar" />
+    <ComboBox fx:id="comboSearchType" layoutX="23.0" layoutY="68.0" prefWidth="150.0" promptText="Tipo de filtro" />
+    <TextField fx:id="txfSearch" layoutX="180.0" layoutY="68.0" promptText="Filtrado" />
+    <Button fx:id="btnSearch" layoutX="354.0" layoutY="68.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" styleClass="btn" text="Filtrar" onAction="#search" />
+    <Label fx:id="lblError" layoutX="23.0" layoutY="375.0" prefHeight="17.0" prefWidth="595.0" styleClass="lbl-error" />
 </children>
 </AnchorPane>

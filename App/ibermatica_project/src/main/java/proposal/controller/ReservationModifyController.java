@@ -37,7 +37,7 @@ public class ReservationModifyController {
         resetLbls();
         if (!txfSearchInput.getText().replaceAll("\\s", "").equals("")) {
             if (checkDbReservationId(Integer.parseInt(txfSearchInput.getText()))) {
-                inputReservation = db.searchSpecificReservation(Integer.parseInt(txfSearchInput.getText()));
+                inputReservation = db.searchSpecificReservationWithId(Integer.parseInt(txfSearchInput.getText()));
                 txfId.setText(inputReservation.getUserId());
                 txfSerialNumber.setText(inputReservation.getSerialNumber());
                 txfStartDate.setText(inputReservation.getStartDate().toString());
@@ -93,6 +93,8 @@ public class ReservationModifyController {
             lblError.setText("El campo Numero de serie tiene que estar completado");
         } else if (!checkDbSerialNumber(txfSerialNumber.getText())) {
             lblError.setText("El Numero de serie insertado no existe");
+        } else if (!checkMachineStatus(txfSerialNumber.getText())) {
+            lblError.setText("La maquina que quiere reservar no se encuentra operativa");
         } else {
             validSerialNumber = true;
         }
@@ -200,6 +202,17 @@ public class ReservationModifyController {
             if (reservation.getReservationId() == reservationId) {
                 valid = true;
             }
+        }
+        return valid;
+    }
+
+    @FXML
+    private boolean checkMachineStatus(String serialNumber) throws IOException {
+        boolean valid = false;
+        Machine machine = db.searchSpecificMachine(serialNumber);
+
+        if (machine.getStatus().equals("operational")) {
+            valid = true;
         }
         return valid;
     }

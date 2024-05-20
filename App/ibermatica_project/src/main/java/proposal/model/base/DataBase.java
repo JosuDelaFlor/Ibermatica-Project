@@ -194,7 +194,7 @@ public class DataBase {
         return reservationList;
     }
 
-    public Reservation searchSpecificReservation(int data) {
+    public Reservation searchSpecificReservationWithId(int data) {
         Reservation reservation;
         String sql = "SELECT * FROM reservation_machines WHERE reservation_id = ?";
         try (Connection connection = connect();
@@ -217,6 +217,104 @@ public class DataBase {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public ArrayList<Reservation> searchSpecificReservationWithUserId(String data) {
+        ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
+        String sql = "SELECT * FROM reservation_machines WHERE user_id = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, data);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String userId = rs.getString("user_id");
+                String serialNumber = rs.getString("serial_num");
+                LocalDate startDate = rs.getTimestamp("start_date").toLocalDateTime().toLocalDate();
+                LocalDate endDate = rs.getTimestamp("end_date").toLocalDateTime().toLocalDate();
+                int reservation_id = rs.getInt("reservation_id");
+
+                Reservation reservation = new Reservation(userId, serialNumber, startDate, endDate, reservation_id);
+                reservationList.add(reservation);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return reservationList;
+    }
+
+    public ArrayList<Reservation> searchSpecificReservationWithSerialNumer(String data) {
+        ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
+        String sql = "SELECT * FROM reservation_machines WHERE serial_num = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, data);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String userId = rs.getString("user_id");
+                String serialNumber = rs.getString("serial_num");
+                LocalDate startDate = rs.getTimestamp("start_date").toLocalDateTime().toLocalDate();
+                LocalDate endDate = rs.getTimestamp("end_date").toLocalDateTime().toLocalDate();
+                int reservation_id = rs.getInt("reservation_id");
+
+                Reservation reservation = new Reservation(userId, serialNumber, startDate, endDate, reservation_id);
+                reservationList.add(reservation);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return reservationList;
+    }
+
+    public ArrayList<Reservation> searchSpecificReservationWithStartDate(String data) {
+        ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
+        String sql = "SELECT * FROM reservation_machines WHERE start_date = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            LocalDate startDateL = LocalDate.parse(data);
+            pstmt.setTimestamp(1, Timestamp.valueOf(startDateL.atStartOfDay()));
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String userId = rs.getString("user_id");
+                String serialNumber = rs.getString("serial_num");
+                LocalDate startDate = rs.getTimestamp("start_date").toLocalDateTime().toLocalDate();
+                LocalDate endDate = rs.getTimestamp("end_date").toLocalDateTime().toLocalDate();
+                int reservation_id = rs.getInt("reservation_id");
+
+                Reservation reservation = new Reservation(userId, serialNumber, startDate, endDate, reservation_id);
+                reservationList.add(reservation);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return reservationList;
+    }
+
+    public ArrayList<Reservation> searchSpecificReservationWithEndDate(String data) {
+        ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
+        String sql = "SELECT * FROM reservation_machines WHERE end_date = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            LocalDate endDateL = LocalDate.parse(data);
+            pstmt.setTimestamp(1, Timestamp.valueOf(endDateL.atStartOfDay()));
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String userId = rs.getString("user_id");
+                String serialNumber = rs.getString("serial_num");
+                LocalDate startDate = rs.getTimestamp("start_date").toLocalDateTime().toLocalDate();
+                LocalDate endDate = rs.getTimestamp("end_date").toLocalDateTime().toLocalDate();
+                int reservation_id = rs.getInt("reservation_id");
+
+                Reservation reservation = new Reservation(userId, serialNumber, startDate, endDate, reservation_id);
+                reservationList.add(reservation);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return reservationList;
     }
 
     public int updateReservation(Reservation reservation) {
@@ -259,8 +357,29 @@ public class DataBase {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-
         return machineList;
+    }
+
+    public Machine searchSpecificMachine(String serialNumberInput) {
+        Machine machine;
+        String sql = "SELECT * FROM machines WHERE serial_num = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, serialNumberInput);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                String serialNumber = rs.getString("serial_num"), name = rs.getString("name");
+                LocalDate adquisitionDate = rs.getTimestamp("adquisition_date").toLocalDateTime().toLocalDate();
+                String type = rs.getString("type"), status = rs.getString("status");
+                
+                machine = new Machine(serialNumber, name, adquisitionDate, type, status);
+                return machine;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return null;
     }
 }
 
