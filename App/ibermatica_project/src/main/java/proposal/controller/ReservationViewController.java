@@ -274,6 +274,7 @@ public class ReservationViewController {
 
     @SuppressWarnings("unchecked")
     private void createReservationTableView(Reservation reservation) {
+        tbtReservation.getItems().clear();
         TableColumn<Reservation, String> column1 = new TableColumn<>("DNI");
         column1.setCellValueFactory(new PropertyValueFactory<>("userId"));
         TableColumn<Reservation, String> column2 = new TableColumn<>("Numero de serie");
