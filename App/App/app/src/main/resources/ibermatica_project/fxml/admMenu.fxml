@@ -1,53 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.*?>
-<?import java.lang.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.shape.*?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ibermatica_project.controller.AdmMenuController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ibermatica_project.controller.AdmMenuController">
     <children>
         <Pane prefHeight="600.0" prefWidth="284.0">
             <children>
-                <ImageView fitHeight="149.0" fitWidth="152.0" layoutX="66.0" layoutY="28.0">
-                    <image>
-                        <Image url="@../img/group.png" />
-                    </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-                </ImageView>
-                <ImageView fitHeight="149.0" fitWidth="152.0" layoutX="66.0" layoutY="206.0">
-                    <image>
-                        <Image url="@../img/machine.png" />
-                    </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-                </ImageView>
-                <ImageView fitHeight="149.0" fitWidth="152.0" layoutX="66.0" layoutY="411.0">
-                    <image>
-                        <Image url="@../img/booking.png" />
-                    </image>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-                </ImageView>
+                <Button fx:id="btnUserManagement" layoutX="58.0" layoutY="41.0" mnemonicParsing="false" onAction="#loadUserManagementMenuScene" prefHeight="149.0" prefWidth="152.0" style="-fx-background-color: white;">
+                    <graphic>
+                        <ImageView fitHeight="149.0" fitWidth="152.0">
+                            <image>
+                                <Image url="@../img/group.png" />
+                            </image>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                    </graphic>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor></Button>
+                <Button fx:id="btnMachineManagement" layoutX="47.0" layoutY="202.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="191.0" style="-fx-background-color: white;">
+                    <graphic>
+                        <ImageView fitHeight="149.0" fitWidth="152.0">
+                            <image>
+                                <Image url="@../img/machine.png" />
+                            </image>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                    </graphic>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor></Button>
+                <Button fx:id="btnReserveManagement" layoutX="56.0" layoutY="405.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="173.0" style="-fx-background-color: white;">
+                    <graphic>
+                        <ImageView fitHeight="149.0" fitWidth="152.0">
+                            <image>
+                                <Image url="@../img/booking.png" />
+                            </image>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                    </graphic>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor></Button>
                 <Line endX="6.0" endY="570.0" layoutX="278.0" layoutY="28.0" startX="6.0" startY="-28.0" />
+                <Label layoutX="66.0" layoutY="16.0" prefHeight="25.0" prefWidth="152.0" styleClass="lbl-info" text="Gestión de usuarios" />
+                <Label layoutX="56.0" layoutY="177.0" prefHeight="25.0" prefWidth="173.0" styleClass="lbl-info" text="Gestión de maquinaria" />
+                <Label layoutX="69.0" layoutY="380.0" styleClass="lbl-info" text="Gestión de reservas" />
             </children>
         </Pane>
         <Pane layoutX="284.0" layoutY="-1.0" prefHeight="608.0" prefWidth="618.0">
             <children>
-                <Label id="lbl-menu-title" layoutX="83.0" layoutY="14.0" prefHeight="47.0" prefWidth="454.0" text="Bienvenido Usuario" />
+                <Label id="lbl-menu-title" fx:id="lblTitle" layoutX="83.0" layoutY="14.0" prefHeight="47.0" prefWidth="454.0" text="Bienvenido Usuario" />
                 <ImageView fitHeight="89.0" fitWidth="103.0" layoutX="258.0" layoutY="92.0">
                     <image>
                         <Image url="@../img/userInfo.png" />
@@ -65,15 +82,16 @@
                 <Label layoutX="410.0" layoutY="355.0" prefHeight="17.0" prefWidth="143.0" styleClass="lbl-info" text="Tipo de usuario" />
                 <Label fx:id="lblTlfNumber" layoutX="233.0" layoutY="415.0" prefHeight="20.0" prefWidth="152.0" styleClass="lbl-data" text="Telefono Usuario" />
                 <Label fx:id="lblType" layoutX="406.0" layoutY="415.0" prefHeight="20.0" prefWidth="152.0" styleClass="lbl-data" text="Tipo Usuario" />
-                <Button layoutX="239.0" layoutY="479.0" mnemonicParsing="false" styleClass="btn-danger" text="Restablecer Contraseña">
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor></Button>
+                <Button layoutX="239.0" layoutY="479.0" mnemonicParsing="false" styleClass="btn-danger" text="Restablecer Contraseña" onAction="#loadRestartPasswordScene" >
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor></Button>
                 <ImageView fitHeight="67.0" fitWidth="77.0" layoutX="417.0" layoutY="460.0">
                     <image>
                         <Image url="@../img/warning.png" />
                     </image>
                 </ImageView>
+                <MenuButton fx:id="btnMenu" layoutX="488.0" layoutY="25.0" mnemonicParsing="false" text="MenuButton" />
             </children>
         </Pane>
     </children>

@@ -13,6 +13,7 @@ import java.util.List;
 import ibermatica_project.model.Machine;
 import ibermatica_project.model.Reservation;
 import ibermatica_project.model.Role;
+import ibermatica_project.model.SimpleUser;
 
 public class DataBase {
     @SuppressWarnings("unused")
@@ -380,6 +381,144 @@ public class DataBase {
             System.out.println(e.getMessage());
         }
         return null;
+    }
+
+    public ArrayList<SimpleUser> searchAllSimpleUsers() {
+        ArrayList<SimpleUser> simpleUsersList = new ArrayList<SimpleUser>();
+        String sql = "SELECT * FROM users";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String userId = rs.getString("user_id"), name = rs.getString("name"),
+                    surname = rs.getString("surname"), email = rs.getString("email");
+                int tlfNumber = rs.getInt("tlf_num");
+                String username = rs.getString("username");
+                int type = rs.getInt("type");
+
+                SimpleUser simpleUser = new SimpleUser(userId, name, surname, email, tlfNumber, username, type);
+                simpleUsersList.add(simpleUser);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return simpleUsersList;
+    }
+
+    public ArrayList<SimpleUser> searchSimpleUserWithId(String data) {
+        ArrayList<SimpleUser> simpleUserList = new ArrayList<SimpleUser>();
+        String sql = "SELECT * FROM users WHERE user_id = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, data);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String userId = rs.getString("user_id"), name = rs.getString("name"),
+                    surname = rs.getString("surname"), email = rs.getString("email");
+                int tlfNumber = rs.getInt("tlf_num");
+                String username = rs.getString("username");
+                int type = rs.getInt("type");
+
+                SimpleUser simpleUser = new SimpleUser(userId, name, surname, email, tlfNumber, username, type);
+                simpleUserList.add(simpleUser);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return simpleUserList;
+    }
+
+    public ArrayList<SimpleUser> searchSimpleUserWithName(String data) {
+        ArrayList<SimpleUser> simpleUserList = new ArrayList<SimpleUser>();
+        String sql = "SELECT * FROM users WHERE name = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, data);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String userId = rs.getString("user_id"), name = rs.getString("name"),
+                    surname = rs.getString("surname"), email = rs.getString("email");
+                int tlfNumber = rs.getInt("tlf_num");
+                String username = rs.getString("username");
+                int type = rs.getInt("type");
+
+                SimpleUser simpleUser = new SimpleUser(userId, name, surname, email, tlfNumber, username, type);
+                simpleUserList.add(simpleUser);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return simpleUserList;
+    }
+
+    public ArrayList<SimpleUser> searchSimpleUserWithSurname(String data) {
+        ArrayList<SimpleUser> simpleUserList = new ArrayList<SimpleUser>();
+        String sql = "SELECT * FROM users WHERE surname = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, data);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String userId = rs.getString("user_id"), name = rs.getString("name"),
+                    surname = rs.getString("surname"), email = rs.getString("email");
+                int tlfNumber = rs.getInt("tlf_num");
+                String username = rs.getString("username");
+                int type = rs.getInt("type");
+
+                SimpleUser simpleUser = new SimpleUser(userId, name, surname, email, tlfNumber, username, type);
+                simpleUserList.add(simpleUser);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return simpleUserList;
+    }
+
+    public ArrayList<SimpleUser> searchSimpleUserWithTlfNumber(int data) {
+        ArrayList<SimpleUser> simpleUserList = new ArrayList<SimpleUser>();
+        String sql = "SELECT * FROM users WHERE tlf_num = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, data);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String userId = rs.getString("user_id"), name = rs.getString("name"),
+                    surname = rs.getString("surname"), email = rs.getString("email");
+                int tlfNumber = rs.getInt("tlf_num");
+                String username = rs.getString("username");
+                int type = rs.getInt("type");
+
+                SimpleUser simpleUser = new SimpleUser(userId, name, surname, email, tlfNumber, username, type);
+                simpleUserList.add(simpleUser);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return simpleUserList;
+    }
+
+    public int updatePassword(String password, String userId) {
+        String sql = "UPDATE users SET password = ? WHERE user_id = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                
+            pstmt.setString(1, password);
+            pstmt.setString(2, userId);
+            int rowUpdated = pstmt.executeUpdate();
+            if (rowUpdated > 0) {
+                return 1;
+            } else {
+                return 0;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return 0;
     }
 }
 

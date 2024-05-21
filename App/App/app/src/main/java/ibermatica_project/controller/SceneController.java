@@ -23,7 +23,6 @@ public class SceneController {
     public void loadIndexScene() throws IOException {
         scene = new Scene(loadFXML("fxml/index"), 640, 480);
         mainStage.setTitle("GESTIÓN IBERMÁTICA");
-        // mainStage.getIcons().add(new Image(getClass().getResourceAsStream("favicon.png")));
         mainStage.initStyle(StageStyle.DECORATED);
         mainStage.setResizable(false);
         mainStage.setScene(scene);
@@ -33,6 +32,20 @@ public class SceneController {
     public static void loadAdmMenuScene() throws IOException {
         scene = new Scene(loadFXML("fxml/admMenu"), 900, 600);
         mainStage.setScene(scene);
+        mainStage.show();
+    }
+
+    public static void loadLoginScene() throws IOException {
+        scene = new Scene(loadFXML("fxml/index"), 640, 480);
+        mainStage.setScene(scene);
+        mainStage.show();
+    }
+
+    public static void loadRestartPasswordScene() throws IOException {
+        scene = new Scene(loadFXML("fxml/restartPassword"), 320, 240);
+        mainStage.setScene(scene);
+        mainStage.setY(150);
+        mainStage.setX(450);
         mainStage.show();
     }
 

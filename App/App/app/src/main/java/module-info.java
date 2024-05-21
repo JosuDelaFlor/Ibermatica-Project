@@ -3,6 +3,7 @@ module ibermatica_project {
     requires javafx.fxml;
     requires java.sql;
     requires javafx.graphics;
+    requires javafx.base;
 
     opens ibermatica_project to javafx.fxml;
     opens ibermatica_project.controller to javafx.fxml;
