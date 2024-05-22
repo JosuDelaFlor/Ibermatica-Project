@@ -44,6 +44,7 @@ public class SceneController {
     public static void loadRestartPasswordScene() throws IOException {
         scene = new Scene(loadFXML("fxml/restartPassword"), 320, 240);
         mainStage.setScene(scene);
+        mainStage.initStyle(StageStyle.UNDECORATED);
         mainStage.setY(150);
         mainStage.setX(450);
         mainStage.show();
@@ -52,6 +53,7 @@ public class SceneController {
     public static void loadRestartUserPasswordScene() throws IOException {
         scene = new Scene(loadFXML("fxml/restartUserPassword"), 320, 240);
         mainStage.setScene(scene);
+        mainStage.initStyle(StageStyle.UNDECORATED);
         mainStage.setY(150);
         mainStage.setX(450);
         mainStage.show();

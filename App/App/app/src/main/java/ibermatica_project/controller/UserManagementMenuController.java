@@ -123,7 +123,7 @@ public class UserManagementMenuController {
         column5.setCellValueFactory(new PropertyValueFactory<>("username"));
         TableColumn<SimpleUser, String> column6 = new TableColumn<>("Tipo");
         column6.setCellValueFactory(new PropertyValueFactory<>("type"));
-        TableColumn actionCol = new TableColumn("Action");
+        TableColumn actionCol = new TableColumn("Eliminar");
         actionCol.setCellValueFactory(new PropertyValueFactory<>("actionDelete"));
 
         tblViewUser.getColumns().add(column1);
