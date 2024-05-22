@@ -49,6 +49,20 @@ public class SceneController {
         mainStage.show();
     }
 
+    public static void loadRestartUserPasswordScene() throws IOException {
+        scene = new Scene(loadFXML("fxml/restartUserPassword"), 320, 240);
+        mainStage.setScene(scene);
+        mainStage.setY(150);
+        mainStage.setX(450);
+        mainStage.show();
+    }
+
+    public static void loadUserModifyMenuScene() throws IOException {
+        scene = new Scene(loadFXML("fxml/userModifyMenu"), 900, 600);
+        mainStage.setScene(scene);
+        mainStage.show();
+    }
+
     public static void setRoot(String fxml) throws IOException {
         scene.setRoot(loadFXML(fxml));
     }

@@ -1,6 +1,7 @@
 package ibermatica_project.controller;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,12 +18,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Callback;
 
 public class UserManagementMenuController {
     @FXML
@@ -44,7 +47,9 @@ public class UserManagementMenuController {
 
     DataBase db = new DataBase("localhost", "ibermatica_db", null, "root", null);
     
-    @SuppressWarnings("unchecked")
+    static ArrayList<SimpleUser> simpleUsersList = new ArrayList<SimpleUser>();
+    
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @FXML
     protected void initialize() throws IOException {
         User loggedUser = IndexController.getLoggedUser();
@@ -98,8 +103,13 @@ public class UserManagementMenuController {
 
         menuItem2.setOnAction(event2);
 
-        ArrayList<SimpleUser> simpleUsersList = new ArrayList<SimpleUser>();
-        simpleUsersList = db.searchAllSimpleUsers();
+        List<String> searchTypeList = new ArrayList<String>();
+        searchTypeList.addAll(Arrays.asList("DNI", "Nombre", "Apellido", "Numero de telefono"));
+    
+        for (int i = 0; i < searchTypeList.size(); i++) {
+            comboSearchType.getItems().add(searchTypeList.get(i));
+        }
+        comboSearchType.setValue(searchTypeList.get(0));
 
         TableColumn<SimpleUser, String> column1 = new TableColumn<>("DNI");
         column1.setCellValueFactory(new PropertyValueFactory<>("userId"));
@@ -113,6 +123,8 @@ public class UserManagementMenuController {
         column5.setCellValueFactory(new PropertyValueFactory<>("username"));
         TableColumn<SimpleUser, String> column6 = new TableColumn<>("Tipo");
         column6.setCellValueFactory(new PropertyValueFactory<>("type"));
+        TableColumn actionCol = new TableColumn("Action");
+        actionCol.setCellValueFactory(new PropertyValueFactory<>("actionDelete"));
 
         tblViewUser.getColumns().add(column1);
         tblViewUser.getColumns().add(column2);
@@ -120,46 +132,54 @@ public class UserManagementMenuController {
         tblViewUser.getColumns().add(column4);
         tblViewUser.getColumns().add(column5);
         tblViewUser.getColumns().add(column6);
+        tblViewUser.getColumns().add(actionCol);
 
-        for (int i = 0; i < simpleUsersList.size(); i++) {
-            tblViewUser.getItems().add(new SimpleUser(simpleUsersList.get(i).getUserId(), simpleUsersList.get(i).getName(), simpleUsersList.get(i).getSurname(),
-                simpleUsersList.get(i).getEmail(), simpleUsersList.get(i).getTlfNum(), simpleUsersList.get(i).getUsername(), simpleUsersList.get(i).getType()));
-        }
+        simpleUsersList = db.searchAllSimpleUsers();
 
-        column4.setPrefWidth(170);
-
-        List<String> searchTypeList = new ArrayList<String>();
-        searchTypeList.addAll(Arrays.asList("DNI", "Nombre", "Apellido", "Numero de telefono"));
-    
-        for (int i = 0; i < searchTypeList.size(); i++) {
-            comboSearchType.getItems().add(searchTypeList.get(i));
-        }
-        comboSearchType.setValue(searchTypeList.get(0));
+        generateTableView(simpleUsersList, actionCol);
     }
 
+    @SuppressWarnings("rawtypes")
+    @FXML
+    private void delete(String userId) throws IOException {
+        boolean result = db.deleteUser(userId);
+        if (result == false) {
+            tblViewUser.getItems().clear();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Operación completada");
+            alert.setHeaderText("El usuario se ha aliminado por completo");
+            simpleUsersList = db.searchAllSimpleUsers();
+            TableColumn actionCol = new TableColumn("Action");
+            generateTableView(simpleUsersList, actionCol);
+        } else {
+            generateAlert(6);
+        }
+    }
+
+    @SuppressWarnings("rawtypes")
     @FXML
     private void search() throws IOException {
-        ArrayList<SimpleUser> simpleUsersList = new ArrayList<SimpleUser>();
+        TableColumn actionCol = new TableColumn("Action");
 
         if ((String) comboSearchType.getValue() == "DNI") {
             if (checkInputs(0)) {
                 simpleUsersList = db.searchSimpleUserWithId(txfSearch.getText());
-                generateSpecificTable(simpleUsersList);
+                generateTableView(simpleUsersList, actionCol);
             }
         } else if ((String) comboSearchType.getValue() == "Nombre") {
             if (checkInputs(1)) {
                 simpleUsersList = db.searchSimpleUserWithName(txfSearch.getText());
-                generateSpecificTable(simpleUsersList);
+                generateTableView(simpleUsersList, actionCol);
             }
         } else if ((String) comboSearchType.getValue() == "Apellido") {
             if (checkInputs(2)) {
                 simpleUsersList = db.searchSimpleUserWithSurname(txfSearch.getText());
-                generateSpecificTable(simpleUsersList);
+                generateTableView(simpleUsersList, actionCol);
             }
         } else {
             if (checkInputs(3)) {
                 simpleUsersList = db.searchSimpleUserWithTlfNumber(Integer.parseInt(txfSearch.getText()));
-                generateSpecificTable(simpleUsersList);
+                generateTableView(simpleUsersList, actionCol);
             }
         }
     }
@@ -258,38 +278,6 @@ public class UserManagementMenuController {
         return valid;
     }
 
-    @SuppressWarnings("unchecked")
-    @FXML
-    private void generateSpecificTable(ArrayList<SimpleUser> simpleUsersList) {
-        tblViewUser.getItems().clear();
-        TableColumn<SimpleUser, String> column1 = new TableColumn<>("DNI");
-        column1.setCellValueFactory(new PropertyValueFactory<>("userId"));
-        TableColumn<SimpleUser, String> column2 = new TableColumn<>("Nombre");
-        column2.setCellValueFactory(new PropertyValueFactory<>("name"));
-        TableColumn<SimpleUser, String> column3 = new TableColumn<>("Apellido");
-        column3.setCellValueFactory(new PropertyValueFactory<>("surname"));
-        TableColumn<SimpleUser, String> column4 = new TableColumn<>("Correo");
-        column4.setCellValueFactory(new PropertyValueFactory<>("email"));
-        TableColumn<SimpleUser, String> column5 = new TableColumn<>("Usuario");
-        column5.setCellValueFactory(new PropertyValueFactory<>("username"));
-        TableColumn<SimpleUser, String> column6 = new TableColumn<>("Tipo");
-        column6.setCellValueFactory(new PropertyValueFactory<>("type"));
-
-        tblViewUser.getColumns().add(column1);
-        tblViewUser.getColumns().add(column2);
-        tblViewUser.getColumns().add(column3);
-        tblViewUser.getColumns().add(column4);
-        tblViewUser.getColumns().add(column5);
-        tblViewUser.getColumns().add(column6);
-
-        for (int i = 0; i < simpleUsersList.size(); i++) {
-            tblViewUser.getItems().add(new SimpleUser(simpleUsersList.get(i).getUserId(), simpleUsersList.get(i).getName(), simpleUsersList.get(i).getSurname(),
-                simpleUsersList.get(i).getEmail(), simpleUsersList.get(i).getTlfNum(), simpleUsersList.get(i).getUsername(), simpleUsersList.get(i).getType()));
-        }
-
-        column4.setPrefWidth(170);
-    }
-
     @FXML
     private void generateAlert(int error) throws IOException {
         Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -305,10 +293,69 @@ public class UserManagementMenuController {
             alert.setHeaderText("El Numero de telefono insertado no existe en la base de datos");
         } else if (error == 4) {
             alert.setHeaderText("El campo de filtrado no puede estar vacio");
-        } else {
+        } else if (error == 5) {
             alert.setHeaderText("El Numero de telefono solo puede estar compuesto por numeros");
-        }
+        } else if (error == 6) {
+            alert.setHeaderText("Hemos tenido problemas al eliminar al usuario, por favor contacte con un Administrador");
+        } 
         alert.show();
+    }
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @FXML
+    private void generateTableView(ArrayList<SimpleUser> simpleUsersList, TableColumn actionCol) throws IOException {
+        tblViewUser.getItems().clear();
+
+        for (int i = 0; i < simpleUsersList.size(); i++) {
+            tblViewUser.getItems().add(new SimpleUser(simpleUsersList.get(i).getUserId(), simpleUsersList.get(i).getName(), simpleUsersList.get(i).getSurname(),
+                simpleUsersList.get(i).getEmail(), simpleUsersList.get(i).getTlfNum(), simpleUsersList.get(i).getUsername(), simpleUsersList.get(i).getType()));
+        }
+
+        Callback<TableColumn<SimpleUser, String>, TableCell<SimpleUser, String>> cellFactory
+                = //
+                new Callback<TableColumn<SimpleUser, String>, TableCell<SimpleUser, String>>() {
+            @Override
+            public TableCell call(final TableColumn<SimpleUser, String> param) {
+                final TableCell<SimpleUser, String> cell = new TableCell<SimpleUser, String>() {
+
+                    final Button btn = new Button();
+                    
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        FileInputStream input2;
+                        try {
+                            input2 = new FileInputStream("src\\main\\resources\\ibermatica_project\\img\\x.png");
+                            Image image2 = new Image(input2);
+                            ImageView imageView2 = new ImageView(image2);
+                            btn.setGraphic(imageView2);
+                            imageView2.setFitWidth(20);
+                            imageView2.setFitHeight(20); 
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            btn.setOnAction(event -> {
+                                SimpleUser simpleUser = getTableView().getItems().get(getIndex());
+                                try {
+                                    delete(simpleUser.getUserId());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            });
+                            setGraphic(btn);
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        actionCol.setCellFactory(cellFactory);
     }
 
     @FXML
@@ -319,5 +366,15 @@ public class UserManagementMenuController {
     @FXML
     private void loadRegisterMenuScene() throws IOException {
         SceneController.setRoot("fxml/registerMenu");
+    }
+
+    @FXML
+    private void loadUserModifyMenuScene() throws IOException {
+        SceneController.setRoot("fxml/userModifyMenu");
+    }
+
+    @FXML
+    private void loadDeleteUserMenuScene() throws IOException {
+        SceneController.setRoot("fxml/deleteUserMenu");
     }
 }

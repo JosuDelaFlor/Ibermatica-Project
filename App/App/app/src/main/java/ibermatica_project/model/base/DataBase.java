@@ -520,5 +520,21 @@ public class DataBase {
         }
         return 0;
     }
+
+    public boolean deleteUser(String userId) {
+        String sql = "DELETE FROM users WHERE user_id = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                
+            pstmt.setString(1, userId);
+            boolean rowUpdated = pstmt.execute();
+            if (rowUpdated == false) {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return true;
+    }
 }
 

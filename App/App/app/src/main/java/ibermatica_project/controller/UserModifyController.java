@@ -2,10 +2,7 @@ package ibermatica_project.controller;
 
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import ibermatica_project.model.Validation;
 import ibermatica_project.model.base.DataBase;
@@ -17,25 +14,25 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class RegisterMenuController {
+public class UserModifyController {
     @FXML
     MenuButton btnMenu;
 
     @FXML
-    Button btnUserManagement, btnMachineManagement, btnReserveManagement, btnVisualice, btnModify, btnDelete, btnRegister, btnGenerateEmail, btnGenerateUser, btnReset;
-    
-    @FXML
-    TextField txfId, txfName, txfSurname, txfEmail, txfTlfNumber, txfUser;
+    Button btnUserManagement, btnMachineManagement, btnReserveManagement, btnVisualice, btnModify, btnDelete, btnSearch, btnPasswordRestart;
 
     @FXML
-    PasswordField psfPass1, psfPass2;
+    TextField txfId, txfName, txfSurname, txfUser, txfEmail, txfTlfNumber;
+
+    @FXML
+    Label lblRegisterday;
 
     @SuppressWarnings("rawtypes")
     @FXML
@@ -43,9 +40,10 @@ public class RegisterMenuController {
 
     DataBase db = new DataBase("localhost", "ibermatica_db", null, "root", null);
     
+    static User modifyUser;
+
     static Alert alert = new Alert(Alert.AlertType.WARNING);
-    
-    @SuppressWarnings("unchecked")
+
     @FXML
     protected void initialize() throws IOException {
         User loggedUser = IndexController.getLoggedUser();
@@ -98,55 +96,66 @@ public class RegisterMenuController {
         };
 
         menuItem2.setOnAction(event2);
-
-        List<String> roleNameList = new ArrayList<String>();
-        roleNameList.addAll(Arrays.asList("Administrador", "Empleado"));
-
-        for (int i = 0; i < roleNameList.size(); i++) {
-            comboType.getItems().add(roleNameList.get(i));
-        }
-        comboType.setValue(roleNameList.get(1));
     }
 
-    public void register() throws IOException {
-        boolean valid = testValidations();
-        if (valid) {
+    public void modify() throws IOException {
+        boolean valid = testValidations(), validId = checkDbId(txfId.getText());
+        if (validId == false) {
+            generateAlert("El DNI insertado no existe");
+        } else if (valid) {
             int type = 1;
             if ((String) comboType.getValue() == "Administrador") {
                 type = 0;
             }
+
             User user = new User(txfId.getText(), txfName.getText(), txfSurname.getText(), txfEmail.getText(),
-                    Integer.parseInt(txfTlfNumber.getText()), txfUser.getText(), psfPass1.getText(), LocalDate.now(), type);
-            int result = db.addNewUser(user);
+                        Integer.parseInt(txfTlfNumber.getText()), txfUser.getText(), null, null, type);
+            int result = db.updateUser(user);
             if (result == 1) {
                 alert.setAlertType(Alert.AlertType.CONFIRMATION);
-                alert.setTitle("Registro completado");
-                alert.setHeaderText("El usuario se ha dado de alta correctamente");
+                alert.setTitle("Actialización completada");
+                alert.setHeaderText("El usuario ha sido actualizado correctamente");
                 alert.show();
             } else {
-                generateAlert("Hemos tenido problemas al dar de alta al usuario, por favor contacte con un Administrador");
+                generateAlert("Hemos tenido problemas al actializar el usuario");
             }
-        }
+        }   
     }
 
-    /**
-     * Checks if the data inserted by the user contains the required characteristics
-     * @return
-     * @throws IOException
-     */
+    @SuppressWarnings("unchecked")
+    @FXML
+    private void searchUser() throws IOException {
+        boolean validId = checkDbId(txfId.getText());
+        if (validId) {
+            modifyUser = db.searchSpecificUser(txfId.getText());
+            txfName.setText(modifyUser.getName());
+            txfSurname.setText(modifyUser.getSurname());
+            txfEmail.setText(modifyUser.getEmail());
+            txfUser.setText(modifyUser.getUsername());
+            txfTlfNumber.setText(Integer.toString(modifyUser.getTlfNum()));
+            lblRegisterday.setText(modifyUser.getRegisterdate().toString());
+            
+            if (modifyUser.getType() == 0) {
+                comboType.setValue("Administrador");
+            } else {
+                comboType.setValue("Empleado");
+            }    
+        } else {
+            generateAlert("El DNI insertado no existe");
+        }
+    }
 
     @FXML
     private boolean testValidations() throws IOException {
         boolean valid = false;
-
+        
         Validation userIdValidation = Validations.userIdValidation(txfId.getText());
         Validation nameSurnameUsernameValidation = Validations.nameSurnameUsernameValidation(txfName.getText(), txfSurname.getText(), txfUser.getText());
         Validation tlfNumberValidation = Validations.tlfNumberValidation(txfTlfNumber.getText());
         Validation emailValidation = Validations.emailValidation(txfEmail.getText());
-        Validation passValidation = Validations.passValidation(psfPass1.getText(), psfPass2.getText());
-        
-        boolean userIdV = true, nameSurnameUsernameV = true, tlfNumberV = true, emailV = true, passV = true;
-        
+
+        boolean userIdV = true, nameSurnameUsernameV = true, tlfNumberV = true, emailV = true;
+
         if (!userIdValidation.isValid()) {
             generateAlert(userIdValidation.getErrorMsg());
             userIdV = false;
@@ -163,87 +172,31 @@ public class RegisterMenuController {
             generateAlert(emailValidation.getErrorMsg());
             emailV = false;
         }
-        if (!passValidation.isValid()) {
-            generateAlert(passValidation.getErrorMsg());
-            passV = false;
-        }
 
-        if (userIdV == false || nameSurnameUsernameV == false || tlfNumberV == false || emailV == false || passV == false) {
+        if (userIdV == false || nameSurnameUsernameV == false || tlfNumberV == false || emailV == false) {
             valid = false;
         } else {
-            valid = checkDbInfo();
+            valid = true;
         }
         return valid;
     }
 
-    private boolean checkDbInfo() throws IOException {
+    private boolean checkDbId(String id) {
+        boolean validId = false;
         ArrayList<User> userList = new ArrayList<User>();
         userList = db.searchAllUsers();
 
-        boolean checkId = true, checkEmail = true, checkTlfNumber = true, checkUsername = true;
-
         for (User user : userList) {
-            if (user.getUserId().equals(txfId.getText().replaceAll("\\s", ""))) {
-                generateAlert("El DNI insertado ya existe en la Base de Datos");
-                checkId = false;
-            } 
-            if (user.getEmail().equals(txfEmail.getText().replaceAll("\\s", ""))) {
-                generateAlert("El correo insertado ya existe en la Base de Datos");
-                checkEmail = false;
-            }
-            if (Integer.toString(user.getTlfNum()).equals(txfTlfNumber.getText().replaceAll("\\s", ""))) {
-                generateAlert("El numero de telefono insertado ya existe en la Base de Datos");
-                checkTlfNumber = false;
-            }
-            if (user.getUsername().equals(txfUser.getText().replaceAll("\\s", ""))) {
-                generateAlert("El nombre de usuario insertato ya existe en la Base de Datos");
-                checkUsername = false;
+            if (user.getUserId().equals(id)) {
+                validId = true;
             }
         }
-
-        if (checkId == false || checkEmail == false || checkTlfNumber == false || checkUsername == false) {
-            return false;
-        } else {
-            return true;
-        }
+        return validId;
     }
 
-    @FXML
-    private void generateEmail() throws IOException {
-        txfEmail.setText(setDefaultText()+"@ayesa.com");
-    }
-
-    @FXML
-    private void generateUsername() throws IOException {
-        txfUser.setText(setDefaultText());
-    }
-
-    private String setDefaultText() {
-        String name = txfName.getText(), surname = txfSurname.getText();
-        if (txfName.getText().equals("")) {
-            name = "nombre";
-        } 
-        if (txfSurname.getText().equals("")) {
-            surname = "apellido";
-        } else {
-            name = txfName.getText().replaceAll("\\s", "").toLowerCase();
-            surname = txfSurname.getText().replaceAll("\\s", "").toLowerCase();
-        }
-        return surname+"."+name;
-    }
-
-    @SuppressWarnings("unchecked")
-    @FXML
-    private void restartInputs() throws IOException {
-        txfId.setText(null);
-        txfName.setText(null);
-        txfSurname.setText(null);
-        txfEmail.setText(null);
-        txfTlfNumber.setText(null);
-        txfUser.setText(null);
-        psfPass1.setText(null);
-        psfPass2.setText(null);
-        comboType.setValue("Empleado");
+    @SuppressWarnings("exports")
+    public static User getModifyUser() {
+        return modifyUser;
     }
 
     @FXML
@@ -259,8 +212,20 @@ public class RegisterMenuController {
     }
 
     @FXML
-    private void loadUserModifyMenuScene() throws IOException {
-        SceneController.setRoot("fxml/userModifyMenu");
+    private void loadRegisterMenuScene() throws IOException {
+        SceneController.setRoot("fxml/registerMenu");
+    }
+
+    @FXML
+    private void loadRestartUserPasswordScene() throws IOException {
+        if (checkDbId(txfId.getText())) {
+            modifyUser = new User(txfId.getText(), txfName.getText(), txfSurname.getText(), txfEmail.getText(),
+            1, txfUser.getText(), null, null, 1);
+            
+            SceneController.loadRestartUserPasswordScene();
+        } else {
+            generateAlert("El DNI insertado no existe");
+        }
     }
 
     @FXML

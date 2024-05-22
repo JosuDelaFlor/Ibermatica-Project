@@ -14,7 +14,7 @@
     <children>
         <Pane prefHeight="600.0" prefWidth="284.0">
             <children>
-                <Button fx:id="btnUserManagement" layoutX="58.0" layoutY="41.0" mnemonicParsing="false" onAction="#loadUserManagementMenuScene" prefHeight="149.0" prefWidth="152.0" style="-fx-background-color: white;">
+                <Button fx:id="btnUserManagement" layoutX="58.0" layoutY="41.0" mnemonicParsing="false" onAction="#loadUserManagementMenuScene" prefHeight="149.0" prefWidth="152.0" style="-fx-background-color: white;" styleClass="btn-img">
                     <graphic>
                         <ImageView fitHeight="149.0" fitWidth="152.0">
                             <image>
@@ -28,7 +28,7 @@
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor></Button>
-                <Button fx:id="btnMachineManagement" layoutX="47.0" layoutY="202.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="191.0" style="-fx-background-color: white;">
+                <Button fx:id="btnMachineManagement" layoutX="47.0" layoutY="202.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="191.0" style="-fx-background-color: white;" styleClass="btn-img">
                     <graphic>
                         <ImageView fitHeight="149.0" fitWidth="152.0">
                             <image>
@@ -42,7 +42,7 @@
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor></Button>
-                <Button fx:id="btnReserveManagement" layoutX="56.0" layoutY="405.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="173.0" style="-fx-background-color: white;">
+                <Button fx:id="btnReserveManagement" layoutX="56.0" layoutY="405.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="173.0" style="-fx-background-color: white;" styleClass="btn-img">
                     <graphic>
                         <ImageView fitHeight="149.0" fitWidth="152.0">
                             <image>
@@ -82,7 +82,7 @@
                 <Label layoutX="410.0" layoutY="355.0" prefHeight="17.0" prefWidth="143.0" styleClass="lbl-info" text="Tipo de usuario" />
                 <Label fx:id="lblTlfNumber" layoutX="233.0" layoutY="415.0" prefHeight="20.0" prefWidth="152.0" styleClass="lbl-data" text="Telefono Usuario" />
                 <Label fx:id="lblType" layoutX="406.0" layoutY="415.0" prefHeight="20.0" prefWidth="152.0" styleClass="lbl-data" text="Tipo Usuario" />
-                <Button layoutX="239.0" layoutY="479.0" mnemonicParsing="false" styleClass="btn-danger" text="Restablecer Contraseña" onAction="#loadRestartPasswordScene" >
+                <Button layoutX="239.0" layoutY="479.0" mnemonicParsing="false" onAction="#loadRestartPasswordScene" styleClass="btn-danger" text="Restablecer Contraseña">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor></Button>

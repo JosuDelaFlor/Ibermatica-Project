@@ -5,7 +5,6 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.MenuButton?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -13,7 +12,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.shape.Line?>
 
-<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ibermatica_project.controller.UserManagementMenuController">
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ibermatica_project.controller.UserModifyController">
     <children>
         <Pane layoutX="284.0" layoutY="-1.0" prefHeight="608.0" prefWidth="618.0">
             <children>
@@ -22,34 +21,53 @@
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor></MenuButton>
-                <TableView fx:id="tblViewUser" layoutX="1.0" layoutY="126.0" prefHeight="314.0" prefWidth="618.0" />
-                <ComboBox fx:id="comboSearchType" layoutX="14.0" layoutY="88.0" prefWidth="150.0">
-                    <cursor>
-                        <Cursor fx:constant="HAND" />
-                    </cursor></ComboBox>
-                <TextField fx:id="txfSearch" layoutX="184.0" layoutY="88.0" promptText="Filtro">
-                    <cursor>
-                        <Cursor fx:constant="TEXT" />
-                    </cursor></TextField>
-                <Button fx:id="btnSearch" layoutX="349.0" layoutY="88.0" mnemonicParsing="false" onAction="#search" text="Buscar">
+                <Button fx:id="btnModify" layoutX="251.0" layoutY="408.0" mnemonicParsing="false" onAction="#modify" prefHeight="29.0" prefWidth="116.0" styleClass="btn-danger" text="Modificar">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor></Button>
-                <Button fx:id="btnModify" layoutX="367.0" layoutY="496.0" mnemonicParsing="false" onAction="#loadUserModifyMenuScene" prefHeight="25.0" prefWidth="81.0" styleClass="btn-danger" text="Modificar">
+                <Button fx:id="btnVisualice" layoutX="185.0" layoutY="496.0" mnemonicParsing="false" onAction="#loadUserManagementMenuScene" prefHeight="29.0" prefWidth="81.0" styleClass="btn-visualice" text="Visualizar">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor></Button>
-                <Button fx:id="btnCreate" layoutX="185.0" layoutY="496.0" mnemonicParsing="false" onAction="#loadRegisterMenuScene" styleClass="btn-success" text="Dar de alta">
+                <TextField fx:id="txfId" layoutX="225.0" layoutY="217.0" prefHeight="25.0" prefWidth="173.0" promptText="Inserte el DNI del usuario" />
+                <TextField fx:id="txfSurname" layoutX="224.0" layoutY="279.0" prefHeight="25.0" prefWidth="173.0" promptText="Apellido" />
+                <TextField fx:id="txfName" layoutX="17.0" layoutY="279.0" prefHeight="25.0" prefWidth="173.0" promptText="Nombre" />
+                <TextField fx:id="txfUser" layoutX="423.0" layoutY="279.0" prefHeight="25.0" prefWidth="173.0" promptText="Nombre de usuario" />
+                <TextField fx:id="txfEmail" layoutX="17.0" layoutY="348.0" prefHeight="25.0" prefWidth="173.0" promptText="Correo" />
+                <TextField fx:id="txfTlfNumber" layoutX="225.0" layoutY="348.0" prefHeight="25.0" prefWidth="173.0" promptText="Numero de telefono" />
+                <ComboBox fx:id="comboType" layoutX="423.0" layoutY="348.0" prefHeight="25.0" prefWidth="173.0" />
+                <Label layoutX="225.0" layoutY="200.0" prefHeight="17.0" prefWidth="173.0" styleClass="lbl-user-info" text="DNI" />
+                <Label layoutX="17.0" layoutY="262.0" prefHeight="17.0" prefWidth="173.0" styleClass="lbl-user-info" text="Nombre" />
+                <Label layoutX="224.0" layoutY="262.0" prefHeight="17.0" prefWidth="173.0" styleClass="lbl-user-info" text="Apellido" />
+                <Label layoutX="423.0" layoutY="262.0" prefHeight="17.0" prefWidth="173.0" styleClass="lbl-user-info" text="Nombre de usuario" />
+                <Label layoutX="17.0" layoutY="331.0" prefHeight="17.0" prefWidth="173.0" styleClass="lbl-user-info" text="Correo" />
+                <Label layoutX="225.0" layoutY="331.0" prefHeight="17.0" prefWidth="173.0" styleClass="lbl-user-info" text="Numero de teléfono" />
+                <Label layoutX="423.0" layoutY="331.0" prefHeight="17.0" prefWidth="173.0" styleClass="lbl-user-info" text="Tipo de usuario" />
+                <Button fx:id="btnCreate" layoutX="367.0" layoutY="496.0" mnemonicParsing="false" onAction="#loadRegisterMenuScene" styleClass="btn-success" text="Dar de alta">
                     <cursor>
                         <Cursor fx:constant="HAND" />
-                    </cursor></Button>
+                    </cursor>
+                </Button>
+                <Label fx:id="lblRegisterday" layoutX="456.0" layoutY="221.0" prefHeight="17.0" prefWidth="108.0" style="-fx-alignment: center;" />
+                <Label layoutX="455.0" layoutY="200.0" prefHeight="17.0" prefWidth="108.0" style="-fx-alignment: center;" styleClass="lbl-user-info" text="Día de registro" />
+                <Button fx:id="btnSearch" layoutX="78.0" layoutY="410.0" mnemonicParsing="false" onAction="#searchUser" text="Buscar" />
+                <Button fx:id="btnPasswordRestart" layoutX="423.0" layoutY="408.0" mnemonicParsing="false" onAction="#loadRestartUserPasswordScene" prefHeight="29.0" prefWidth="160.0" styleClass="btn-danger" text="Restablecer contraseña">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <ImageView layoutX="261.0" layoutY="80.0">
+                    <image>
+                        <Image url="@../img/userData.png" />
+                    </image>
+                </ImageView>
             </children>
         </Pane>
         <Pane prefHeight="600.0" prefWidth="284.0">
             <children>
                 <Button fx:id="btnUserManagement" layoutX="58.0" layoutY="41.0" mnemonicParsing="false" onAction="#loadUserManagementMenuScene" prefHeight="149.0" prefWidth="152.0" style="-fx-background-color: white;" styleClass="btn-img">
                     <graphic>
-                        <ImageView fitHeight="149.0" fitWidth="152.0" styleClass="btn-img">
+                        <ImageView fitHeight="149.0" fitWidth="152.0">
                             <image>
                                 <Image url="@../img/group.png" />
                             </image>
