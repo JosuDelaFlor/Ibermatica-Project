@@ -1,6 +1,7 @@
 package ibermatica_project.controller;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -18,12 +19,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Callback;
 
 public class MachineManagementMenuController {
     @FXML
@@ -132,6 +135,25 @@ public class MachineManagementMenuController {
         tblViewMachine.getColumns().add(actionCol);
 
         machineList = db.searchAllMachines();
+
+        generateTableView(machineList, actionCol);
+    }
+
+    @SuppressWarnings("rawtypes")
+    @FXML
+    private void delete(String serialNumber) throws IOException {
+        boolean result = db.deleteMachine(serialNumber);
+        if (result == false) {
+            tblViewMachine.getItems().clear();
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("Operación completada");
+            alert.setHeaderText("El usuario se ha aliminado por completo");
+            machineList = db.searchAllMachines();
+            TableColumn actionCol = new TableColumn("Action");
+            generateTableView(machineList, actionCol);
+        } else {
+            generateAlert(6);
+        }
     }
 
     @FXML
@@ -207,6 +229,63 @@ public class MachineManagementMenuController {
             }
         }
         return valid;
+    }
+
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    @FXML
+    private void generateTableView(ArrayList<Machine> machineList, TableColumn actionCol) throws IOException {
+        tblViewMachine.getItems().clear();
+
+        for (int i = 0; i < machineList.size(); i++) {
+            tblViewMachine.getItems().add(new Machine(machineList.get(i).getSerialNumber(), machineList.get(i).getName(),
+                machineList.get(i).getAcquisitionDate(), machineList.get(i).getType(), machineList.get(i).getStatus()));
+        }
+
+        Callback<TableColumn<Machine, String>, TableCell<Machine, String>> cellFactory
+                = //
+                new Callback<TableColumn<Machine, String>, TableCell<Machine, String>>() {
+            @Override
+            public TableCell call(final TableColumn<Machine, String> param) {
+                final TableCell<Machine, String> cell = new TableCell<Machine, String>() {
+
+                    final Button btn = new Button();
+                    
+                    @Override
+                    public void updateItem(String item, boolean empty) {
+                        FileInputStream input2;
+                        try {
+                            input2 = new FileInputStream("src\\main\\resources\\ibermatica_project\\img\\x.png");
+                            Image image2 = new Image(input2);
+                            ImageView imageView2 = new ImageView(image2);
+                            btn.setGraphic(imageView2);
+                            imageView2.setFitWidth(20);
+                            imageView2.setFitHeight(20); 
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                            setText(null);
+                        } else {
+                            btn.setOnAction(event -> {
+                                Machine machine = getTableView().getItems().get(getIndex());
+                                try {
+                                    delete(machine.getSerialNumber());
+                                } catch (IOException e) {
+                                    e.printStackTrace();
+                                }
+                            });
+                            setGraphic(btn);
+                            setText(null);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        actionCol.setCellFactory(cellFactory);
     }
 
     @SuppressWarnings({ "unchecked" })

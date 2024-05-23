@@ -702,5 +702,21 @@ public class DataBase {
         }
         return false;
     }
+
+    public boolean deleteMachine(String serialNumber) {
+        String sql = "DELETE FROM machines WHERE serial_num = ?";
+        try (Connection connection = connect();
+        PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, serialNumber);
+            boolean rowUpdated = pstmt.execute();
+            if (rowUpdated == false) {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return true;
+    }
 }
 
