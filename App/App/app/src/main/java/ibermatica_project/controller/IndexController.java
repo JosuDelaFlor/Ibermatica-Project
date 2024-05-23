@@ -1,5 +1,6 @@
 package ibermatica_project.controller;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -13,16 +14,21 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 public class IndexController {
     @FXML
-    Button btnLogin;
+    Button btnLogin, btnPassShow;
 
     @FXML
-    TextField txfUser;
+    TextField txfUser, txfPassword;
 
     @FXML
     PasswordField psfPass;
+
+    @FXML
+    ImageView imgPassShow;
 
     @FXML
     Label lblError;
@@ -30,6 +36,36 @@ public class IndexController {
     DataBase db = new DataBase("localhost", "ibermatica_db", null, "root", null);
 
     static User loggedUser;
+
+    private boolean mask = true;
+
+    @FXML
+    private void toggleVisiblePassword() throws IOException {
+        FileInputStream inputShow = new FileInputStream("src\\main\\resources\\ibermatica_project\\img\\icons8-eye-30-closed.png");
+        Image imageShow = new Image(inputShow);
+        imgPassShow = new ImageView(imageShow);
+        imgPassShow.setFitWidth(20);
+        imgPassShow.setFitHeight(18);
+        
+        if (mask) {
+            btnPassShow.setGraphic(imgPassShow);
+            txfPassword.setText(psfPass.getText());
+            txfPassword.setVisible(true);
+            psfPass.setVisible(false);
+            mask = false;
+        } else {
+            FileInputStream inputClose = new FileInputStream("src\\main\\resources\\ibermatica_project\\img\\icons8-eye-30.png");
+            Image imageClose = new Image(inputClose);
+            imgPassShow = new ImageView(imageClose);
+            imgPassShow.setFitWidth(20);
+            imgPassShow.setFitHeight(18);
+            btnPassShow.setGraphic(imgPassShow);
+            psfPass.setText(txfPassword.getText());
+            psfPass.setVisible(true);
+            txfPassword.setVisible(false);
+            mask = true;
+        }
+    }
 
     /**
      * Collects all the users in the database and compares the inserted data and if they match 

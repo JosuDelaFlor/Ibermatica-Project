@@ -91,7 +91,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button fx:id="btnMachineManagement" layoutX="47.0" layoutY="202.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="191.0" style="-fx-background-color: white;" styleClass="btn-img">
+                <Button fx:id="btnMachineManagement" layoutX="47.0" layoutY="202.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="191.0" style="-fx-background-color: white;" styleClass="btn-img" onAction="#loadMachineManagementMenuScene">
                     <graphic>
                         <ImageView fitHeight="149.0" fitWidth="152.0">
                             <image>
@@ -106,7 +106,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button fx:id="btnReserveManagement" layoutX="56.0" layoutY="405.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="173.0" style="-fx-background-color: white;" styleClass="btn-img">
+                <Button fx:id="btnReserveManagement" layoutX="56.0" layoutY="405.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="173.0" style="-fx-background-color: white;" styleClass="btn-img" onAction="#loadReservationManagementMenuScene">
                     <graphic>
                         <ImageView fitHeight="149.0" fitWidth="152.0">
                             <image>

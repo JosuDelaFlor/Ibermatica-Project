@@ -84,4 +84,14 @@ public class AdmMenuController {
     private void loadRestartPasswordScene() throws IOException {
         SceneController.loadRestartPasswordScene();
     }
+
+    @FXML
+    private void loadReservationManagementMenuScene() throws IOException {
+        SceneController.setRoot("fxml/reservationManagementMenu");
+    }
+
+    @FXML
+    private void loadMachineManagementMenuScene() throws IOException {
+        SceneController.setRoot("fxml/machineManagementMenu");
+    }
 }

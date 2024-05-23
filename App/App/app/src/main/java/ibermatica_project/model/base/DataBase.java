@@ -195,23 +195,45 @@ public class DataBase {
         return reservationList;
     }
 
-    public Reservation searchSpecificReservationWithId(int data) {
-        Reservation reservation;
+    public ArrayList<Reservation> searchAllReservationWithId(int data) {
+        ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
         String sql = "SELECT * FROM reservation_machines WHERE reservation_id = ?";
         try (Connection connection = connect();
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
             
             pstmt.setInt(1, data);
             ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 String userId = rs.getString("user_id");
                 String serialNumber = rs.getString("serial_num");
                 LocalDate startDate = rs.getTimestamp("start_date").toLocalDateTime().toLocalDate();
                 LocalDate endDate = rs.getTimestamp("end_date").toLocalDateTime().toLocalDate();
                 int reservation_id = rs.getInt("reservation_id");
 
-                reservation = new Reservation(userId, serialNumber, startDate, endDate, reservation_id);
+                Reservation reservation = new Reservation(userId, serialNumber, startDate, endDate, reservation_id);
+                reservationList.add(reservation);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return reservationList;
+    }
+
+    public Reservation searchSpecificReservationWithId(int reservationId) {
+        String sql = "SELECT * FROM reservation_machines WHERE reservation_id = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
             
+            pstmt.setInt(1, reservationId);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String userId = rs.getString("user_id");
+                String serialNumber = rs.getString("serial_num");
+                LocalDate startDate = rs.getTimestamp("start_date").toLocalDateTime().toLocalDate();
+                LocalDate endDate = rs.getTimestamp("end_date").toLocalDateTime().toLocalDate();
+                int reservation_id = rs.getInt("reservation_id");
+
+                Reservation reservation = new Reservation(userId, serialNumber, startDate, endDate, reservation_id);
                 return reservation;
             }
         } catch (SQLException e) {
@@ -318,7 +340,7 @@ public class DataBase {
         return reservationList;
     }
 
-    public int updateReservation(Reservation reservation) {
+    public boolean updateReservation(Reservation reservation) {
         String sql = "UPDATE reservation_machines SET user_id = ?, serial_num = ?, start_date = ?, end_date = ? WHERE reservation_id = ?";
         try (Connection connection = connect();
             PreparedStatement pstmt = connection.prepareStatement(sql)) {
@@ -328,16 +350,14 @@ public class DataBase {
             pstmt.setTimestamp(3, Timestamp.valueOf(reservation.getStartDate().atStartOfDay()));
             pstmt.setTimestamp(4, Timestamp.valueOf(reservation.getEndDate().atStartOfDay()));
             pstmt.setInt(5, reservation.getReservationId());
-            int rowUpdated = pstmt.executeUpdate();
-            if (rowUpdated > 0) {
-                return 1;
-            } else {
-                return 0;
+            boolean rowUpdated = pstmt.execute();
+            if (rowUpdated == false) {
+                return true;
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
-        return 0;
+        return false;
     }
 
     public ArrayList<Machine> searchAllMachines() {
@@ -354,6 +374,116 @@ public class DataBase {
                     
                 Machine machine = new Machine(serialNumber, name, adquisitionDate, type, status);
                 machineList.add(machine);   
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return machineList;
+    }
+
+    public ArrayList <Machine> searchMachineWithSerialNumber(String serialNumberInput) {
+        ArrayList<Machine> machineList = new ArrayList<Machine>();
+        String sql = "SELECT * FROM machines WHERE serial_num = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, serialNumberInput);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                String serialNumber = rs.getString("serial_num"), name = rs.getString("name");
+                LocalDate adquisitionDate = rs.getTimestamp("adquisition_date").toLocalDateTime().toLocalDate();
+                String type = rs.getString("type"), status = rs.getString("status");
+                
+                Machine machine = new Machine(serialNumber, name, adquisitionDate, type, status);
+                machineList.add(machine);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return machineList;
+    }
+
+    public ArrayList <Machine> searchMachineWithName(String nameInput) {
+        ArrayList<Machine> machineList = new ArrayList<Machine>();
+        String sql = "SELECT * FROM machines WHERE name = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, nameInput);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                String serialNumber = rs.getString("serial_num"), name = rs.getString("name");
+                LocalDate adquisitionDate = rs.getTimestamp("adquisition_date").toLocalDateTime().toLocalDate();
+                String type = rs.getString("type"), status = rs.getString("status");
+                
+                Machine machine = new Machine(serialNumber, name, adquisitionDate, type, status);
+                machineList.add(machine);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return machineList;
+    }
+
+    public ArrayList <Machine> searchMachineWithAdquisitonDate(LocalDate dateInput) {
+        ArrayList<Machine> machineList = new ArrayList<Machine>();
+        String sql = "SELECT * FROM machines WHERE adquisition_date = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setTimestamp(1, Timestamp.valueOf(dateInput.atStartOfDay()));
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                String serialNumber = rs.getString("serial_num"), name = rs.getString("name");
+                LocalDate adquisitionDate = rs.getTimestamp("adquisition_date").toLocalDateTime().toLocalDate();
+                String type = rs.getString("type"), status = rs.getString("status");
+                
+                Machine machine = new Machine(serialNumber, name, adquisitionDate, type, status);
+                machineList.add(machine);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return machineList;
+    }
+
+    public ArrayList <Machine> searchMachineWithType(String typeInput) {
+        ArrayList<Machine> machineList = new ArrayList<Machine>();
+        String sql = "SELECT * FROM machines WHERE type = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, typeInput);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                String serialNumber = rs.getString("serial_num"), name = rs.getString("name");
+                LocalDate adquisitionDate = rs.getTimestamp("adquisition_date").toLocalDateTime().toLocalDate();
+                String type = rs.getString("type"), status = rs.getString("status");
+                
+                Machine machine = new Machine(serialNumber, name, adquisitionDate, type, status);
+                machineList.add(machine);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return machineList;
+    }
+
+    public ArrayList <Machine> searchMachineWithStatus(String statusInput) {
+        ArrayList<Machine> machineList = new ArrayList<Machine>();
+        String sql = "SELECT * FROM machines WHERE status = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, statusInput);
+            ResultSet rs = pstmt.executeQuery();
+            if (rs.next()) {
+                String serialNumber = rs.getString("serial_num"), name = rs.getString("name");
+                LocalDate adquisitionDate = rs.getTimestamp("adquisition_date").toLocalDateTime().toLocalDate();
+                String type = rs.getString("type"), status = rs.getString("status");
+                
+                Machine machine = new Machine(serialNumber, name, adquisitionDate, type, status);
+                machineList.add(machine);
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
@@ -535,6 +665,42 @@ public class DataBase {
             System.out.println(e.getMessage());
         }
         return true;
+    }
+
+    public boolean deleteReservation(int reservationId) {
+        String sql = "DELETE FROM reservation_machines WHERE reservation_id = ?";
+        try (Connection connection = connect();
+        PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, reservationId);
+            boolean rowUpdated = pstmt.execute();
+            if (rowUpdated == false) {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return true;
+    }
+
+    public boolean addReservation(Reservation reservation) {
+        String sql = "INSERT INTO reservation_machines (user_id, serial_num, start_date, end_date)" +
+                "VALUES(?, ?, ?, ?)";
+        try (Connection connection = connect();
+        PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, reservation.getUserId());
+            pstmt.setString(2, reservation.getSerialNumber());
+            pstmt.setTimestamp(3, Timestamp.valueOf(reservation.getStartDate().atStartOfDay()));
+            pstmt.setTimestamp(4, Timestamp.valueOf(reservation.getEndDate().atStartOfDay()));
+            boolean rowUpdated = pstmt.execute();
+            if (rowUpdated == false) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 }
 

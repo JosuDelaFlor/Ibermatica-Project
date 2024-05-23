@@ -34,7 +34,7 @@
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor></Button>
-                <Button fx:id="btnMachineManagement" layoutX="47.0" layoutY="202.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="191.0" style="-fx-background-color: white;" styleClass="btn-img">
+                <Button fx:id="btnMachineManagement" layoutX="47.0" layoutY="202.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="191.0" style="-fx-background-color: white;" styleClass="btn-img" onAction="#loadMachineManagementMenuScene">
                     <graphic>
                         <ImageView fitHeight="149.0" fitWidth="152.0">
                             <image>
@@ -48,7 +48,7 @@
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor></Button>
-                <Button fx:id="btnReserveManagement" layoutX="56.0" layoutY="405.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="173.0" style="-fx-background-color: white;" styleClass="btn-img">
+                <Button fx:id="btnReserveManagement" layoutX="56.0" layoutY="405.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="173.0" style="-fx-background-color: white;" styleClass="btn-img" onAction="#loadReservationManagementMenuScene" >
                     <graphic>
                         <ImageView fitHeight="149.0" fitWidth="152.0">
                             <image>
@@ -98,36 +98,36 @@
                     </image>
                 </ImageView>
                 <MenuButton fx:id="btnMenu" layoutX="488.0" layoutY="25.0" mnemonicParsing="false" text="MenuButton" />
-            <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="171.0" layoutY="225.0">
-               <image>
-                  <Image url="@../img/icons8-signature-48.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="346.0" layoutY="225.0">
-               <image>
-                  <Image url="@../img/icons8-signature-48.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="516.0" layoutY="225.0">
-               <image>
-                  <Image url="@../img/icons8-id-50.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="164.0" layoutY="355.0">
-               <image>
-                  <Image url="@../img/icons8-email-48.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="383.0" layoutY="355.0">
-               <image>
-                  <Image url="@../img/icons8-phone-48.png" />
-               </image>
-            </ImageView>
-            <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="542.0" layoutY="355.0">
-               <image>
-                  <Image url="@../img/icons8-users-50.png" />
-               </image>
-            </ImageView>
+                <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="171.0" layoutY="225.0">
+                    <image>
+                        <Image url="@../img/icons8-signature-48.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="346.0" layoutY="225.0">
+                    <image>
+                        <Image url="@../img/icons8-signature-48.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="29.0" fitWidth="36.0" layoutX="516.0" layoutY="225.0">
+                    <image>
+                        <Image url="@../img/icons8-id-50.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="164.0" layoutY="355.0">
+                    <image>
+                        <Image url="@../img/icons8-email-48.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="383.0" layoutY="355.0">
+                    <image>
+                        <Image url="@../img/icons8-phone-48.png" />
+                    </image>
+                </ImageView>
+                <ImageView fitHeight="25.0" fitWidth="30.0" layoutX="542.0" layoutY="355.0">
+                    <image>
+                        <Image url="@../img/icons8-users-50.png" />
+                    </image>
+                </ImageView>
             </children>
         </Pane>
     </children>
