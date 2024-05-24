@@ -433,7 +433,7 @@ public class DataBase {
             
             pstmt.setTimestamp(1, Timestamp.valueOf(dateInput.atStartOfDay()));
             ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 String serialNumber = rs.getString("serial_num"), name = rs.getString("name");
                 LocalDate adquisitionDate = rs.getTimestamp("adquisition_date").toLocalDateTime().toLocalDate();
                 String type = rs.getString("type"), status = rs.getString("status");
@@ -455,7 +455,7 @@ public class DataBase {
             
             pstmt.setString(1, typeInput);
             ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 String serialNumber = rs.getString("serial_num"), name = rs.getString("name");
                 LocalDate adquisitionDate = rs.getTimestamp("adquisition_date").toLocalDateTime().toLocalDate();
                 String type = rs.getString("type"), status = rs.getString("status");
@@ -477,7 +477,7 @@ public class DataBase {
             
             pstmt.setString(1, statusInput);
             ResultSet rs = pstmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 String serialNumber = rs.getString("serial_num"), name = rs.getString("name");
                 LocalDate adquisitionDate = rs.getTimestamp("adquisition_date").toLocalDateTime().toLocalDate();
                 String type = rs.getString("type"), status = rs.getString("status");
@@ -717,6 +717,47 @@ public class DataBase {
             System.out.println(e.getMessage());
         }
         return true;
+    }
+
+    public boolean addMachine(Machine machine) {
+        String sql = "INSERT INTO machines (serial_num, name, adquisition_date, type, status)" +
+                "VALUES(?,?,?,?,?)";
+        try (Connection connection = connect();
+        PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, machine.getSerialNumber());
+            pstmt.setString(2, machine.getName());
+            pstmt.setTimestamp(3, Timestamp.valueOf(LocalDate.now().atStartOfDay()));
+            pstmt.setString(4, machine.getType());
+            pstmt.setString(5, machine.getStatus());
+            boolean rowUpdated = pstmt.execute();
+            if (rowUpdated == false) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean updateMachine(Machine machine) {
+        String sql = "UPDATE machines SET name = ?, adquisition_date = ?, type = ?, status = ? WHERE serial_num = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                
+            pstmt.setString(1, machine.getName());
+            pstmt.setTimestamp(2, Timestamp.valueOf(machine.getAcquisitionDate().atStartOfDay()));
+            pstmt.setString(3, machine.getType());
+            pstmt.setString(4, machine.getStatus());
+            pstmt.setString(5, machine.getSerialNumber());
+            boolean rowUpdated = pstmt.execute();
+            if (rowUpdated == false) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
     }
 }
 

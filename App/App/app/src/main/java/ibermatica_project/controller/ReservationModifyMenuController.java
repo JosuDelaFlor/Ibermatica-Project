@@ -96,7 +96,7 @@ public class ReservationModifyMenuController {
     }
 
     @FXML
-    private void searchReservation() throws IOException {
+    private void search() throws IOException {
         if (!txfSearchInput.getText().replaceAll("\\s", "").equals("")) {
             if (checkDbReservationId(Integer.parseInt(txfSearchInput.getText()))) {
                 inputReservation = db.searchSpecificReservationWithId(Integer.parseInt(txfSearchInput.getText()));

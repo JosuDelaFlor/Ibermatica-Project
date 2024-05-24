@@ -33,7 +33,7 @@
                         <Image url="@../img/icons8-calendar-96.png" />
                     </image>
                 </ImageView>
-                <TextField fx:id="txfSearchInput" layoutX="23.0" layoutY="292.0" prefHeight="25.0" prefWidth="23.0" promptText="0" />
+                <TextField fx:id="txfSearchInput" layoutX="23.0" layoutY="292.0" onAction="#search" prefHeight="25.0" prefWidth="23.0" promptText="0" />
                 <TextField fx:id="txfId" layoutX="86.0" layoutY="249.0" prefHeight="25.0" prefWidth="173.0" promptText="DNI" />
                 <TextField fx:id="txfSerialNumber" layoutX="388.0" layoutY="249.0" prefHeight="25.0" prefWidth="173.0" promptText="Número de serie" />
                 <TextField fx:id="txfStartDate" layoutX="85.0" layoutY="343.0" prefHeight="25.0" prefWidth="173.0" promptText="Fehca de inicio yyyy-mm-dd" />
@@ -44,7 +44,7 @@
                     </image>
                 </ImageView>
                 <Button fx:id="btnModify" layoutX="257.0" layoutY="422.0" mnemonicParsing="false" onAction="#modify" prefHeight="25.0" prefWidth="107.0" styleClass="btn-danger" text="Modificar" />
-                <Button fx:id="btnSearch" layoutX="134.0" layoutY="422.0" mnemonicParsing="false" onAction="#searchReservation" text="Buscar" />
+                <Button fx:id="btnSearch" layoutX="134.0" layoutY="422.0" mnemonicParsing="false" onAction="#search" text="Buscar" />
                 <Label layoutX="86.0" layoutY="232.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="DNI" />
                 <Label layoutX="388.0" layoutY="232.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Número de serie" />
                 <Label layoutX="86.0" layoutY="322.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Fecha de inicio" />
@@ -70,7 +70,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button fx:id="btnMachineManagement" layoutX="47.0" layoutY="202.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="191.0" style="-fx-background-color: white;" styleClass="btn-img" onAction="#loadMachineManagementMenuScene">
+                <Button fx:id="btnMachineManagement" layoutX="47.0" layoutY="202.0" mnemonicParsing="false" onAction="#loadMachineManagementMenuScene" prefHeight="159.0" prefWidth="191.0" style="-fx-background-color: white;" styleClass="btn-img">
                     <graphic>
                         <ImageView fitHeight="149.0" fitWidth="152.0" styleClass="btn-img">
                             <image>

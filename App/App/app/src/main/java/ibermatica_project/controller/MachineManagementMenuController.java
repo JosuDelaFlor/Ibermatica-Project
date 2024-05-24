@@ -7,6 +7,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import ibermatica_project.model.Machine;
 import ibermatica_project.model.base.DataBase;
@@ -129,7 +132,7 @@ public class MachineManagementMenuController {
 
         tblViewMachine.getColumns().add(column1);
         tblViewMachine.getColumns().add(column2);
-        tblViewMachine.getColumns().add(column3);
+        // tblViewMachine.getColumns().add(column3);
         tblViewMachine.getColumns().add(column4);
         tblViewMachine.getColumns().add(column5);
         tblViewMachine.getColumns().add(actionCol);
@@ -156,9 +159,69 @@ public class MachineManagementMenuController {
         }
     }
 
+    @SuppressWarnings("rawtypes")
     @FXML
     private void search() throws IOException {
-        
+        TableColumn actionCol = new TableColumn("Action");
+
+        if ((String) comboSearchType.getValue() == "Número de serie") {
+            if (checkInputs(0)) {
+                machineList = db.searchMachineWithSerialNumber(txfSearch.getText());
+                generateTableView(machineList, actionCol);
+            }
+        } else if ((String) comboSearchType.getValue() == "Nombre") {
+            if (checkInputs(1)) {
+                machineList = db.searchMachineWithName(txfSearch.getText());
+                generateTableView(machineList, actionCol);
+            }
+        } else if ((String) comboSearchType.getValue() == "Fecha de adquisición") {
+            if (checkInputs(2)) {
+                machineList = db.searchMachineWithAdquisitonDate(LocalDate.parse(txfSearch.getText()));
+                generateTableView(machineList, actionCol);
+            }
+        } else if ((String) comboSearchType.getValue() == "Tipo") {
+            if ((String) comboSearchInput.getValue() == "Tornos") {
+                machineList = db.searchMachineWithType("tornos");
+            } else if ((String) comboSearchInput.getValue() == "Embalaje") {
+                machineList = db.searchMachineWithType("embalaje");
+            } else {
+                machineList = db.searchMachineWithType("procesados");
+            }
+            generateTableView(machineList, actionCol);
+        } else if ((String) comboSearchType.getValue() == "Estado") {
+            if ((String) comboSearchInput.getValue() == "No operativa") {
+                machineList = db.searchMachineWithStatus("not_operational");
+            } else {
+                machineList = db.searchMachineWithStatus("operational");
+            }
+            generateTableView(machineList, actionCol);
+        } 
+    }
+
+    @FXML
+    private boolean checkInputs(int searchType) throws IOException {
+        boolean valid = true;
+
+        if (searchType == 0) { // searchType 0 = SerialNumber
+            if (!checkDbSerialNumber(txfSearch.getText().replaceAll("\\s", ""))) {
+                generateAlert(0);
+                valid = false;
+            }
+        } else if (searchType == 1) { // searchType 1 = name
+            if (!checkDbName(txfSearch.getText().replaceAll("\\s", ""))) {
+                generateAlert(1);
+                valid = false;
+            }
+        } else if (searchType == 2) { // searchType 2 = adquisitionDate
+            LocalDate adquisitionDate = LocalDate.parse(txfSearch.getText());
+            if (!checkValidDate(txfSearch.getText().replaceAll("\\s", ""), "yyyy-mm-dd")) {
+                generateAlert(2);
+            } else if (!checkDbAdquisitionDate(adquisitionDate)) {
+                generateAlert(3);
+                valid = false;
+            }
+        } 
+        return valid;
     }
 
     @FXML
@@ -229,6 +292,17 @@ public class MachineManagementMenuController {
             }
         }
         return valid;
+    }
+
+    private boolean checkValidDate(String date, String dateFormat) {
+        DateFormat df = new SimpleDateFormat(dateFormat);
+        df.setLenient(false);
+        try {
+            df.parse(date);
+        } catch (ParseException e) {
+            return false;
+        }
+        return true;
     }
 
     @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -311,7 +385,7 @@ public class MachineManagementMenuController {
         if (changeComboBox) {
             txfSearch.setVisible(false);
             txfSearch.setEditable(false);
-            comboSearchInput.setLayoutX(184);
+            comboSearchInput.setLayoutX(203);
             comboSearchInput.setLayoutY(88);
             comboSearchInput.setVisible(true);
             txfSearch.setLayoutX(448);
@@ -323,7 +397,7 @@ public class MachineManagementMenuController {
             comboSearchInput.setLayoutY(88);
             comboSearchInput.setEditable(false);
             comboSearchInput.setVisible(false);
-            txfSearch.setLayoutX(184);
+            txfSearch.setLayoutX(203);
             txfSearch.setLayoutY(88);
         }
     }
@@ -334,19 +408,13 @@ public class MachineManagementMenuController {
         alert.setTitle("Cuidado!");
 
         if (error == 0) {
-            alert.setHeaderText("El DNI insertado no existe en la base de datos");
+            alert.setHeaderText("El Número de serie insertado no existe en la base de datos");
         } else if (error == 1) {
             alert.setHeaderText("El Nombre insertado no existe en la base de datos");
         } else if (error == 2) {
-            alert.setHeaderText("El Apellido insertado no existe en la base de datos");
+            alert.setHeaderText("No existe ninguna maquina con la fecha de adquisición insertada");
         } else if (error == 3) {
-            alert.setHeaderText("El Numero de telefono insertado no existe en la base de datos");
-        } else if (error == 4) {
-            alert.setHeaderText("El campo de filtrado no puede estar vacio");
-        } else if (error == 5) {
-            alert.setHeaderText("El Numero de telefono solo puede estar compuesto por numeros");
-        } else if (error == 6) {
-            alert.setHeaderText("Hemos tenido problemas al eliminar al usuario, por favor contacte con un Administrador");
+            alert.setHeaderText("El formato de la fecha de adquisición es incorrecto (yyyy-mm-dd)");
         } 
         alert.show();
     }
@@ -364,5 +432,15 @@ public class MachineManagementMenuController {
     @FXML
     private void loadMachineManagementMenuScene() throws IOException {
         SceneController.setRoot("fxml/machineManagementMenu");
+    }
+
+    @FXML
+    private void loadMachineAddMenuScene() throws IOException {
+        SceneController.setRoot("fxml/machineAddMenu");
+    }
+
+    @FXML
+    private void loadMachineModifyMenuScene() throws IOException {
+        SceneController.setRoot("fxml/machineModifyMenu");
     }
 }

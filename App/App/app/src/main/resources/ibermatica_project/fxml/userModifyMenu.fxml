@@ -29,7 +29,7 @@
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor></Button>
-                <TextField fx:id="txfId" layoutX="225.0" layoutY="217.0" prefHeight="25.0" prefWidth="173.0" promptText="Inserte el DNI del usuario" />
+                <TextField fx:id="txfId" layoutX="225.0" layoutY="217.0" onAction="#search" prefHeight="25.0" prefWidth="173.0" promptText="Inserte el DNI del usuario" />
                 <TextField fx:id="txfSurname" layoutX="224.0" layoutY="279.0" prefHeight="25.0" prefWidth="173.0" promptText="Apellido" />
                 <TextField fx:id="txfName" layoutX="17.0" layoutY="279.0" prefHeight="25.0" prefWidth="173.0" promptText="Nombre" />
                 <TextField fx:id="txfUser" layoutX="423.0" layoutY="279.0" prefHeight="25.0" prefWidth="173.0" promptText="Nombre de usuario" />
@@ -50,7 +50,7 @@
                 </Button>
                 <Label fx:id="lblRegisterday" layoutX="456.0" layoutY="221.0" prefHeight="17.0" prefWidth="108.0" style="-fx-alignment: center;" />
                 <Label layoutX="455.0" layoutY="200.0" prefHeight="17.0" prefWidth="108.0" style="-fx-alignment: center;" styleClass="lbl-user-info" text="Día de registro" />
-                <Button fx:id="btnSearch" layoutX="78.0" layoutY="410.0" mnemonicParsing="false" onAction="#searchUser" text="Buscar" />
+                <Button fx:id="btnSearch" layoutX="78.0" layoutY="410.0" mnemonicParsing="false" onAction="#search" text="Buscar" />
                 <Button fx:id="btnPasswordRestart" layoutX="423.0" layoutY="408.0" mnemonicParsing="false" onAction="#loadRestartUserPasswordScene" prefHeight="29.0" prefWidth="160.0" styleClass="btn-danger" text="Restablecer contraseña">
                     <cursor>
                         <Cursor fx:constant="HAND" />
@@ -80,7 +80,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button fx:id="btnMachineManagement" layoutX="47.0" layoutY="202.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="191.0" style="-fx-background-color: white;" styleClass="btn-img" onAction="#loadMachineManagementMenuScene">
+                <Button fx:id="btnMachineManagement" layoutX="47.0" layoutY="202.0" mnemonicParsing="false" onAction="#loadMachineManagementMenuScene" prefHeight="159.0" prefWidth="191.0" style="-fx-background-color: white;" styleClass="btn-img">
                     <graphic>
                         <ImageView fitHeight="149.0" fitWidth="152.0" styleClass="btn-img">
                             <image>
@@ -95,7 +95,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button fx:id="btnReserveManagement" layoutX="56.0" layoutY="405.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="173.0" style="-fx-background-color: white;" styleClass="btn-img" onAction="#loadReservationManagementMenuScene">
+                <Button fx:id="btnReserveManagement" layoutX="56.0" layoutY="405.0" mnemonicParsing="false" onAction="#loadReservationManagementMenuScene" prefHeight="159.0" prefWidth="173.0" style="-fx-background-color: white;" styleClass="btn-img">
                     <graphic>
                         <ImageView fitHeight="149.0" fitWidth="152.0" styleClass="btn-img">
                             <image>

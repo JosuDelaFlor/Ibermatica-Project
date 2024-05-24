@@ -124,7 +124,7 @@ public class UserModifyController {
 
     @SuppressWarnings("unchecked")
     @FXML
-    private void searchUser() throws IOException {
+    private void search() throws IOException {
         boolean validId = checkDbId(txfId.getText());
         if (validId) {
             modifyUser = db.searchSpecificUser(txfId.getText());
@@ -137,8 +137,10 @@ public class UserModifyController {
             
             if (modifyUser.getType() == 0) {
                 comboType.setValue("Administrador");
+                comboType.getItems().add("Empleado");
             } else {
                 comboType.setValue("Empleado");
+                comboType.getItems().add("Admnistrador");
             }    
         } else {
             generateAlert("El DNI insertado no existe");

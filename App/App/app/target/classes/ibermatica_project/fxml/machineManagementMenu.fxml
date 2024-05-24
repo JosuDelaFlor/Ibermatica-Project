@@ -23,23 +23,23 @@
                         <Cursor fx:constant="HAND" />
                     </cursor></MenuButton>
                 <TableView fx:id="tblViewMachine" layoutX="1.0" layoutY="126.0" prefHeight="314.0" prefWidth="618.0" />
-                <ComboBox fx:id="comboSearchType" layoutX="14.0" layoutY="88.0" onAction="#comoboBoxSelection" prefWidth="150.0">
+                <ComboBox fx:id="comboSearchType" layoutX="14.0" layoutY="88.0" onAction="#comoboBoxSelection" prefHeight="25.0" prefWidth="173.0">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor></ComboBox>
-                <TextField fx:id="txfSearch" layoutX="184.0" layoutY="88.0" promptText="Filtro">
+                <TextField fx:id="txfSearch" layoutX="203.0" layoutY="88.0" onAction="#search" promptText="Filtro">
                     <cursor>
                         <Cursor fx:constant="TEXT" />
                     </cursor></TextField>
-                <Button fx:id="btnSearch" layoutX="349.0" layoutY="88.0" mnemonicParsing="false" onAction="#search" text="Buscar">
+                <Button fx:id="btnSearch" layoutX="367.0" layoutY="88.0" mnemonicParsing="false" onAction="#search" text="Buscar">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor></Button>
-                <Button fx:id="btnModify" layoutX="367.0" layoutY="496.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="81.0" styleClass="btn-danger" text="Modificar">
+                <Button fx:id="btnModify" layoutX="367.0" layoutY="496.0" mnemonicParsing="false" onAction="#loadMachineModifyMenuScene" prefHeight="25.0" prefWidth="81.0" styleClass="btn-danger" text="Modificar">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor></Button>
-                <Button fx:id="btnCreate" layoutX="185.0" layoutY="496.0" mnemonicParsing="false" styleClass="btn-success" text="Agregar">
+                <Button fx:id="btnCreate" layoutX="185.0" layoutY="496.0" mnemonicParsing="false" onAction="#loadMachineAddMenuScene" styleClass="btn-success" text="Agregar">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor></Button>

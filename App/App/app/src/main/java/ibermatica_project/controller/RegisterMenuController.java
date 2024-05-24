@@ -269,12 +269,12 @@ public class RegisterMenuController {
     }
 
     @FXML
-    private void loadReservationManagementMenuScene() throws IOException {
-        SceneController.setRoot("fxml/reservationManagementMenu");
+    private void loadMachineManagementMenuScene() throws IOException {
+        SceneController.setRoot("fxml/machineManagementMenu");
     }
 
     @FXML
-    private void loadMachineManagementMenuScene() throws IOException {
-        SceneController.setRoot("fxml/machineManagementMenu");
+    private void loadReservationManagementMenuScene() throws IOException {
+        SceneController.setRoot("fxml/reservationManagementMenu");
     }
 }
