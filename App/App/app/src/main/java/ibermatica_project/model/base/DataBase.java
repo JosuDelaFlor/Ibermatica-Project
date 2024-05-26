@@ -718,6 +718,30 @@ public class DataBase {
         }
         return true;
     }
+    
+    public ArrayList<Reservation> searchReservationWithUserId(String userID) {
+        ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
+        String sql = "SELECT * FROM reservation_machines WHERE user_id = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, userID);
+            ResultSet rs = pstmt.executeQuery();
+            while (rs.next()) {
+                String serialNumber = rs.getString("serial_num");
+                LocalDate startDate = rs.getTimestamp("start_date").toLocalDateTime().toLocalDate(),
+                    endDate = rs.getTimestamp("end_date").toLocalDateTime().toLocalDate();
+                int reservationId = rs.getInt("reservation_id");
+
+                Reservation reservation = new Reservation(userID, serialNumber, startDate, endDate, reservationId);
+                reservationList.add(reservation);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return reservationList;
+    }
 
     public boolean addMachine(Machine machine) {
         String sql = "INSERT INTO machines (serial_num, name, adquisition_date, type, status)" +

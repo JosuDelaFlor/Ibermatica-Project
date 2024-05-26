@@ -35,6 +35,12 @@ public class SceneController {
         mainStage.show();
     }
 
+    public static void loadEmployeeMenuScene() throws IOException {
+        scene = new Scene(loadFXML("fxml/employeeMenu"), 900, 600);
+        mainStage.setScene(scene);
+        mainStage.show();
+    }
+
     public static void loadLoginScene() throws IOException {
         scene = new Scene(loadFXML("fxml/index"), 640, 480);
         mainStage.setScene(scene);

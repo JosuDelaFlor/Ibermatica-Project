@@ -25,6 +25,8 @@ public class PasswordRestartController {
     DataBase db = new DataBase("localhost", "ibermatica_db", null, "root", null);
 
     static Alert alert = new Alert(Alert.AlertType.WARNING);
+
+    User user = IndexController.getLoggedUser();
     
     @FXML
     private void update() throws IOException {
@@ -35,7 +37,7 @@ public class PasswordRestartController {
                 alert.setTitle("Contraseña actualizada");
                 alert.setHeaderText("La actualización de la contraseña se completo con éxito");
                 alert.show();
-                SceneController.loadAdmMenuScene();
+                loadAdmMenuScene();
             } else {
                 generateAlert("Hemos tenido algún fallo al actualizar la contraseña, por favor contacta con un Administrador");
             } 
@@ -52,7 +54,6 @@ public class PasswordRestartController {
             passV = true;
         }
         
-        User user = IndexController.getLoggedUser();
         if (!user.getUserId().equals(txfUserId.getText().replaceAll("\\s", ""))) {
             generateAlert("El DNI insertado no coincide con su usuario");
         } else {
@@ -74,6 +75,10 @@ public class PasswordRestartController {
 
     @FXML
     private void loadAdmMenuScene() throws IOException {
-        SceneController.loadAdmMenuScene();
+        if (user.getType() == 0) {
+            SceneController.loadAdmMenuScene();
+        } else {
+            SceneController.loadEmployeeMenuScene();
+        }
     }
 }

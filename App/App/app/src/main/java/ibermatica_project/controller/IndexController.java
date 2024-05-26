@@ -92,7 +92,7 @@ public class IndexController {
                         SceneController.loadAdmMenuScene();
                         break;
                     } else {
-                        // App.setRoot("fxml/employeeMenu");
+                        SceneController.loadEmployeeMenuScene();
                     }
                 } else if (username.equals("") || password.equals("")) {
                     showAlert(0);
