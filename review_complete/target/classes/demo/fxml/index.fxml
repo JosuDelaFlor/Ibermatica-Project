@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Button?>
+<?import javafx.geometry.Insets?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@../css/style.css"
+   xmlns="http://javafx.com/javafx/8"
+   xmlns:fx="http://javafx.com/fxml/1" fx:controller="demo.controller.IndexController">
+   <children>
+      <Label id="lbl-menu-title" layoutX="248.0" layoutY="22.0" prefHeight="33.0" prefWidth="145.0" text="REVIEW">
+         <effect>
+            <Glow />
+         </effect>
+      </Label>
+      <Button fx:id="btnAdd" layoutX="256.0" layoutY="116.0" mnemonicParsing="false" onAction="#loadStudentScene" prefHeight="31.0" prefWidth="128.0" styleClass="btn" text="Agregar Estudiante">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Glow />
+         </effect>
+      </Button>
+      <Button fx:id="btnMeeting" layoutX="256.0" layoutY="209.0" mnemonicParsing="false" onAction="#loadMeetingScene" prefHeight="31.0" prefWidth="128.0" styleClass="btn" text="Combocar Reunion">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Glow />
+         </effect>
+      </Button>
+      <Button fx:id="btnMaterial" layoutX="256.0" layoutY="302.0" mnemonicParsing="false" onAction="#loadMaterialScene" prefHeight="31.0" prefWidth="128.0" styleClass="btn" text="Gestionar Material">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <effect>
+            <Glow />
+         </effect>
+      </Button>
+   </children>
+</AnchorPane>
