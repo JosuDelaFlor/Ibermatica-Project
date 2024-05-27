@@ -48,6 +48,8 @@ public class UserManagementMenuController {
     DataBase db = new DataBase("localhost", "ibermatica_db", null, "root", null);
     
     static ArrayList<SimpleUser> simpleUsersList = new ArrayList<SimpleUser>();
+
+    static User deleteUser;
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @FXML
@@ -152,7 +154,7 @@ public class UserManagementMenuController {
             TableColumn actionCol = new TableColumn("Action");
             generateTableView(simpleUsersList, actionCol);
         } else {
-            generateAlert(6);
+            SceneController.loadUserDeleteErrorScene();
         }
     }
 
@@ -341,6 +343,7 @@ public class UserManagementMenuController {
                             btn.setOnAction(event -> {
                                 SimpleUser simpleUser = getTableView().getItems().get(getIndex());
                                 try {
+                                    deleteUser = db.searchSpecificUser(simpleUser.getUserId());
                                     delete(simpleUser.getUserId());
                                 } catch (IOException e) {
                                     e.printStackTrace();
@@ -356,6 +359,11 @@ public class UserManagementMenuController {
         };
 
         actionCol.setCellFactory(cellFactory);
+    }
+
+    @SuppressWarnings("exports")
+    public static User getDeleteUser() {
+        return deleteUser;
     }
 
     @FXML

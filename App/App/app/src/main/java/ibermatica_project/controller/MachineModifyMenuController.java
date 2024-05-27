@@ -96,8 +96,9 @@ public class MachineModifyMenuController {
 
     public void update() throws IOException {
         if (checkDbSerialNumber() && testInputs()) {
-            Machine machine = db.searchSpecificMachine(txfSerialNumber.getText().replaceAll("\\", ""));
+            Machine machine = new Machine(null, null, null, null, null);
             machine.setName(txfName.getText().replaceAll("\\s", ""));
+            machine.setSerialNumber(txfSerialNumber.getText().replaceAll("\\s", ""));
             if (comboStatus.getValue() == "Operativa") {
                 machine.setStatus("operational");
             } else {
@@ -132,7 +133,7 @@ public class MachineModifyMenuController {
                     comboStatus.setValue("No operativa");
                 }
 
-                if (machine.getType() == "tornos") {
+                if (machine.getType().equals("tornos")) {
                     comboType.setValue("tornos");
                 } else if (machine.getType() == "embalaje") {
                     comboType.setValue("embalaje");

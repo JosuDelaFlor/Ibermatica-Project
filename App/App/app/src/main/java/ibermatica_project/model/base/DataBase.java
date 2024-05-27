@@ -663,6 +663,7 @@ public class DataBase {
             }
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            
         }
         return true;
     }
@@ -709,6 +710,22 @@ public class DataBase {
         PreparedStatement pstmt = connection.prepareStatement(sql)) {
             
             pstmt.setString(1, serialNumber);
+            boolean rowUpdated = pstmt.execute();
+            if (rowUpdated == false) {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return true;
+    }
+
+    public boolean deleteAllReservations(String userId) {
+        String sql = "DELETE FROM reservation_machines WHERE user_id = ?";
+        try (Connection connection = connect();
+        PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, userId);
             boolean rowUpdated = pstmt.execute();
             if (rowUpdated == false) {
                 return false;
@@ -782,6 +799,39 @@ public class DataBase {
             System.out.println(e.getMessage());
         }
         return false;
+    }
+
+    public boolean updateReservationUserId(String assignUserId, String dessignUserId) {
+        String sql = "UPDATE reservation_machines SET user_id = ? WHERE user_id = ?";
+        try (Connection connection = connect();
+            PreparedStatement pstmt = connection.prepareStatement(sql)) {
+                
+            pstmt.setString(1, assignUserId);
+            pstmt.setString(2, dessignUserId);
+            boolean rowUpdated = pstmt.execute();
+            if (rowUpdated == false) {
+                return true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return false;
+    }
+
+    public boolean deleteReservationWithSerialNumber(String serialNumber) {
+        String sql = "DELETE FROM reservation_machines WHERE serial_num = ?";
+        try (Connection connection = connect();
+        PreparedStatement pstmt = connection.prepareStatement(sql)) {
+            
+            pstmt.setString(1, serialNumber);
+            boolean rowUpdated = pstmt.execute();
+            if (rowUpdated == false) {
+                return false;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return true;
     }
 }
 

@@ -52,6 +52,8 @@ public class MachineManagementMenuController {
     DataBase db = new DataBase("localhost", "ibermatica_db", null, "root", null);
     
     static ArrayList<Machine> machineList = new ArrayList<Machine>();
+
+    static Machine deletMachine;
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @FXML
@@ -155,7 +157,7 @@ public class MachineManagementMenuController {
             TableColumn actionCol = new TableColumn("Action");
             generateTableView(machineList, actionCol);
         } else {
-            generateAlert(6);
+            SceneController.loadMachineDeleteErrorScene();
         }
     }
 
@@ -345,6 +347,7 @@ public class MachineManagementMenuController {
                             btn.setOnAction(event -> {
                                 Machine machine = getTableView().getItems().get(getIndex());
                                 try {
+                                    deletMachine = db.searchSpecificMachine(machine.getSerialNumber());
                                     delete(machine.getSerialNumber());
                                 } catch (IOException e) {
                                     e.printStackTrace();
@@ -360,6 +363,10 @@ public class MachineManagementMenuController {
         };
 
         actionCol.setCellFactory(cellFactory);
+    }
+
+    public static Machine getDeleteMachine() {
+        return deletMachine;
     }
 
     @SuppressWarnings({ "unchecked" })

@@ -4,6 +4,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import ibermatica_project.model.Validation;
+import javafx.scene.control.Alert;
 
 /*
  * This file will be used to create static methods that will be used in the 
@@ -144,5 +145,19 @@ public class Validations {
         }
 
         return validation;
+    }
+
+    public static void generateErrorAltert(String errorMsg) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("ERROR!");
+        alert.setHeaderText(errorMsg);
+        alert.show();
+    }
+
+    public static void generateSuccessAltert(String successMsg) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Completado");
+        alert.setHeaderText(successMsg);
+        alert.show();
     }
 }

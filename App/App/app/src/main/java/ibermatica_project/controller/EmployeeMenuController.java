@@ -127,6 +127,7 @@ public class EmployeeMenuController {
                     alert.show();
                     TableColumn actionCol = new TableColumn("Action");
                     tblUserReservation.getItems().clear();
+                    reservationList = db.searchReservationWithUserId(loggedUser.getUserId());
                     generateTableView(reservationList, actionCol);
                 } else {
                     generateAlert(6);

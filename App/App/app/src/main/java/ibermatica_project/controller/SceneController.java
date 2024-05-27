@@ -50,7 +50,6 @@ public class SceneController {
     public static void loadRestartPasswordScene() throws IOException {
         scene = new Scene(loadFXML("fxml/restartPassword"), 320, 240);
         mainStage.setScene(scene);
-        mainStage.initStyle(StageStyle.UNDECORATED);
         mainStage.setY(150);
         mainStage.setX(450);
         mainStage.show();
@@ -59,7 +58,6 @@ public class SceneController {
     public static void loadRestartUserPasswordScene() throws IOException {
         scene = new Scene(loadFXML("fxml/restartUserPassword"), 320, 240);
         mainStage.setScene(scene);
-        mainStage.initStyle(StageStyle.UNDECORATED);
         mainStage.setY(150);
         mainStage.setX(450);
         mainStage.show();
@@ -67,6 +65,30 @@ public class SceneController {
 
     public static void loadUserModifyMenuScene() throws IOException {
         scene = new Scene(loadFXML("fxml/userModifyMenu"), 900, 600);
+        mainStage.setScene(scene);
+        mainStage.show();
+    }
+
+    public static void loadUserDeleteErrorScene() throws IOException {
+        scene = new Scene(loadFXML("fxml/userDeleteError"), 600, 400);
+        mainStage.setScene(scene);
+        mainStage.show();
+    }
+
+    public static void loadMachineDeleteErrorScene() throws IOException {
+        scene = new Scene(loadFXML("fxml/machineDeleteError"), 600, 400);
+        mainStage.setScene(scene);
+        mainStage.show();
+    }
+
+    public static void loadUserManagementMenuScene() throws IOException {
+        scene = new Scene(loadFXML("fxml/userManagementMenu"), 900, 600);
+        mainStage.setScene(scene);
+        mainStage.show();
+    }
+
+    public static void loadMachineManagementMenuScene() throws IOException {
+        scene = new Scene(loadFXML("fxml/machineManagementMenu"), 900, 600);
         mainStage.setScene(scene);
         mainStage.show();
     }
