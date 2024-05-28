@@ -36,6 +36,6 @@ public class Material {
 
     @Override
     public String toString() {
-        return "Producto:" +name+ ", Precio: ["+price+"€]";
+        return name+ ", Precio: ["+price+"€]";
     }
 }

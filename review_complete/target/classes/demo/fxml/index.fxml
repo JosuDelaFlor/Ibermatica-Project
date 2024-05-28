@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.image.*?>
 <?import javafx.scene.effect.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
@@ -10,9 +11,7 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.geometry.Insets?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@../css/style.css"
-   xmlns="http://javafx.com/javafx/8"
-   xmlns:fx="http://javafx.com/fxml/1" fx:controller="demo.controller.IndexController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="demo.controller.IndexController">
    <children>
       <Label id="lbl-menu-title" layoutX="248.0" layoutY="22.0" prefHeight="33.0" prefWidth="145.0" text="REVIEW">
          <effect>
@@ -42,6 +41,24 @@
          <effect>
             <Glow />
          </effect>
+      </Button>
+      <Button fx:id="btnPortuguese" layoutX="14.0" layoutY="16.0" mnemonicParsing="false" onAction="#btnPortuguesePerformed" style="-fx-border-color: white;" styleClass="btn">
+         <graphic>
+            <ImageView>
+               <image>
+                  <Image url="@../img/icons8-monkey-48.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button fx:id="btnSpanish" disable="true" layoutX="139.0" layoutY="16.0" mnemonicParsing="false" onAction="#btnSpanishPerformed" style="-fx-border-color: white;" styleClass="btn" visible="false">
+         <graphic>
+            <ImageView>
+               <image>
+                  <Image url="@../img/icons8-spain-48.png" />
+               </image>
+            </ImageView>
+         </graphic>
       </Button>
    </children>
 </AnchorPane>

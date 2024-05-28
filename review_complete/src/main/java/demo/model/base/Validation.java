@@ -77,10 +77,15 @@ public class Validation {
     }
 
     public static boolean checkCourse(String course) throws IOException {
-        if (course.equals("DAM") || course.equals("DAW")) {
-            return true;
+        if (!course.equals(null)) {
+            if (course.equals("DAM") || course.equals("DAW")) {
+                return true;
+            } else {
+                generateAlert("Los cursos solo pueden ser DAM o DAW");
+                return false;
+            }
         } else {
-            generateAlert("Los cursos solo pueden ser DAM o DAW");
+            generateAlert("Tienes que seleccionar un curso");
             return false;
         }
     }

@@ -30,15 +30,15 @@
                 </ImageView>
             </graphic>
         </Button>
-        <VBox fx:id="vboxCheckBoxes" layoutX="10.0" layoutY="70.0" prefHeight="273.0" prefWidth="269.0" />
+        <VBox fx:id="vboxCheckBoxes" layoutX="10.0" layoutY="70.0" prefHeight="273.0" prefWidth="209.0" />
         <Label id="lbl-info" layoutX="14.0" layoutY="343.0" prefHeight="17.0" prefWidth="76.0" text="Precio total: " />
-        <Label id="lbl-info" fx:id="lblTotalPrice" layoutX="95.0" layoutY="343.0" prefHeight="17.0" prefWidth="37.0" />
-        <TextArea fx:id="txtAreaInfo" layoutX="358.0" layoutY="87.0" prefHeight="273.0" prefWidth="276.0" />
-        <Button fx:id="btnBuy" layoutX="287.0" layoutY="195.0" mnemonicParsing="false" onAction="#buy" styleClass="btn" text="Comprar">
+        <Label id="lbl-info" fx:id="lblTotalPrice" layoutX="95.0" layoutY="343.0" prefHeight="17.0" prefWidth="94.0" />
+        <TextArea fx:id="txtAreaInfo" layoutX="299.0" layoutY="87.0" prefHeight="273.0" prefWidth="335.0" />
+        <Button fx:id="btnBuy" layoutX="227.0" layoutY="192.0" mnemonicParsing="false" onAction="#buy" styleClass="btn" text="Comprar">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>
         </Button>
-        <Label id="lbl-info" layoutX="437.0" layoutY="70.0" prefHeight="17.0" prefWidth="119.0" text="Ticket de la compra" />
+        <Label id="lbl-info" layoutX="414.0" layoutY="70.0" prefHeight="17.0" prefWidth="119.0" text="Ticket de la compra" />
     </children>
 </AnchorPane>

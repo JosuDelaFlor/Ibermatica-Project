@@ -35,8 +35,6 @@ public class StudentController {
      * PUEDES MODIFICAR LO QUE QUIERAS
      */
 
-    ArrayList<Student> studentList = new ArrayList<>();
-
     /**
      * Insertar en la ComboBox los valores DAM y DAW y que aparezca un Label con la
      * informacion de los Estudiantes actuales en la VBox
@@ -48,7 +46,7 @@ public class StudentController {
     private void initialize() throws IOException {
         comboCourse.getItems().addAll("DAM", "DAW");
 
-        studentList = Student.studentInitialize();
+        ArrayList<Student> studentList = Student.studentInitialize();
         for (Student student : studentList) {
             Label label = new Label(student.toString());
             vboxInfo.getChildren().add(label);

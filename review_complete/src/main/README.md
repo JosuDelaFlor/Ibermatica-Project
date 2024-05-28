@@ -11,4 +11,4 @@
       2 Producto: name, Precio: [00.00]
             ..................
       Cantidad de productos: x
-      Precio total: x + y + z = precioTotal
+      Precio total: x  y  z  =  precioTotal

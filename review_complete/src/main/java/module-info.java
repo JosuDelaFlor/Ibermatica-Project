@@ -6,6 +6,7 @@ module demo {
     opens demo.controller to javafx.fxml;
 
     exports demo;
+    exports demo.lang;
     exports demo.controller;
     exports demo.model;
 }
