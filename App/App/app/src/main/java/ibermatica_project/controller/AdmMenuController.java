@@ -3,6 +3,7 @@ package ibermatica_project.controller;
 import java.io.FileInputStream;
 import java.io.IOException;
 
+import ibermatica_project.lang.Lang;
 import ibermatica_project.model.base.DataBase;
 import ibermatica_project.model.base.User;
 import javafx.event.ActionEvent;
@@ -17,21 +18,26 @@ import javafx.scene.image.ImageView;
 
 public class AdmMenuController {
     @FXML
-    Label lblName, lblSurname, lblUsername, lblEmail, lblTlfNumber, lblType, lblTitle;
+    Label lblName, lblSurname, lblUsername, lblEmail, lblTlfNumber, lblType, lblTitleAdm,
+        lblNameAdm, lblSurnameAdm, lblUserNameAdm, lblEmailAdm, lblPhoneNumberAdm, lblUserTypeAdm, lblUserManagement,
+        lblMachineManagement, lblReservesManagement;
 
     @FXML
     MenuButton btnMenu;
 
     @FXML
-    Button btnUserManagement, btnMachineManagement, btnReserveManagement;
+    Button btnUserManagement, btnMachineManagement, btnReserveManagement, btnSpanish, btnEnglish;
 
-    DataBase db = new DataBase("localhost", "ibermatica_db", null, "root", null);
+    DataBase db = new DataBase("localhost", "ibermatica_db", null, "root", null); 
 
+    
     @FXML
-    protected void initialize() throws IOException {
+    public void initialize() throws IOException {
+        btnSpanish.setVisible(false);
+        btnSpanish.setDisable(true);
         User loggedUser = IndexController.getLoggedUser();
 
-        lblTitle.setText("Bienvenido " + loggedUser.getName());
+        lblTitleAdm.setText("Bienvenido " + loggedUser.getName());
         lblName.setText(loggedUser.getName());
         lblSurname.setText(loggedUser.getSurname());
         lblUsername.setText(loggedUser.getUsername());
@@ -73,6 +79,41 @@ public class AdmMenuController {
         };
 
         menuItem1.setOnAction(event1);
+    }
+
+    public void langChange(String langName) throws IOException{
+        Lang lang = new Lang(langName);
+
+        this.lblTitleAdm.setText(lang.getProperty("lblTitle"));
+        this.lblNameAdm.setText(lang.getProperty("lblName"));
+        this.lblSurnameAdm.setText(lang.getProperty("lblSurname"));
+        this.lblUserNameAdm.setText(lang.getProperty("lblUserName"));
+        this.lblEmailAdm.setText(lang.getProperty("lblEmail"));
+        this.lblPhoneNumberAdm.setText(lang.getProperty("lblPhoneNumber"));
+        this.lblUserTypeAdm.setText(lang.getProperty("lblUserType"));
+        
+    }
+
+    @FXML
+    private void btnSpanishActionPerformed() throws IOException {
+        langChange("Spanish");
+        btnSpanish.setVisible(false);
+        btnSpanish.setDisable(true);
+        btnSpanish.setLayoutX(14);
+        btnEnglish.setLayoutX(94);
+        btnEnglish.setVisible(true);
+        btnEnglish.setDisable(false);
+    }
+
+    @FXML
+    private void btnEnglishActionPerformed() throws IOException {
+        langChange("English");
+        btnEnglish.setVisible(false);
+        btnEnglish.setDisable(true);
+        btnEnglish.setLayoutX(14);
+        btnSpanish.setLayoutX(94);
+        btnSpanish.setVisible(true);
+        btnSpanish.setDisable(false);
     }
 
     @FXML

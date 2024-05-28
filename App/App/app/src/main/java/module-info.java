@@ -9,6 +9,7 @@ module ibermatica_project {
     opens ibermatica_project.controller to javafx.fxml;
 
     exports ibermatica_project;
+    exports ibermatica_project.lang;
     exports ibermatica_project.controller;
     exports ibermatica_project.model;
     exports ibermatica_project.tests;
