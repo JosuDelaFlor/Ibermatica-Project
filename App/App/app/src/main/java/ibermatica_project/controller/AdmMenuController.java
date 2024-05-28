@@ -17,10 +17,10 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 public class AdmMenuController {
+
     @FXML
     Label lblName, lblSurname, lblUsername, lblEmail, lblTlfNumber, lblType, lblTitleAdm,
-        lblNameAdm, lblSurnameAdm, lblUserNameAdm, lblEmailAdm, lblPhoneNumberAdm, lblUserTypeAdm, lblUserManagement,
-        lblMachineManagement, lblReservesManagement;
+        lblNameAdm, lblSurnameAdm, lblUserNameAdm, lblEmailAdm, lblPhoneNumberAdm, lblUserTypeAdm;
 
     @FXML
     MenuButton btnMenu;
@@ -77,21 +77,17 @@ public class AdmMenuController {
                 }
             }
         };
-
         menuItem1.setOnAction(event1);
     }
+    
 
-    public void langChange(String langName) throws IOException{
-        Lang lang = new Lang(langName);
+    private void langChange(String langName) throws IOException {
+        Label[] labelList = {lblTitleAdm, lblNameAdm, lblSurnameAdm, lblUserNameAdm, lblEmailAdm, lblPhoneNumberAdm, lblUserTypeAdm};
+        Label[] labelChangeList = Lang.langChange(langName, labelList, "admMenu");
 
-        this.lblTitleAdm.setText(lang.getProperty("lblTitle"));
-        this.lblNameAdm.setText(lang.getProperty("lblName"));
-        this.lblSurnameAdm.setText(lang.getProperty("lblSurname"));
-        this.lblUserNameAdm.setText(lang.getProperty("lblUserName"));
-        this.lblEmailAdm.setText(lang.getProperty("lblEmail"));
-        this.lblPhoneNumberAdm.setText(lang.getProperty("lblPhoneNumber"));
-        this.lblUserTypeAdm.setText(lang.getProperty("lblUserType"));
-        
+        for (int i = 0; i < labelChangeList.length; i++) {
+            labelList[i].setText(labelChangeList[i].getText());
+        }
     }
 
     @FXML
