@@ -28,6 +28,11 @@ public class MeetingController {
 
     static ArrayList<Meeting> meetingList = new ArrayList<Meeting>();
 
+    @FXML
+    private void initialize() throws IOException {
+        meetingList.clear();
+    }
+
     /**
      * Se tiene que agregar los en el TextField las reuniones en el formato que aparece en el README
      * @throws IOException
@@ -36,7 +41,7 @@ public class MeetingController {
     @FXML
     private void add() throws IOException {
         if (validations()) {
-            int count = 0;
+            int count = 1;
             LocalDate date = dpkDate.getValue();
             String name = txfName.getText();
             int amount = Integer.parseInt(txfAmount.getText());
@@ -62,7 +67,26 @@ public class MeetingController {
 
     @FXML
     private void delete() throws IOException {
-        // TODO
+        boolean exists = false;
+        for (int i = 0; i < meetingList.size(); i++) {
+            if (meetingList.get(i).getName().equals(txfDeleteInput.getText())) {
+                meetingList.remove(i);
+                exists = true;
+            }
+        }
+
+        if (!exists) {
+            Validation.generateAlert("No existe ninguna reunion con ese nombre");
+            resetInputs();
+        } else {
+            int count = 1;
+            txtAreaInfo.clear();
+            for (Meeting meeting : meetingList) {
+                txtAreaInfo.appendText(Integer.toString(count)+meeting.toString()+"\n");
+                count++;
+            }
+            resetInputs();
+        }
     }
 
     /**

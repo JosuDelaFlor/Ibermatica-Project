@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="demo.controller.IndexController">
    <children>
-      <Label id="lbl-menu-title" layoutX="203.0" layoutY="23.0" prefHeight="47.0" prefWidth="235.0" text="Repaso">
+      <Label fx:id="lblTitle" id="lbl-menu-title" layoutX="203.0" layoutY="23.0" prefHeight="47.0" prefWidth="235.0" text="Repaso">
          <effect>
             <Glow />
          </effect>

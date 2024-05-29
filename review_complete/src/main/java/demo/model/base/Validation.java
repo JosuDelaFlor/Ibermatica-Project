@@ -89,14 +89,14 @@ public class Validation {
     }
 
     public static boolean checkDate(LocalDate date) throws IOException {
-        if (!date.equals(null)) {
+        try {
             if (date.isBefore(LocalDate.now())) {
                 generateAlert("La fecha insetada tiene que ser superior a la fecha actual");
             } else {
                 return true;
             }
-        } else {
-            generateAlert("El campo de la feca tiene que estar completado");
+        } catch (Exception e) {
+            generateAlert("Tienes que seleccionar una fecha");
         }
         return false;
     }
