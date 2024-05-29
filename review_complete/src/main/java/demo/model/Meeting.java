@@ -31,6 +31,6 @@ public class Meeting {
 
     @Override
     public String toString() {
-        return "Reinuon: " +name+ ", Catidad de asistentes:" +personAmount+ ", Fecha:" + meetingDate;
+        return " Reinuon: " +name+ ", Catidad de asistentes: " +personAmount+ ", Fecha: " + meetingDate;
     }
 }

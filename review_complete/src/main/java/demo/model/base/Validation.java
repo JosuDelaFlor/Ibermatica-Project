@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import demo.model.Meeting;
 import demo.model.Student;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
@@ -19,16 +20,13 @@ public class Validation {
     static Pattern isNumeric = Pattern.compile("\\d");
     static Pattern numberPattern = Pattern.compile("^\\d{1,2}$");
 
-    static ArrayList<Student> studentLis = new ArrayList<Student>();
-
-    public static boolean checkUserId(String userId) throws IOException {
+    public static boolean checkUserId(String userId, ArrayList<Student> studentList) throws IOException {
         if (!userId.replaceAll("\\s", "").isEmpty()) {
             Matcher userIdMat = userIdPattern.matcher(userId.replaceAll("\\s", ""));
             boolean validFormat = (!userIdMat.matches()) ? false : true;
 
-            studentLis = Student.studentInitialize();
             boolean isValid = false;
-            for (Student student : studentLis) {
+            for (Student student : studentList) {
                 isValid = (student.getUserId().equals(userId.replaceAll("\\s", ""))) ? false : true;
             }
 
@@ -77,7 +75,7 @@ public class Validation {
     }
 
     public static boolean checkCourse(String course) throws IOException {
-        if (!course.equals(null)) {
+        if (!course.equals("Seleccione un curso")) {
             if (course.equals("DAM") || course.equals("DAW")) {
                 return true;
             } else {
@@ -92,13 +90,37 @@ public class Validation {
 
     public static boolean checkDate(LocalDate date) throws IOException {
         if (!date.equals(null)) {
-            if (date.isAfter(LocalDate.now())) {
+            if (date.isBefore(LocalDate.now())) {
                 generateAlert("La fecha insetada tiene que ser superior a la fecha actual");
             } else {
                 return true;
             }
         } else {
             generateAlert("El campo de la feca tiene que estar completado");
+        }
+        return false;
+    }
+
+    public static boolean checkMeetingName(String meetingName, ArrayList<Meeting> meetingList) throws IOException {
+        if (!meetingName.replaceAll("\\s", "").isEmpty()) {
+            for (Meeting meeting : meetingList) {
+                return (meeting.getName().equals(meetingName.replaceAll("\\s", ""))) ? false : true;
+            }
+        }
+        return false;
+    }
+
+    public static boolean checkMeetingAmount(String amount) throws IOException {
+        if (!amount.replaceAll("\\s", "").isEmpty()) {
+            Matcher amountMat = numberPattern.matcher(amount.replaceAll("\\s", ""));
+            boolean valid = (amountMat.matches()) ? true : false;
+            if (!valid) {
+                generateAlert("La cantidad de asistentes solo puede contener valores numericos y tener como maximo 2 digitos");
+            } else {
+                return valid;
+            }
+        } else {
+            generateAlert("El campo de la cantidad de asistentes tiene que estar completado");
         }
         return false;
     }

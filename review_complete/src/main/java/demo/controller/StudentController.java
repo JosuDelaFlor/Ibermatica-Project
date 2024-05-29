@@ -35,6 +35,8 @@ public class StudentController {
      * PUEDES MODIFICAR LO QUE QUIERAS
      */
 
+    static ArrayList<Student> studentList = Student.studentInitialize();
+
     /**
      * Insertar en la ComboBox los valores DAM y DAW y que aparezca un Label con la
      * informacion de los Estudiantes actuales en la VBox
@@ -44,9 +46,9 @@ public class StudentController {
     @SuppressWarnings("unchecked")
     @FXML
     private void initialize() throws IOException {
+        comboCourse.setValue("Seleccione un curso");
         comboCourse.getItems().addAll("DAM", "DAW");
 
-        ArrayList<Student> studentList = Student.studentInitialize();
         for (Student student : studentList) {
             Label label = new Label(student.toString());
             vboxInfo.getChildren().add(label);
@@ -62,13 +64,14 @@ public class StudentController {
     @FXML
     private void add() throws IOException {
         if (validations()) {
-            boolean debt = (checkDebt.isSelected()) ? true : false;
+            boolean debt = (checkDebt.isSelected()) ? false : true;
             Student student = new Student(txfUserId.getText().replaceAll("\\s", ""), 
                 txfName.getText().replaceAll("\\s", ""), Integer.parseInt(txfAge.getText().replaceAll("\\s", "")),
                 (String) comboCourse.getValue(), debt);
 
             Label label = new Label(student.toString());
             vboxInfo.getChildren().add(label);
+            studentList.add(student);
             resetInputs();
         }
     }
@@ -93,7 +96,7 @@ public class StudentController {
     private boolean validations() throws IOException {
         boolean userIdV = true, ageV = true, nameV = true, couseV = true;
 
-        if (!Validation.checkUserId(txfUserId.getText())) {
+        if (!Validation.checkUserId(txfUserId.getText(), studentList)) {
             userIdV = false;
         } else if (!Validation.checkUserAge(txfAge.getText())) {
             ageV = false;

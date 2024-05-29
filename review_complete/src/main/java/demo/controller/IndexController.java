@@ -3,13 +3,18 @@ package demo.controller;
 import java.io.IOException;
 
 import demo.App;
+import demo.lang.Input;
 import demo.lang.Lang;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 public class IndexController {
     @FXML
     Button btnAdd, btnMeeting, btnMaterial, btnPortuguese, btnSpanish;
+
+    @FXML 
+    Label lblTitle;
     
     @FXML
     private void loadStudentScene() throws IOException {
@@ -27,11 +32,12 @@ public class IndexController {
     }
 
     private void langChange(String langName) throws IOException {
-        Button[] buttonList = {btnAdd, btnMeeting, btnMaterial};
-        Button[] buttonChangeList = Lang.buttonLangChange(langName, buttonList, "index");
+        Input[] inputList = {new Input(btnAdd, new Label()), new Input(btnMeeting, new Label()), new Input(btnMaterial, new Label()), new Input(new Button(), lblTitle)};
+        Input[] changeInputList = Lang.LangChange(langName, inputList, "index");
 
-        for (int i = 0; i < buttonChangeList.length; i++) {
-            buttonList[i].setText(buttonChangeList[i].getText());
+        for (int i = 0; i < changeInputList.length; i++) {
+            inputList[i].getButton().setText(changeInputList[i].getButton().getText());
+            inputList[i].getLabel().setText(changeInputList[i].getLabel().getText());
         }
     }
 

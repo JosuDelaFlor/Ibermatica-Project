@@ -34,7 +34,7 @@
             </cursor>
         </CheckBox>
         <VBox fx:id="vboxInfo" layoutX="218.0" layoutY="103.0" prefHeight="370.0" prefWidth="413.0" />
-        <Button fx:id="btnAdd" layoutX="40.0" layoutY="303.0" mnemonicParsing="false" onAction="#add" styleClass="btn" text="Agregar">
+        <Button fx:id="btnAddStudent" layoutX="40.0" layoutY="303.0" mnemonicParsing="false" onAction="#add" styleClass="btn" text="Agregar">
             <cursor>
                 <Cursor fx:constant="HAND" />
             </cursor>

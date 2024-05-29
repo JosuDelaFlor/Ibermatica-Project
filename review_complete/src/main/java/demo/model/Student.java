@@ -55,7 +55,7 @@ public class Student extends User {
 
     @Override
     public String toString() {
-        return "Estudiante: " + userId + "Nombre: " + name + " Edad: " + age + " Curso: " + course
+        return "Estudiante: " + userId + " Nombre: " + name + " Edad: " + age + " Curso: " + course
                 + ", Deuda: " + (!debt ? "Pagada" : "Por pagar");
     }
 

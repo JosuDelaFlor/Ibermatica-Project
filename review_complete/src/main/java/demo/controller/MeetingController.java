@@ -1,8 +1,12 @@
 package demo.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.ArrayList;
 
 import demo.App;
+import demo.model.Meeting;
+import demo.model.base.Validation;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
@@ -22,6 +26,8 @@ public class MeetingController {
     @FXML
     Button btnBack, btnAdd, btnDelete;
 
+    static ArrayList<Meeting> meetingList = new ArrayList<Meeting>();
+
     /**
      * Se tiene que agregar los en el TextField las reuniones en el formato que aparece en el README
      * @throws IOException
@@ -29,7 +35,20 @@ public class MeetingController {
 
     @FXML
     private void add() throws IOException {
-        // TODO
+        if (validations()) {
+            int count = 0;
+            LocalDate date = dpkDate.getValue();
+            String name = txfName.getText();
+            int amount = Integer.parseInt(txfAmount.getText());
+            Meeting meeting = new Meeting(name, amount, date);
+            meetingList.add(meeting);
+            txtAreaInfo.clear();
+            for (Meeting meetingIt : meetingList) {
+                txtAreaInfo.appendText(Integer.toString(count)+meetingIt.toString()+"\n");
+                count++;
+            }
+            resetInputs();
+        }
     }
 
     /*
@@ -61,8 +80,45 @@ public class MeetingController {
 
     @FXML
     private boolean validations() throws IOException {
-        // TODO 
-        return false;
+        boolean dateV = true, nameV = true, amountV = true;
+
+        if (!Validation.checkDate(dpkDate.getValue())) {
+            dateV = false;
+        } else if (!Validation.checkIsNumeric(txfName.getText())) {
+            nameV = false;
+        } else if (!Validation.checkMeetingAmount(txfAmount.getText())) {
+            amountV = false;
+        }
+
+        if (dateV && nameV && amountV) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * 1. Comprobar si el nombre de la reunion que vamos a eliminar existe
+     * @return
+     * @throws IOException
+     */
+
+    @FXML
+    private boolean checkMeetingName() throws IOException {
+        return (!Validation.checkMeetingName(txfName.getText(), meetingList)) ? false : true;
+    }
+
+    /**
+     * Al agregar una nueva reunion 
+     * @throws IOException
+     */
+
+    @FXML
+    private void resetInputs() throws IOException {
+        txfAmount.setText("");
+        txfDeleteInput.setText("");
+        txfName.setText("");
+        dpkDate.setValue(null);
     }
 
     @FXML
