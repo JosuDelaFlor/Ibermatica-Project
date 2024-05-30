@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import ibermatica_project.lang.Lang;
 import ibermatica_project.model.Validation;
 import ibermatica_project.model.base.DataBase;
 import ibermatica_project.model.base.User;
@@ -26,13 +27,13 @@ public class UserModifyController {
     MenuButton btnMenu;
 
     @FXML
-    Button btnUserManagement, btnMachineManagement, btnReserveManagement, btnVisualice, btnModify, btnDelete, btnSearch, btnPasswordRestart;
+    Button btnUserManagement, btnMachineManagement, btnReserveManagement, btnCreate, btnVisualice, btnModify, btnDelete, btnSearch, btnPasswordRestart;
 
     @FXML
     TextField txfId, txfName, txfSurname, txfUser, txfEmail, txfTlfNumber;
 
     @FXML
-    Label lblRegisterday;
+    Label lblUserTitle, lblUserManagement, lblMachineManagement, lblReservesManagement, lblRegisterDate, lblRegisterday, lblId, lblName, lblSurname, lblEmail, lblPhoneNumber, lblUserName, lblUserType;
 
     @SuppressWarnings("rawtypes")
     @FXML
@@ -44,8 +45,33 @@ public class UserModifyController {
 
     static Alert alert = new Alert(Alert.AlertType.WARNING);
 
+    static boolean langChangeBol = AdmMenuController.getLangChangeBol();
+
     @FXML
     protected void initialize() throws IOException {
+        if (langChangeBol) {
+            Label[] labelList = {lblUserTitle, lblUserManagement, lblMachineManagement, lblReservesManagement, lblId, lblName, lblSurname, lblEmail, lblPhoneNumber, lblUserName, lblUserType, lblRegisterDate};
+            Label[] labelChangeList = Lang.langChangeLabel("English", labelList, "userModify");
+
+            Button[] buttonList = {btnPasswordRestart, btnVisualice, btnModify, btnCreate, btnSearch};
+            Button[] buttonChangeList = Lang.langChangeButton("English", buttonList, "userModify");
+
+            TextField[] textFieldList = {txfId, txfName, txfSurname, txfEmail, txfTlfNumber, txfUser};
+            TextField[] textFieldChangeList = Lang.langChangeTextField("English", textFieldList, "userModify");
+
+            for (int i = 0; i < labelChangeList.length; i++) {
+                labelList[i].setText(labelChangeList[i].getText());
+            }
+
+            for (int i = 0; i < buttonChangeList.length; i++) {
+                buttonList[i].setText(buttonChangeList[i].getText());
+            }
+
+            for (int i = 0; i < textFieldChangeList.length; i++) {
+                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
+            }
+        }
+
         User loggedUser = IndexController.getLoggedUser();
 
         MenuItem menuItem1 = new MenuItem("Cerrar sesión"), menuItem2 = new MenuItem("Inicio");

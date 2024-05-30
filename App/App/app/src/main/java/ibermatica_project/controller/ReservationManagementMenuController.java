@@ -13,6 +13,7 @@ import java.time.LocalDate;
 
 import ibermatica_project.model.base.DataBase;
 import ibermatica_project.model.base.User;
+import ibermatica_project.lang.Lang;
 import ibermatica_project.model.Reservation;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -20,6 +21,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableCell;
@@ -44,6 +46,9 @@ public class ReservationManagementMenuController {
     ComboBox comboSearchType;
 
     @FXML
+    Label lblReservationTitle, lblUserManagement, lblMachineManagement, lblReservesManagement;
+
+    @FXML
     TextField txfSearch;
 
     @FXML
@@ -52,10 +57,35 @@ public class ReservationManagementMenuController {
     DataBase db = new DataBase("localhost", "ibermatica_db", null, "root", null);
     
     static ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
+
+    static boolean langChangeBol = AdmMenuController.getLangChangeBol();
     
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @FXML
     protected void initialize() throws IOException {
+        if (langChangeBol) {
+            Label[] labelList = {lblReservationTitle, lblUserManagement, lblMachineManagement, lblReservesManagement};
+            Label[] labelChangeList = Lang.langChangeLabel("English", labelList, "reservationManagement");
+
+            Button[] buttonList = {btnSearch, btnModify, btnCreate};
+            Button[] buttonChangeList = Lang.langChangeButton("English", buttonList, "reservationManagement");
+
+            TextField[] textFieldList = {txfSearch};
+            TextField[] textFieldChangeList = Lang.langChangeTextField("English", textFieldList, "reservationManagement");
+
+            for (int i = 0; i < labelChangeList.length; i++) {
+                labelList[i].setText(labelChangeList[i].getText());
+            }
+
+            for (int i = 0; i < buttonChangeList.length; i++) {
+                buttonList[i].setText(buttonChangeList[i].getText());
+            }
+
+            for (int i = 0; i < textFieldChangeList.length; i++) {
+                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
+            }
+        }
+
         User loggedUser = IndexController.getLoggedUser();
 
         MenuItem menuItem1 = new MenuItem("Cerrar sesión"), menuItem2 = new MenuItem("Inicio");

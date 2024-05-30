@@ -36,7 +36,7 @@ public class ReservationModifyMenuController {
     TextField txfId, txfSerialNumber, txfStartDate, txfEndDate, txfSearchInput;
 
     @FXML
-    Label lblError;
+    Label lblError, lblReservationTitle, lblUserManagement, lblMachineManagement, lblReservesManagement;
 
     static Reservation inputReservation;
 

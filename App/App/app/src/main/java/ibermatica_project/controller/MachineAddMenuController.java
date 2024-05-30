@@ -4,6 +4,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import ibermatica_project.lang.Lang;
 import ibermatica_project.model.Machine;
 import ibermatica_project.model.base.DataBase;
 import ibermatica_project.model.base.User;
@@ -13,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -31,16 +33,43 @@ public class MachineAddMenuController {
     ComboBox comboType, comoStatus;
 
     @FXML
-    Button btnRestart, btnAdd, btnVisualize, btnModify, btnUserManagement, btnMachineManagement, btnReserveManagement;
+    Label lblMachineTitle, lblUserManagement, lblMachineManagement, lblReservesManagement, lblSerialNumber, lblName, lblMachineType, lblStatus;
+
+    @FXML
+    Button btnReset, btnAdd, btnVisualice, btnModify, btnUserManagement, btnMachineManagement, btnReserveManagement;
 
     DataBase db = new DataBase("localhost", "ibermatica_db", null, "root", null);
     
     static Alert alert = new Alert(Alert.AlertType.WARNING);
 
+    static boolean langChangeBol = AdmMenuController.getLangChangeBol();
+
     @SuppressWarnings("unchecked")
     @FXML
     protected void initialize() throws IOException {
-        
+        if (langChangeBol) {
+            Label[] labelList = {lblMachineTitle, lblUserManagement, lblMachineManagement, lblReservesManagement, lblSerialNumber, lblName, lblMachineType, lblStatus};
+            Label[] labelChangeList = Lang.langChangeLabel("English", labelList, "machineAdd");
+
+            Button[] buttonList = {btnAdd, btnReset, btnVisualice, btnModify};
+            Button[] buttonChangeList = Lang.langChangeButton("English", buttonList, "machineAdd");
+
+            TextField[] textFieldList = {txfSerialNumber, txfName};
+            TextField[] textFieldChangeList = Lang.langChangeTextField("English", textFieldList, "machineAdd");
+
+            for (int i = 0; i < labelChangeList.length; i++) {
+                labelList[i].setText(labelChangeList[i].getText());
+            }
+
+            for (int i = 0; i < buttonChangeList.length; i++) {
+                buttonList[i].setText(buttonChangeList[i].getText());
+            }
+
+            for (int i = 0; i < textFieldChangeList.length; i++) {
+                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
+            }
+        }
+
         User loggedUser = IndexController.getLoggedUser();
 
         MenuItem menuItem1 = new MenuItem("Cerrar sesión"), menuItem2 = new MenuItem("Inicio");

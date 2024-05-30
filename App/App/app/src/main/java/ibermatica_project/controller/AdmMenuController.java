@@ -20,19 +20,38 @@ public class AdmMenuController {
 
     @FXML
     Label lblName, lblSurname, lblUsername, lblEmail, lblTlfNumber, lblType, lblTitleAdm,
-        lblNameAdm, lblSurnameAdm, lblUserNameAdm, lblEmailAdm, lblPhoneNumberAdm, lblUserTypeAdm;
+        lblNameAdm, lblSurnameAdm, lblUserNameAdm, lblEmailAdm, lblPhoneNumberAdm, lblUserTypeAdm, lblUserManagement,
+        lblMachineManagement, lblReservesManagement;
 
     @FXML
     MenuButton btnMenu;
 
     @FXML
-    Button btnUserManagement, btnMachineManagement, btnReserveManagement, btnSpanish, btnEnglish;
+    Button btnUserManagement, btnMachineManagement, btnReserveManagement, btnSpanish, btnEnglish, btnRestartPassword;
 
     DataBase db = new DataBase("localhost", "ibermatica_db", null, "root", null); 
 
+    static boolean langChangeBol;
     
     @FXML
     public void initialize() throws IOException {
+        if (langChangeBol) {
+            Label[] labelList = {lblTitleAdm, lblNameAdm, lblSurnameAdm, lblUserNameAdm, lblEmailAdm, lblPhoneNumberAdm, lblUserTypeAdm, lblUserManagement,
+                lblMachineManagement, lblReservesManagement};
+            Label[] labelChangeList = Lang.langChangeLabel("English", labelList, "admMenu");
+    
+            Button[] buttonList = {btnRestartPassword};
+            Button[] buttonChangeList = Lang.langChangeButton("English", buttonList, "admMenu");
+    
+            for (int i = 0; i < labelChangeList.length; i++) {
+                labelList[i].setText(labelChangeList[i].getText());
+            }
+    
+            for (int i = 0; i < buttonChangeList.length; i++) {
+                buttonList[i].setText(buttonChangeList[i].getText());
+            }
+        }
+
         btnSpanish.setVisible(false);
         btnSpanish.setDisable(true);
         User loggedUser = IndexController.getLoggedUser();
@@ -82,16 +101,25 @@ public class AdmMenuController {
     
 
     private void langChange(String langName) throws IOException {
-        Label[] labelList = {lblTitleAdm, lblNameAdm, lblSurnameAdm, lblUserNameAdm, lblEmailAdm, lblPhoneNumberAdm, lblUserTypeAdm};
-        Label[] labelChangeList = Lang.langChange(langName, labelList, "admMenu");
+        Label[] labelList = {lblTitleAdm, lblNameAdm, lblSurnameAdm, lblUserNameAdm, lblEmailAdm, lblPhoneNumberAdm, lblUserTypeAdm, lblUserManagement,
+            lblMachineManagement, lblReservesManagement};
+        Label[] labelChangeList = Lang.langChangeLabel(langName, labelList, "admMenu");
+
+        Button[] buttonList = {btnRestartPassword};
+        Button[] buttonChangeList = Lang.langChangeButton(langName, buttonList, "admMenu");
 
         for (int i = 0; i < labelChangeList.length; i++) {
             labelList[i].setText(labelChangeList[i].getText());
+        }
+
+        for (int i = 0; i < buttonChangeList.length; i++) {
+            buttonList[i].setText(buttonChangeList[i].getText());
         }
     }
 
     @FXML
     private void btnSpanishActionPerformed() throws IOException {
+        langChangeBol = false;
         langChange("Spanish");
         btnSpanish.setVisible(false);
         btnSpanish.setDisable(true);
@@ -103,6 +131,7 @@ public class AdmMenuController {
 
     @FXML
     private void btnEnglishActionPerformed() throws IOException {
+        langChangeBol = true;
         langChange("English");
         btnEnglish.setVisible(false);
         btnEnglish.setDisable(true);
@@ -110,6 +139,10 @@ public class AdmMenuController {
         btnSpanish.setLayoutX(94);
         btnSpanish.setVisible(true);
         btnSpanish.setDisable(false);
+    }
+
+    public static boolean getLangChangeBol() {
+        return langChangeBol;
     }
 
     @FXML

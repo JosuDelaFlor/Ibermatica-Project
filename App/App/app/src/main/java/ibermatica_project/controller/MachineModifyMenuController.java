@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import ibermatica_project.lang.Lang;
 import ibermatica_project.model.Machine;
 import ibermatica_project.model.base.DataBase;
 import ibermatica_project.model.base.User;
@@ -14,6 +15,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
@@ -30,6 +32,9 @@ public class MachineModifyMenuController {
     @FXML
     Button btnSearch, btnModify, btnCreate, btnVisualize, btnUserManagement, btnMachineManagement, btnReserveManagement;
 
+    @FXML
+    Label lblSerialNumber, lblMachineTitle, lblUserManagement, lblMachineManagement, lblReservesManagement, lblAdquisitionDate, lblMachineType, lblStatus, lblName;
+
     @SuppressWarnings("rawtypes")
     @FXML
     ComboBox comboType, comboStatus;
@@ -38,9 +43,34 @@ public class MachineModifyMenuController {
 
     static Alert alert = new Alert(Alert.AlertType.WARNING);
 
+    static boolean langChangeBol = AdmMenuController.getLangChangeBol();
+
     @SuppressWarnings("unchecked")
     @FXML
     protected void initialize() throws IOException {
+        if (langChangeBol) {
+            Label[] labelList = {lblSerialNumber, lblName, lblMachineTitle, lblUserManagement, lblMachineManagement, lblReservesManagement, lblAdquisitionDate, lblMachineType, lblStatus};
+            Label[] labelChangeList = Lang.langChangeLabel("English", labelList, "machineModify");
+
+            Button[] buttonList = {btnSearch, btnModify, btnCreate, btnVisualize};
+            Button[] buttonChangeList = Lang.langChangeButton("English", buttonList, "machineModify");
+
+            TextField[] textFieldList = {txfSerialNumber, txfName, txfAdquisitionDate};
+            TextField[] textFieldChangeList = Lang.langChangeTextField("English", textFieldList, "machineModify");
+
+            for (int i = 0; i < labelChangeList.length; i++) {
+                labelList[i].setText(labelChangeList[i].getText());
+            }
+
+            for (int i = 0; i < buttonChangeList.length; i++) {
+                buttonList[i].setText(buttonChangeList[i].getText());
+            }
+
+            for (int i = 0; i < textFieldChangeList.length; i++) {
+                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
+            }
+        }
+
         User loggedUser = IndexController.getLoggedUser();
 
         MenuItem menuItem1 = new MenuItem("Cerrar sesión"), menuItem2 = new MenuItem("Inicio");

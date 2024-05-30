@@ -82,7 +82,7 @@
                 <Label fx:id="lblUserTypeAdm" layoutX="410.0" layoutY="355.0" prefHeight="17.0" prefWidth="143.0" styleClass="lbl-info" text="Tipo de usuario" />
                 <Label fx:id="lblTlfNumber" layoutX="233.0" layoutY="415.0" prefHeight="20.0" prefWidth="152.0" styleClass="lbl-data" text="Telefono Usuario" />
                 <Label fx:id="lblType" layoutX="406.0" layoutY="415.0" prefHeight="20.0" prefWidth="152.0" styleClass="lbl-data" text="Tipo Usuario" />
-                <Button layoutX="238.0" layoutY="479.0" mnemonicParsing="false" onAction="#loadRestartPasswordScene" styleClass="btn-danger" text="Restablecer Contraseña">
+                <Button fx:id="btnRestartPassword" layoutX="238.0" layoutY="479.0" mnemonicParsing="false" onAction="#loadRestartPasswordScene" styleClass="btn-danger" text="Restablecer Contraseña">
                     <cursor>
                         <Cursor fx:constant="HAND" />
                     </cursor></Button>

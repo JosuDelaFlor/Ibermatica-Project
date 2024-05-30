@@ -17,7 +17,7 @@
     <children>
         <Pane layoutX="284.0" layoutY="-1.0" prefHeight="608.0" prefWidth="618.0">
             <children>
-                <Label id="lbl-menu-title" fx:id="lblTitle" layoutX="83.0" layoutY="14.0" prefHeight="47.0" prefWidth="454.0" text="Gestión de usuarios" />
+                <Label id="lbl-menu-title" fx:id="lblUserTitle" layoutX="83.0" layoutY="14.0" prefHeight="47.0" prefWidth="454.0" text="Gestión de usuarios" />
                 <MenuButton fx:id="btnMenu" layoutX="488.0" layoutY="25.0" mnemonicParsing="false" text="MenuButton">
                     <cursor>
                         <Cursor fx:constant="HAND" />
@@ -43,15 +43,15 @@
                 </ComboBox>
                 <PasswordField fx:id="psfPass1" layoutX="16.0" layoutY="279.0" prefHeight="25.0" prefWidth="173.0" promptText="Inserte la contraseña" />
                 <PasswordField fx:id="psfPass2" layoutX="225.0" layoutY="279.0" prefHeight="25.0" prefWidth="173.0" promptText="Repite la contraseña" />
-                <Label layoutX="16.0" layoutY="98.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="DNI" />
-                <Label layoutX="16.0" layoutY="182.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Correo" />
-                <Label layoutX="16.0" layoutY="262.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Contraseña" />
-                <Label layoutX="225.0" layoutY="98.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Nombre" />
-                <Label layoutX="225.0" layoutY="182.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Numero de teléfono" />
-                <Label layoutX="225.0" layoutY="262.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Validación de contraseña" />
-                <Label layoutX="423.0" layoutY="98.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Apellido" />
-                <Label layoutX="423.0" layoutY="182.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Nombre de usuario" />
-                <Label layoutX="423.0" layoutY="262.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Tipo de usuario" />
+                <Label fx:id="lblId" layoutX="16.0" layoutY="98.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="DNI" />
+                <Label fx:id="lblEmail" layoutX="16.0" layoutY="182.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Correo" />
+                <Label fx:id="lblPassword1" layoutX="16.0" layoutY="262.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Contraseña" />
+                <Label fx:id="lblName" layoutX="225.0" layoutY="98.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Nombre" />
+                <Label fx:id="lblPhoneNumber" layoutX="225.0" layoutY="182.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Numero de teléfono" />
+                <Label fx:id="lblPassword2" layoutX="225.0" layoutY="262.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Validación de contraseña" />
+                <Label fx:id="lblSurname" layoutX="423.0" layoutY="98.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Apellido" />
+                <Label fx:id="lblUserName" layoutX="423.0" layoutY="182.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Nombre de usuario" />
+                <Label fx:id="lblUserType" layoutX="423.0" layoutY="262.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Tipo de usuario" />
                 <Button fx:id="btnGenerateEmail" layoutX="49.0" layoutY="328.0" mnemonicParsing="false" onAction="#generateEmail" prefHeight="25.0" prefWidth="107.0" text="Generar correo">
                     <cursor>
                         <Cursor fx:constant="HAND" />
@@ -91,7 +91,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button fx:id="btnMachineManagement" layoutX="47.0" layoutY="202.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="191.0" style="-fx-background-color: white;" styleClass="btn-img" onAction="#loadMachineManagementMenuScene">
+                <Button fx:id="btnMachineManagement" layoutX="47.0" layoutY="202.0" mnemonicParsing="false" onAction="#loadMachineManagementMenuScene" prefHeight="159.0" prefWidth="191.0" style="-fx-background-color: white;" styleClass="btn-img">
                     <graphic>
                         <ImageView fitHeight="149.0" fitWidth="152.0">
                             <image>
@@ -106,7 +106,7 @@
                         <Cursor fx:constant="HAND" />
                     </cursor>
                 </Button>
-                <Button fx:id="btnReserveManagement" layoutX="56.0" layoutY="405.0" mnemonicParsing="false" prefHeight="159.0" prefWidth="173.0" style="-fx-background-color: white;" styleClass="btn-img" onAction="#loadReservationManagementMenuScene">
+                <Button fx:id="btnReserveManagement" layoutX="56.0" layoutY="405.0" mnemonicParsing="false" onAction="#loadReservationManagementMenuScene" prefHeight="159.0" prefWidth="173.0" style="-fx-background-color: white;" styleClass="btn-img">
                     <graphic>
                         <ImageView fitHeight="149.0" fitWidth="152.0">
                             <image>
@@ -122,9 +122,9 @@
                     </cursor>
                 </Button>
                 <Line endX="6.0" endY="570.0" layoutX="278.0" layoutY="28.0" startX="6.0" startY="-28.0" />
-                <Label layoutX="66.0" layoutY="16.0" prefHeight="25.0" prefWidth="152.0" styleClass="lbl-info" text="Gestión de usuarios" textFill="#00bfff" />
-                <Label layoutX="56.0" layoutY="177.0" prefHeight="25.0" prefWidth="173.0" styleClass="lbl-info" text="Gestión de maquinaria" />
-                <Label layoutX="69.0" layoutY="380.0" styleClass="lbl-info" text="Gestión de reservas" />
+                <Label fx:id="lblUserManagement" layoutX="66.0" layoutY="16.0" prefHeight="25.0" prefWidth="152.0" styleClass="lbl-info" text="Gestión de usuarios" textFill="#00bfff" />
+                <Label fx:id="lblMachineManagement" layoutX="56.0" layoutY="177.0" prefHeight="25.0" prefWidth="173.0" styleClass="lbl-info" text="Gestión de maquinaria" />
+                <Label fx:id="lblReservesManagement" layoutX="69.0" layoutY="380.0" styleClass="lbl-info" text="Gestión de reservas" />
             </children>
         </Pane>
     </children>

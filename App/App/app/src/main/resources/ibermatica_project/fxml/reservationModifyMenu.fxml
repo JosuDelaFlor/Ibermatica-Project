@@ -15,7 +15,7 @@
     <children>
         <Pane layoutX="284.0" layoutY="-1.0" prefHeight="608.0" prefWidth="618.0">
             <children>
-                <Label id="lbl-menu-title" fx:id="lblTitle" layoutX="83.0" layoutY="14.0" prefHeight="47.0" prefWidth="454.0" text="Gestión de reservas" />
+                <Label id="lbl-menu-title" fx:id="lblReservationTitle" layoutX="83.0" layoutY="14.0" prefHeight="47.0" prefWidth="454.0" text="Gestión de reservas" />
                 <MenuButton fx:id="btnMenu" layoutX="488.0" layoutY="25.0" mnemonicParsing="false" text="MenuButton">
                     <cursor>
                         <Cursor fx:constant="HAND" />
@@ -101,9 +101,9 @@
                     </cursor>
                 </Button>
                 <Line endX="6.0" endY="570.0" layoutX="278.0" layoutY="28.0" startX="6.0" startY="-28.0" />
-                <Label layoutX="66.0" layoutY="16.0" prefHeight="25.0" prefWidth="152.0" styleClass="lbl-info" text="Gestión de usuarios" />
-                <Label layoutX="56.0" layoutY="177.0" prefHeight="25.0" prefWidth="173.0" styleClass="lbl-info" text="Gestión de maquinaria" />
-                <Label layoutX="69.0" layoutY="380.0" styleClass="lbl-info" text="Gestión de reservas" textFill="DEEPSKYBLUE" />
+                <Label fx:id="lblUserManagement" layoutX="66.0" layoutY="16.0" prefHeight="25.0" prefWidth="152.0" styleClass="lbl-info" text="Gestión de usuarios" />
+                <Label fx:id="lblMachineManagement" layoutX="56.0" layoutY="177.0" prefHeight="25.0" prefWidth="173.0" styleClass="lbl-info" text="Gestión de maquinaria" />
+                <Label fx:id="lblReservesManagement" layoutX="69.0" layoutY="380.0" styleClass="lbl-info" text="Gestión de reservas" textFill="DEEPSKYBLUE" />
             </children>
         </Pane>
     </children>
