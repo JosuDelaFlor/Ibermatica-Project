@@ -9,6 +9,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
+/*
+ * The Lang class is responsible for managing all the translation of the scenes
+ */
+
 public class Lang extends Properties {
     private static final long serialVersionUID = 1L;
 

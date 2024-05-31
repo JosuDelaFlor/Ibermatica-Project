@@ -15,6 +15,10 @@ import ibermatica_project.model.Reservation;
 import ibermatica_project.model.Role;
 import ibermatica_project.model.SimpleUser;
 
+/*
+ * The DataBase class is responsible for managing all operations related to the database
+ */
+
 public class DataBase {
     @SuppressWarnings("unused")
     private String server = "localhost", db = "ibermatica_db",  table = null, user = "root", pass = null;

@@ -10,6 +10,11 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 public class SceneController {
+
+    /*
+     * The scene controller is responsible for managing the resolution of the different scenes
+     */
+
     private static Scene scene;
 
     private static Stage mainStage;
