@@ -65,27 +65,11 @@ public class MachineManagementMenuController {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @FXML
     protected void initialize() throws IOException {
+        langChangeBol = AdmMenuController.getLangChangeBol();
         if (langChangeBol) {
-            Label[] labelList = {lblMachineTitle, lblUserManagement, lblMachineManagement, lblReservesManagement};
-            Label[] labelChangeList = Lang.langChangeLabel("English", labelList, "machineManagement");
-
-            Button[] buttonList = {btnSearch, btnModify, btnCreate};
-            Button[] buttonChangeList = Lang.langChangeButton("English", buttonList, "machineManagement");
-
-            TextField[] textFieldList = {txfSearch};
-            TextField[] textFieldChangeList = Lang.langChangeTextField("English", textFieldList, "machineManagement");
-
-            for (int i = 0; i < labelChangeList.length; i++) {
-                labelList[i].setText(labelChangeList[i].getText());
-            }
-
-            for (int i = 0; i < buttonChangeList.length; i++) {
-                buttonList[i].setText(buttonChangeList[i].getText());
-            }
-
-            for (int i = 0; i < textFieldChangeList.length; i++) {
-                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
-            }
+            langChange("English");
+        } else {
+            langChange("Spanish");
         }
 
         comboSearchInput.setEditable(false);
@@ -172,6 +156,32 @@ public class MachineManagementMenuController {
         machineList = db.searchAllMachines();
 
         generateTableView(machineList, actionCol);
+    }
+
+    @FXML
+    private void langChange(String lang) throws IOException {
+        if (langChangeBol) {
+            Label[] labelList = {lblMachineTitle, lblUserManagement, lblMachineManagement, lblReservesManagement};
+            Label[] labelChangeList = Lang.langChangeLabel(lang, labelList, "machineManagement");
+
+            Button[] buttonList = {btnSearch, btnModify, btnCreate};
+            Button[] buttonChangeList = Lang.langChangeButton(lang, buttonList, "machineManagement");
+
+            TextField[] textFieldList = {txfSearch};
+            TextField[] textFieldChangeList = Lang.langChangeTextField(lang, textFieldList, "machineManagement");
+
+            for (int i = 0; i < labelChangeList.length; i++) {
+                labelList[i].setText(labelChangeList[i].getText());
+            }
+
+            for (int i = 0; i < buttonChangeList.length; i++) {
+                buttonList[i].setText(buttonChangeList[i].getText());
+            }
+
+            for (int i = 0; i < textFieldChangeList.length; i++) {
+                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
+            }
+        }
     }
 
     @SuppressWarnings("rawtypes")

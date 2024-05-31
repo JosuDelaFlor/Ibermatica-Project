@@ -34,26 +34,7 @@ public class AdmMenuController {
     static boolean langChangeBol;
     
     @FXML
-    public void initialize() throws IOException {
-        if (langChangeBol) {
-            Label[] labelList = {lblTitleAdm, lblNameAdm, lblSurnameAdm, lblUserNameAdm, lblEmailAdm, lblPhoneNumberAdm, lblUserTypeAdm, lblUserManagement,
-                lblMachineManagement, lblReservesManagement};
-            Label[] labelChangeList = Lang.langChangeLabel("English", labelList, "admMenu");
-    
-            Button[] buttonList = {btnRestartPassword};
-            Button[] buttonChangeList = Lang.langChangeButton("English", buttonList, "admMenu");
-    
-            for (int i = 0; i < labelChangeList.length; i++) {
-                labelList[i].setText(labelChangeList[i].getText());
-            }
-    
-            for (int i = 0; i < buttonChangeList.length; i++) {
-                buttonList[i].setText(buttonChangeList[i].getText());
-            }
-        }
-
-        btnSpanish.setVisible(false);
-        btnSpanish.setDisable(true);
+    public void initialize() throws IOException {        
         User loggedUser = IndexController.getLoggedUser();
 
         lblTitleAdm.setText("Bienvenido " + loggedUser.getName());
@@ -97,8 +78,27 @@ public class AdmMenuController {
             }
         };
         menuItem1.setOnAction(event1);
+
+        if (langChangeBol) {
+            langChange("English");
+            btnEnglish.setVisible(false);
+            btnEnglish.setDisable(true);
+            btnEnglish.setLayoutX(14);
+            btnSpanish.setLayoutX(94);
+            btnSpanish.setVisible(true);
+            btnSpanish.setDisable(false);
+            langChangeBol = true;
+        } else {
+            langChange("Spanish");
+            langChangeBol = false;
+            btnSpanish.setVisible(false);
+            btnSpanish.setDisable(true);
+            btnSpanish.setLayoutX(14);
+            btnEnglish.setLayoutX(94);
+            btnEnglish.setVisible(true);
+            btnEnglish.setDisable(false);
+        }
     }
-    
 
     private void langChange(String langName) throws IOException {
         Label[] labelList = {lblTitleAdm, lblNameAdm, lblSurnameAdm, lblUserNameAdm, lblEmailAdm, lblPhoneNumberAdm, lblUserTypeAdm, lblUserManagement,

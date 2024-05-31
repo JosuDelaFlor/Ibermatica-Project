@@ -47,27 +47,11 @@ public class ReservationAddMenuController {
 
     @FXML
     protected void initialize() throws IOException {
+        langChangeBol = AdmMenuController.getLangChangeBol();
         if (langChangeBol) {
-            Label[] labelList = {lblReservationTitle, lblUserManagement, lblMachineManagement, lblReservesManagement, lblStartDate, lblEndDate};
-            Label[] labelChangeList = Lang.langChangeLabel("English", labelList, "reservationAdd");
-
-            Button[] buttonList = {btnReset, btnModify, btnCreate, btnVisualize};
-            Button[] buttonChangeList = Lang.langChangeButton("English", buttonList, "reservationAdd");
-
-            TextField[] textFieldList = {txfStartDate, txfId, txfEndDate, txfSerialNumber};
-            TextField[] textFieldChangeList = Lang.langChangeTextField("English", textFieldList, "reservationAdd");
-
-            for (int i = 0; i < labelChangeList.length; i++) {
-                labelList[i].setText(labelChangeList[i].getText());
-            }
-
-            for (int i = 0; i < buttonChangeList.length; i++) {
-                buttonList[i].setText(buttonChangeList[i].getText());
-            }
-
-            for (int i = 0; i < textFieldChangeList.length; i++) {
-                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
-            }
+            langChange("English");
+        } else {
+            langChange("Spanish");
         }
 
         User loggedUser = IndexController.getLoggedUser();
@@ -119,6 +103,32 @@ public class ReservationAddMenuController {
             }
         };
         menuItem2.setOnAction(event2);
+    }
+
+    @FXML
+    private void langChange(String lang) throws IOException {
+        if (langChangeBol) {
+            Label[] labelList = {lblReservationTitle, lblUserManagement, lblMachineManagement, lblReservesManagement, lblStartDate, lblEndDate};
+            Label[] labelChangeList = Lang.langChangeLabel(lang, labelList, "reservationAdd");
+
+            Button[] buttonList = {btnReset, btnModify, btnCreate, btnVisualize};
+            Button[] buttonChangeList = Lang.langChangeButton(lang, buttonList, "reservationAdd");
+
+            TextField[] textFieldList = {txfStartDate, txfId, txfEndDate, txfSerialNumber};
+            TextField[] textFieldChangeList = Lang.langChangeTextField(lang, textFieldList, "reservationAdd");
+
+            for (int i = 0; i < labelChangeList.length; i++) {
+                labelList[i].setText(labelChangeList[i].getText());
+            }
+
+            for (int i = 0; i < buttonChangeList.length; i++) {
+                buttonList[i].setText(buttonChangeList[i].getText());
+            }
+
+            for (int i = 0; i < textFieldChangeList.length; i++) {
+                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
+            }
+        }
     }
 
     @FXML

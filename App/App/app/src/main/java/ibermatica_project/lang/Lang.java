@@ -17,7 +17,7 @@ public class Lang extends Properties {
             case "Spanish":
                 getProperties("spanish.properties");
                 break;
-            case "English":
+                case "English":
             default:
                 getProperties("english.properties");
                 break;
@@ -55,6 +55,8 @@ public class Lang extends Properties {
             keys = setKeys(scene);
         } else if (scene.equals("reservationModify")) {
             keys = setKeys(scene);
+        } else if (scene.equals("employeeMenu")) {
+            keys = setKeys(scene);
         }
 
         Lang lang = new Lang(langName);
@@ -89,6 +91,8 @@ public class Lang extends Properties {
         } else if (scene.equals("reservationAdd")) {
             keys = setKeys(scene);
         } else if (scene.equals("reservationModify")) {
+            keys = setKeys(scene);
+        } else if (scene.equals("employeeMenu")) {
             keys = setKeys(scene);
         }
 
@@ -127,6 +131,8 @@ public class Lang extends Properties {
         } else if (scene.equals("reservationAdd")) {
             keys = setKeys(scene);
         } else if (scene.equals("reservationModify")) {
+            keys = setKeys(scene);
+        } else if (scene.equals("employeeMenu")) {
             keys = setKeys(scene);
         }
         
@@ -180,6 +186,9 @@ public class Lang extends Properties {
         } else if (scene.equals("reservationModify")) {
             keys.addAll(Arrays.asList("lblReservationTitle", "lblUserManagement", "lblMachineManagement", "lblReservesManagement", "lblStartDate", "lblEndDate", "lblSerialNumber", "lblId",
                 "btnSearch", "btnModify", "btnCreate", "btnVisualize", "txfStartDate", "txfId", "txfEndDate", "txfSerialNumber"));
+        } else if (scene.equals("employeeMenu")) {
+            keys.addAll(Arrays.asList("lblName", "lblSurname", "lblEmail", "lblPhoneNumber", "lblUserName", "lblStartDate", "lblEndDate", "lblSerialNumber", "lblTitle",
+                "btnAddReservation", "btnPasswordRestart", "txfStartDate", "txfEndDate", "txfSerialNumber"));
         }
         return keys;
     }

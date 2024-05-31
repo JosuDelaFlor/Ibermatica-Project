@@ -63,27 +63,11 @@ public class ReservationManagementMenuController {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @FXML
     protected void initialize() throws IOException {
+        langChangeBol = AdmMenuController.getLangChangeBol();
         if (langChangeBol) {
-            Label[] labelList = {lblReservationTitle, lblUserManagement, lblMachineManagement, lblReservesManagement};
-            Label[] labelChangeList = Lang.langChangeLabel("English", labelList, "reservationManagement");
-
-            Button[] buttonList = {btnSearch, btnModify, btnCreate};
-            Button[] buttonChangeList = Lang.langChangeButton("English", buttonList, "reservationManagement");
-
-            TextField[] textFieldList = {txfSearch};
-            TextField[] textFieldChangeList = Lang.langChangeTextField("English", textFieldList, "reservationManagement");
-
-            for (int i = 0; i < labelChangeList.length; i++) {
-                labelList[i].setText(labelChangeList[i].getText());
-            }
-
-            for (int i = 0; i < buttonChangeList.length; i++) {
-                buttonList[i].setText(buttonChangeList[i].getText());
-            }
-
-            for (int i = 0; i < textFieldChangeList.length; i++) {
-                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
-            }
+            langChange("English");
+        } else {
+            langChange("Spanish");
         }
 
         User loggedUser = IndexController.getLoggedUser();
@@ -174,6 +158,33 @@ public class ReservationManagementMenuController {
         reservationList = db.searchAllReservations();
 
         generateTableView(reservationList, actionCol);
+    }
+
+    
+    @FXML
+    private void langChange(String lang) throws IOException {
+        if (langChangeBol) {
+            Label[] labelList = {lblReservationTitle, lblUserManagement, lblMachineManagement, lblReservesManagement};
+            Label[] labelChangeList = Lang.langChangeLabel(lang, labelList, "reservationManagement");
+
+            Button[] buttonList = {btnSearch, btnModify, btnCreate};
+            Button[] buttonChangeList = Lang.langChangeButton(lang, buttonList, "reservationManagement");
+
+            TextField[] textFieldList = {txfSearch};
+            TextField[] textFieldChangeList = Lang.langChangeTextField(lang, textFieldList, "reservationManagement");
+
+            for (int i = 0; i < labelChangeList.length; i++) {
+                labelList[i].setText(labelChangeList[i].getText());
+            }
+
+            for (int i = 0; i < buttonChangeList.length; i++) {
+                buttonList[i].setText(buttonChangeList[i].getText());
+            }
+
+            for (int i = 0; i < textFieldChangeList.length; i++) {
+                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
+            }
+        }
     }
 
     @SuppressWarnings("rawtypes")

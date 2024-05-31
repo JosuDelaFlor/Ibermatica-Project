@@ -55,27 +55,11 @@ public class RegisterMenuController {
     @SuppressWarnings("unchecked")
     @FXML
     protected void initialize() throws IOException {
+        langChangeBol = AdmMenuController.getLangChangeBol();
         if (langChangeBol) {
-            Label[] labelList = {lblUserTitle, lblUserManagement, lblMachineManagement, lblReservesManagement, lblId, lblName, lblSurname, lblEmail, lblPhoneNumber, lblUserName, lblPassword1, lblPassword2, lblUserType};
-            Label[] labelChangeList = Lang.langChangeLabel("English", labelList, "register");
-
-            Button[] buttonList = {btnRegister, btnGenerateEmail, btnGenerateUser, btnReset, btnVisualice, btnModify};
-            Button[] buttonChangeList = Lang.langChangeButton("English", buttonList, "register");
-
-            TextField[] textFieldList = {txfId, txfName, txfSurname, txfEmail, txfTlfNumber, txfUser};
-            TextField[] textFieldChangeList = Lang.langChangeTextField("English", textFieldList, "register");
-
-            for (int i = 0; i < labelChangeList.length; i++) {
-                labelList[i].setText(labelChangeList[i].getText());
-            }
-
-            for (int i = 0; i < buttonChangeList.length; i++) {
-                buttonList[i].setText(buttonChangeList[i].getText());
-            }
-
-            for (int i = 0; i < textFieldChangeList.length; i++) {
-                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
-            }
+            langChange("English");
+        } else {
+            langChange("Spanish");
         }
 
         User loggedUser = IndexController.getLoggedUser();
@@ -136,6 +120,32 @@ public class RegisterMenuController {
             comboType.getItems().add(roleNameList.get(i));
         }
         comboType.setValue(roleNameList.get(1));
+    }
+
+    @FXML
+    private void langChange(String lang) throws IOException {
+        if (langChangeBol) {
+            Label[] labelList = {lblUserTitle, lblUserManagement, lblMachineManagement, lblReservesManagement, lblId, lblName, lblSurname, lblEmail, lblPhoneNumber, lblUserName, lblPassword1, lblPassword2, lblUserType};
+            Label[] labelChangeList = Lang.langChangeLabel(lang, labelList, "register");
+
+            Button[] buttonList = {btnRegister, btnGenerateEmail, btnGenerateUser, btnReset, btnVisualice, btnModify};
+            Button[] buttonChangeList = Lang.langChangeButton(lang, buttonList, "register");
+
+            TextField[] textFieldList = {txfId, txfName, txfSurname, txfEmail, txfTlfNumber, txfUser};
+            TextField[] textFieldChangeList = Lang.langChangeTextField(lang, textFieldList, "register");
+
+            for (int i = 0; i < labelChangeList.length; i++) {
+                labelList[i].setText(labelChangeList[i].getText());
+            }
+
+            for (int i = 0; i < buttonChangeList.length; i++) {
+                buttonList[i].setText(buttonChangeList[i].getText());
+            }
+
+            for (int i = 0; i < textFieldChangeList.length; i++) {
+                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
+            }
+        }
     }
 
     public void register() throws IOException {

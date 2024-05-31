@@ -48,27 +48,11 @@ public class MachineModifyMenuController {
     @SuppressWarnings("unchecked")
     @FXML
     protected void initialize() throws IOException {
+        langChangeBol = AdmMenuController.getLangChangeBol();
         if (langChangeBol) {
-            Label[] labelList = {lblSerialNumber, lblName, lblMachineTitle, lblUserManagement, lblMachineManagement, lblReservesManagement, lblAdquisitionDate, lblMachineType, lblStatus};
-            Label[] labelChangeList = Lang.langChangeLabel("English", labelList, "machineModify");
-
-            Button[] buttonList = {btnSearch, btnModify, btnCreate, btnVisualize};
-            Button[] buttonChangeList = Lang.langChangeButton("English", buttonList, "machineModify");
-
-            TextField[] textFieldList = {txfSerialNumber, txfName, txfAdquisitionDate};
-            TextField[] textFieldChangeList = Lang.langChangeTextField("English", textFieldList, "machineModify");
-
-            for (int i = 0; i < labelChangeList.length; i++) {
-                labelList[i].setText(labelChangeList[i].getText());
-            }
-
-            for (int i = 0; i < buttonChangeList.length; i++) {
-                buttonList[i].setText(buttonChangeList[i].getText());
-            }
-
-            for (int i = 0; i < textFieldChangeList.length; i++) {
-                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
-            }
+            langChange("English");
+        } else {
+            langChange("Spanish");
         }
 
         User loggedUser = IndexController.getLoggedUser();
@@ -122,6 +106,32 @@ public class MachineModifyMenuController {
         menuItem2.setOnAction(event2);
 
         comboStatus.getItems().addAll("Operativa", "No operativa");
+    }
+
+    @FXML
+    private void langChange(String lang) throws IOException {
+        if (langChangeBol) {
+            Label[] labelList = {lblSerialNumber, lblName, lblMachineTitle, lblUserManagement, lblMachineManagement, lblReservesManagement, lblAdquisitionDate, lblMachineType, lblStatus};
+            Label[] labelChangeList = Lang.langChangeLabel(lang, labelList, "machineModify");
+
+            Button[] buttonList = {btnSearch, btnModify, btnCreate, btnVisualize};
+            Button[] buttonChangeList = Lang.langChangeButton(lang, buttonList, "machineModify");
+
+            TextField[] textFieldList = {txfSerialNumber, txfName, txfAdquisitionDate};
+            TextField[] textFieldChangeList = Lang.langChangeTextField(lang, textFieldList, "machineModify");
+
+            for (int i = 0; i < labelChangeList.length; i++) {
+                labelList[i].setText(labelChangeList[i].getText());
+            }
+
+            for (int i = 0; i < buttonChangeList.length; i++) {
+                buttonList[i].setText(buttonChangeList[i].getText());
+            }
+
+            for (int i = 0; i < textFieldChangeList.length; i++) {
+                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
+            }
+        }
     }
 
     public void update() throws IOException {

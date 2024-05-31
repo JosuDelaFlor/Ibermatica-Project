@@ -62,7 +62,7 @@
                 <Label fx:id="lblReservesManagement" layoutX="69.0" layoutY="380.0" styleClass="lbl-info" text="Gestión de reservas" />
             </children>
         </Pane>
-        <Pane layoutX="284.0" layoutY="-1.0" prefHeight="608.0" prefWidth="618.0">
+        <Pane layoutX="284.0" layoutY="7.0" prefHeight="608.0" prefWidth="618.0">
             <children>
                 <Label id="lbl-menu-title" fx:id="lblTitleAdm" layoutX="83.0" layoutY="14.0" prefHeight="47.0" prefWidth="454.0" text="Bienvenido Usuario" />
                 <ImageView fitHeight="89.0" fitWidth="103.0" layoutX="258.0" layoutY="92.0">

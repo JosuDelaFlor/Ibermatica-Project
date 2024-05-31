@@ -49,27 +49,11 @@ public class UserModifyController {
 
     @FXML
     protected void initialize() throws IOException {
+        langChangeBol = AdmMenuController.getLangChangeBol();
         if (langChangeBol) {
-            Label[] labelList = {lblUserTitle, lblUserManagement, lblMachineManagement, lblReservesManagement, lblId, lblName, lblSurname, lblEmail, lblPhoneNumber, lblUserName, lblUserType, lblRegisterDate};
-            Label[] labelChangeList = Lang.langChangeLabel("English", labelList, "userModify");
-
-            Button[] buttonList = {btnPasswordRestart, btnVisualice, btnModify, btnCreate, btnSearch};
-            Button[] buttonChangeList = Lang.langChangeButton("English", buttonList, "userModify");
-
-            TextField[] textFieldList = {txfId, txfName, txfSurname, txfEmail, txfTlfNumber, txfUser};
-            TextField[] textFieldChangeList = Lang.langChangeTextField("English", textFieldList, "userModify");
-
-            for (int i = 0; i < labelChangeList.length; i++) {
-                labelList[i].setText(labelChangeList[i].getText());
-            }
-
-            for (int i = 0; i < buttonChangeList.length; i++) {
-                buttonList[i].setText(buttonChangeList[i].getText());
-            }
-
-            for (int i = 0; i < textFieldChangeList.length; i++) {
-                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
-            }
+            langChange("English");
+        } else {
+            langChange("Spanish");
         }
 
         User loggedUser = IndexController.getLoggedUser();
@@ -122,6 +106,32 @@ public class UserModifyController {
         };
 
         menuItem2.setOnAction(event2);
+    }
+
+    @FXML
+    private void langChange(String lang) throws IOException{
+        if (langChangeBol) {
+            Label[] labelList = {lblUserTitle, lblUserManagement, lblMachineManagement, lblReservesManagement, lblId, lblName, lblSurname, lblEmail, lblPhoneNumber, lblUserName, lblUserType, lblRegisterDate};
+            Label[] labelChangeList = Lang.langChangeLabel(lang, labelList, "userModify");
+
+            Button[] buttonList = {btnPasswordRestart, btnVisualice, btnModify, btnCreate, btnSearch};
+            Button[] buttonChangeList = Lang.langChangeButton(lang, buttonList, "userModify");
+
+            TextField[] textFieldList = {txfId, txfName, txfSurname, txfEmail, txfTlfNumber, txfUser};
+            TextField[] textFieldChangeList = Lang.langChangeTextField(lang, textFieldList, "userModify");
+
+            for (int i = 0; i < labelChangeList.length; i++) {
+                labelList[i].setText(labelChangeList[i].getText());
+            }
+
+            for (int i = 0; i < buttonChangeList.length; i++) {
+                buttonList[i].setText(buttonChangeList[i].getText());
+            }
+
+            for (int i = 0; i < textFieldChangeList.length; i++) {
+                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
+            }
+        }
     }
 
     public void modify() throws IOException {

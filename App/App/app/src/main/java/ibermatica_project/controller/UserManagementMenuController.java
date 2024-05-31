@@ -61,29 +61,13 @@ public class UserManagementMenuController {
     @SuppressWarnings({ "unchecked", "rawtypes" })
     @FXML
     protected void initialize() throws IOException {
+        langChangeBol = AdmMenuController.getLangChangeBol();
         if (langChangeBol) {
-            Label[] labelList = {lblUserTitle, lblUserManagement, lblMachineManagement, lblReservesManagement};
-            Label[] labelChangeList = Lang.langChangeLabel("English", labelList, "userManagement");
-
-            Button[] buttonList = {btnSearch, btnModify, btnUserCreate};
-            Button[] buttonChangeList = Lang.langChangeButton("English", buttonList, "userManagement");
-
-            TextField[] textFieldList = {txfSearch};
-            TextField[] textFieldChangeList = Lang.langChangeTextField("English", textFieldList, "userManagement");
-
-            for (int i = 0; i < labelChangeList.length; i++) {
-                labelList[i].setText(labelChangeList[i].getText());
-            }
-
-            for (int i = 0; i < buttonChangeList.length; i++) {
-                buttonList[i].setText(buttonChangeList[i].getText());
-            }
-
-            for (int i = 0; i < textFieldChangeList.length; i++) {
-                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
-            }
+            langChange("English");
+        } else {
+            langChange("Spanish");
         }
-
+        
         User loggedUser = IndexController.getLoggedUser();
 
         MenuItem menuItem1 = new MenuItem("Cerrar sesión"), menuItem2 = new MenuItem("Inicio");
@@ -169,6 +153,33 @@ public class UserManagementMenuController {
         simpleUsersList = db.searchAllSimpleUsers();
 
         generateTableView(simpleUsersList, actionCol);
+    }
+
+    @FXML
+    private void langChange(String lang) throws IOException {
+        if (langChangeBol) {
+            Label[] labelList = {lblUserTitle, lblUserManagement, lblMachineManagement, lblReservesManagement};
+            Label[] labelChangeList = Lang.langChangeLabel(lang, labelList, "userManagement");
+
+            Button[] buttonList = {btnSearch, btnModify, btnUserCreate};
+            Button[] buttonChangeList = Lang.langChangeButton(lang, buttonList, "userManagement");
+
+            TextField[] textFieldList = {txfSearch};
+            TextField[] textFieldChangeList = Lang.langChangeTextField(lang, textFieldList, "userManagement");
+
+            for (int i = 0; i < labelChangeList.length; i++) {
+                labelList[i].setText(labelChangeList[i].getText());
+            }
+
+            for (int i = 0; i < buttonChangeList.length; i++) {
+                buttonList[i].setText(buttonChangeList[i].getText());
+            }
+
+            for (int i = 0; i < textFieldChangeList.length; i++) {
+                textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
+            }
+        }
+
     }
 
     @SuppressWarnings("rawtypes")

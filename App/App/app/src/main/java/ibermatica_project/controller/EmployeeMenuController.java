@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import ibermatica_project.lang.Lang;
 import ibermatica_project.model.BlockDay;
 import ibermatica_project.model.Machine;
 import ibermatica_project.model.Reservation;
@@ -30,7 +31,8 @@ import javafx.util.Callback;
 
 public class EmployeeMenuController {
     @FXML
-    Label lblName, lblSurname, lblEmail, lblTlfNumber, lblUsername, lblTitle, lblError;
+    Label lblNameInfo, lblSurnameInfo, lblEmailInfo, lblTlfNumberInfo, lblUsernameInfo, lblTitle, lblError,
+        lblName, lblSurname, lblEmail, lblPhoneNumber, lblUserName, lblStartDate, lblEndDate, lblSerialNumber;
 
     @FXML
     TextField txfStartDate, txfEndDate, txfSerialNumber;
@@ -43,22 +45,26 @@ public class EmployeeMenuController {
     TableView tblUserReservation;
 
     @FXML
-    Button btnAddReservation;
+    Button btnAddReservation, btnPasswordRestart, btnSpanish, btnEnglish;
 
     DataBase db = new DataBase("localhost", "ibermatica_db", null, "root", null);
 
     ArrayList<Reservation> reservationList = new ArrayList<Reservation>();
     User loggedUser = IndexController.getLoggedUser();
 
+    static boolean langChangeBol = false;
+
     @SuppressWarnings({ "rawtypes", "unchecked" })
     @FXML
     protected void initialize() throws IOException {
+        btnSpanish.setDisable(true);
+        btnSpanish.setVisible(false);
         lblTitle.setText("Bienvenido " + loggedUser.getName());
-        lblName.setText(loggedUser.getName());
-        lblSurname.setText(loggedUser.getSurname());
-        lblUsername.setText(loggedUser.getUsername());
-        lblEmail.setText(loggedUser.getEmail());
-        lblTlfNumber.setText(Integer.toString(loggedUser.getTlfNum()));
+        lblNameInfo.setText(loggedUser.getName());
+        lblSurnameInfo.setText(loggedUser.getSurname());
+        lblUsernameInfo.setText(loggedUser.getUsername());
+        lblEmailInfo.setText(loggedUser.getEmail());
+        lblTlfNumberInfo.setText(Integer.toString(loggedUser.getTlfNum()));
 
         MenuItem menuItem1 = new MenuItem("Cerrar sesión");
         btnMenu.setText(loggedUser.getName());
@@ -107,6 +113,54 @@ public class EmployeeMenuController {
         reservationList = db.searchReservationWithUserId(loggedUser.getUserId());
 
         generateTableView(reservationList, actionCol);
+    }
+
+    @FXML
+    private void langChange(String lang) throws IOException{
+        Label[] labelList = {lblName, lblSurname, lblEmail, lblPhoneNumber, lblUserName, lblStartDate, lblEndDate, lblSerialNumber, lblTitle};
+        Label[] labelChangeList = Lang.langChangeLabel(lang, labelList, "employeeMenu");
+
+        Button[] buttonList = {btnAddReservation, btnPasswordRestart};
+        Button[] buttonChangeList = Lang.langChangeButton(lang, buttonList, "employeeMenu");
+
+        TextField[] textFieldList = {txfStartDate, txfEndDate, txfSerialNumber};
+        TextField[] textFieldChangeList = Lang.langChangeTextField(lang, textFieldList, "employeeMenu");
+
+        for (int i = 0; i < labelChangeList.length; i++) {
+            labelList[i].setText(labelChangeList[i].getText());
+        }
+
+        for (int i = 0; i < buttonChangeList.length; i++) {
+            buttonList[i].setText(buttonChangeList[i].getText());
+        }
+
+        for (int i = 0; i < textFieldChangeList.length; i++) {
+            textFieldList[i].setPromptText(textFieldChangeList[i].getPromptText());
+        }
+    }
+
+    @FXML
+    private void btnSpanishActionPerformed() throws IOException {
+        langChangeBol = false;
+        langChange("Spanish");
+        btnSpanish.setVisible(false);
+        btnSpanish.setDisable(true);
+        btnSpanish.setLayoutX(703);
+        btnEnglish.setLayoutY(10);
+        btnEnglish.setVisible(true);
+        btnEnglish.setDisable(false);
+    }
+
+    @FXML
+    private void btnEnglishActionPerformed() throws IOException {
+        langChangeBol = true;
+        langChange("English");
+        btnEnglish.setVisible(false);
+        btnEnglish.setDisable(true);
+        btnEnglish.setLayoutX(703);
+        btnSpanish.setLayoutY(10);
+        btnSpanish.setVisible(true);
+        btnSpanish.setDisable(false);
     }
 
     @SuppressWarnings("rawtypes")
