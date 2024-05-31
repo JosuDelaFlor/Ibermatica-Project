@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane fx:id="anchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="900.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ibermatica_project.controller.ReservationModifyMenuController">
+    <children>
+        <Pane layoutX="284.0" layoutY="-1.0" prefHeight="608.0" prefWidth="618.0">
+            <children>
+                <Label id="lbl-menu-title" fx:id="lblReservationTitle" layoutX="83.0" layoutY="14.0" prefHeight="47.0" prefWidth="454.0" text="Gestión de reservas" />
+                <MenuButton fx:id="btnMenu" layoutX="488.0" layoutY="25.0" mnemonicParsing="false" text="MenuButton">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor></MenuButton>
+                <Button fx:id="btnVisualize" layoutX="367.0" layoutY="496.0" mnemonicParsing="false" onAction="#loadReservationMangementMenuScene" prefHeight="25.0" prefWidth="81.0" styleClass="btn-visualice" text="Visualizar">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor></Button>
+                <Button fx:id="btnCreate" layoutX="185.0" layoutY="496.0" mnemonicParsing="false" onAction="#loadReservationAddMenuScene" styleClass="btn-success" text="Agregar Reserva">
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor></Button>
+                <ImageView layoutX="262.0" layoutY="85.0">
+                    <image>
+                        <Image url="@../img/icons8-calendar-96.png" />
+                    </image>
+                </ImageView>
+                <TextField fx:id="txfSearchInput" layoutX="23.0" layoutY="292.0" onAction="#search" prefHeight="25.0" prefWidth="23.0" promptText="0" />
+                <TextField fx:id="txfId" layoutX="86.0" layoutY="249.0" prefHeight="25.0" prefWidth="173.0" promptText="DNI" />
+                <TextField fx:id="txfSerialNumber" layoutX="388.0" layoutY="249.0" prefHeight="25.0" prefWidth="173.0" promptText="Número de serie" />
+                <TextField fx:id="txfStartDate" layoutX="85.0" layoutY="343.0" prefHeight="25.0" prefWidth="173.0" promptText="Fehca de inicio yyyy-mm-dd" />
+                <TextField fx:id="txfEndDate" layoutX="388.0" layoutY="343.0" prefHeight="25.0" prefWidth="173.0" promptText="Fecha final yyyy-mm-dd" />
+                <ImageView layoutX="286.0" layoutY="331.0">
+                    <image>
+                        <Image url="@../img/icons8-clock-checked-50.png" />
+                    </image>
+                </ImageView>
+                <Button fx:id="btnModify" layoutX="257.0" layoutY="422.0" mnemonicParsing="false" onAction="#modify" prefHeight="25.0" prefWidth="107.0" styleClass="btn-danger" text="Modificar" />
+                <Button fx:id="btnSearch" layoutX="134.0" layoutY="422.0" mnemonicParsing="false" onAction="#search" text="Buscar" />
+                <Label fx:id="lblId" layoutX="86.0" layoutY="232.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="DNI" />
+                <Label fx:id="lblSerialNumber" layoutX="388.0" layoutY="232.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Número de serie" />
+                <Label fx:id="lblStartDate" layoutX="86.0" layoutY="322.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Fecha de inicio" />
+                <Label fx:id="lblEndDate" layoutX="388.0" layoutY="322.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Fecha final" />
+                <Label fx:id="lblReservationId" layoutX="23.0" layoutY="274.0" prefHeight="17.0" prefWidth="23.0" styleClass="lbl-user-info" text="Id" />
+            <Label fx:id="lblError" layoutX="86.0" layoutY="392.0" prefHeight="17.0" prefWidth="382.0" styleClass="lbl-error" />
+            </children>
+        </Pane>
+        <Pane prefHeight="600.0" prefWidth="284.0">
+            <children>
+                <Button fx:id="btnUserManagement" layoutX="58.0" layoutY="41.0" mnemonicParsing="false" onAction="#loadUserManagementMenuScene" prefHeight="149.0" prefWidth="152.0" style="-fx-background-color: white;" styleClass="btn-img">
+                    <graphic>
+                        <ImageView fitHeight="149.0" fitWidth="152.0" styleClass="btn-img">
+                            <image>
+                                <Image url="@../img/group.png" />
+                            </image>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                    </graphic>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button fx:id="btnMachineManagement" layoutX="47.0" layoutY="202.0" mnemonicParsing="false" onAction="#loadMachineManagementMenuScene" prefHeight="159.0" prefWidth="191.0" style="-fx-background-color: white;" styleClass="btn-img">
+                    <graphic>
+                        <ImageView fitHeight="149.0" fitWidth="152.0" styleClass="btn-img">
+                            <image>
+                                <Image url="@../img/machine.png" />
+                            </image>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                    </graphic>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Button fx:id="btnReserveManagement" layoutX="56.0" layoutY="405.0" mnemonicParsing="false" onAction="#loadReservationMangementMenuScene" prefHeight="159.0" prefWidth="173.0" style="-fx-background-color: white;" styleClass="btn-img">
+                    <graphic>
+                        <ImageView fitHeight="149.0" fitWidth="152.0" styleClass="btn-img">
+                            <image>
+                                <Image url="@../img/booking.png" />
+                            </image>
+                            <cursor>
+                                <Cursor fx:constant="HAND" />
+                            </cursor>
+                        </ImageView>
+                    </graphic>
+                    <cursor>
+                        <Cursor fx:constant="HAND" />
+                    </cursor>
+                </Button>
+                <Line endX="6.0" endY="570.0" layoutX="278.0" layoutY="28.0" startX="6.0" startY="-28.0" />
+                <Label fx:id="lblUserManagement" layoutX="66.0" layoutY="16.0" prefHeight="25.0" prefWidth="152.0" styleClass="lbl-info" text="Gestión de usuarios" />
+                <Label fx:id="lblMachineManagement" layoutX="56.0" layoutY="177.0" prefHeight="25.0" prefWidth="173.0" styleClass="lbl-info" text="Gestión de maquinaria" />
+                <Label fx:id="lblReservesManagement" layoutX="69.0" layoutY="380.0" styleClass="lbl-info" text="Gestión de reservas" textFill="DEEPSKYBLUE" />
+            </children>
+        </Pane>
+    </children>
+</AnchorPane>
