@@ -53,6 +53,8 @@ public class Lang extends Properties {
             keys = setKeys(scene);
         } else if (scene.equals("reservationAdd")) {
             keys = setKeys(scene);
+        } else if (scene.equals("reservationModify")) {
+            keys = setKeys(scene);
         }
 
         Lang lang = new Lang(langName);
@@ -85,6 +87,8 @@ public class Lang extends Properties {
         } else if (scene.equals("reservationManagement")) {
             keys = setKeys(scene);
         } else if (scene.equals("reservationAdd")) {
+            keys = setKeys(scene);
+        } else if (scene.equals("reservationModify")) {
             keys = setKeys(scene);
         }
 
@@ -121,6 +125,8 @@ public class Lang extends Properties {
         } else if (scene.equals("reservationManagement")) {
             keys = setKeys(scene);
         } else if (scene.equals("reservationAdd")) {
+            keys = setKeys(scene);
+        } else if (scene.equals("reservationModify")) {
             keys = setKeys(scene);
         }
         
@@ -171,6 +177,9 @@ public class Lang extends Properties {
         } else if (scene.equals("reservationAdd")) {
             keys.addAll(Arrays.asList("lblReservationTitle", "lblUserManagement", "lblMachineManagement", "lblReservesManagement", "lblStartDate", "lblEndDate",
                 "btnReset", "btnModify", "btnCreate", "btnVisualize", "txfStartDate", "txfId", "txfEndDate", "txfSerialNumber"));
+        } else if (scene.equals("reservationModify")) {
+            keys.addAll(Arrays.asList("lblReservationTitle", "lblUserManagement", "lblMachineManagement", "lblReservesManagement", "lblStartDate", "lblEndDate", "lblSerialNumber", "lblId",
+                "btnSearch", "btnModify", "btnCreate", "btnVisualize", "txfStartDate", "txfId", "txfEndDate", "txfSerialNumber"));
         }
         return keys;
     }

@@ -45,11 +45,11 @@
                 </ImageView>
                 <Button fx:id="btnModify" layoutX="257.0" layoutY="422.0" mnemonicParsing="false" onAction="#modify" prefHeight="25.0" prefWidth="107.0" styleClass="btn-danger" text="Modificar" />
                 <Button fx:id="btnSearch" layoutX="134.0" layoutY="422.0" mnemonicParsing="false" onAction="#search" text="Buscar" />
-                <Label layoutX="86.0" layoutY="232.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="DNI" />
-                <Label layoutX="388.0" layoutY="232.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Número de serie" />
-                <Label layoutX="86.0" layoutY="322.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Fecha de inicio" />
-                <Label layoutX="388.0" layoutY="322.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Fecha final" />
-                <Label layoutX="23.0" layoutY="274.0" prefHeight="17.0" prefWidth="23.0" styleClass="lbl-user-info" text="Id" />
+                <Label fx:id="lblId" layoutX="86.0" layoutY="232.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="DNI" />
+                <Label fx:id="lblSerialNumber" layoutX="388.0" layoutY="232.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Número de serie" />
+                <Label fx:id="lblStartDate" layoutX="86.0" layoutY="322.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Fecha de inicio" />
+                <Label fx:id="lblEndDate" layoutX="388.0" layoutY="322.0" prefHeight="17.0" prefWidth="149.0" styleClass="lbl-user-info" text="Fecha final" />
+                <Label fx:id="lblReservationId" layoutX="23.0" layoutY="274.0" prefHeight="17.0" prefWidth="23.0" styleClass="lbl-user-info" text="Id" />
             <Label fx:id="lblError" layoutX="86.0" layoutY="392.0" prefHeight="17.0" prefWidth="382.0" styleClass="lbl-error" />
             </children>
         </Pane>
