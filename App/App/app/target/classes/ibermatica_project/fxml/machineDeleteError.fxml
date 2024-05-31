@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ibermatica_project.controller.MachineDeteteErrorController">
+    <children>
+        <Label id="lbl-title" layoutX="184.0" layoutY="29.0" prefHeight="25.0" prefWidth="233.0" text="Usuario" />
+        <Label fx:id="lblInfo" layoutX="29.0" layoutY="78.0" prefHeight="88.0" prefWidth="543.0" style="-fx-alignment: start;" styleClass="lbl-user-info" />
+        <Button fx:id="btnDelete" layoutX="237.0" layoutY="179.0" mnemonicParsing="false" onAction="#deleteReserver" prefHeight="42.0" prefWidth="127.0" styleClass="btn-danger" text="Eliminar reservas" />
+        <Button fx:id="btnBack" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#loadMachineManagementMenuScene" prefHeight="42.0" prefWidth="60.0" style="-fx-background-color: white;" styleClass="btn-img">
+            <graphic>
+                <ImageView fitHeight="45.0" fitWidth="45.0">
+                    <image>
+                        <Image url="@../img/back.png" />
+                    </image>
+                </ImageView>
+            </graphic>
+        </Button>
+    </children>
+</AnchorPane>

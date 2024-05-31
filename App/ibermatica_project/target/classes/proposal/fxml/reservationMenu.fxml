@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="480.0" prefWidth="640.0" stylesheets="@../css/style.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proposal.controller.ReservationViewController">
+    <children>
+        <Label layoutX="180.0" layoutY="14.0" prefHeight="35.0" prefWidth="281.0" styleClass="lbl-tlt" text="GESTIÓN IBERMÁTICA" />
+        <ImageView fitHeight="100.0" fitWidth="281.0" layoutX="345.0" layoutY="366.0">
+            <image>
+                <Image url="@../img/logo.jpg" />
+            </image>
+        </ImageView>
+        <Button fx:id="btnback" layoutX="30.0" layoutY="404.0" mnemonicParsing="false" onAction="#back" prefHeight="29.0" prefWidth="54.0" styleClass="btn" text="Atras" />
+        <Button fx:id="btnLogOut" layoutX="14.0" layoutY="19.0" mnemonicParsing="false" onAction="#logOut" styleClass="btn" text="Cerrar Sesion" />
+        <ImageView fx:id="btnUserData" fitHeight="53.0" fitWidth="61.0" layoutX="565.0" layoutY="7.0" onMouseClicked="#loadUserDataScene">
+            <image>
+                <Image url="@../img/loginIcon.jpg" />
+            </image>
+        </ImageView>
+    <TableView fx:id="tbtReservation" layoutX="23.0" layoutY="112.0" prefHeight="251.0" prefWidth="595.0" />
+    <Button fx:id="btnModify" layoutX="442.0" layoutY="66.0" mnemonicParsing="false" onAction="#loadModifyReservationScene" styleClass="btn" text="Modificar" />
+    <ComboBox fx:id="comboSearchType" layoutX="23.0" layoutY="68.0" prefWidth="150.0" promptText="Tipo de filtro" />
+    <TextField fx:id="txfSearch" layoutX="180.0" layoutY="68.0" promptText="Filtrado" />
+    <Button fx:id="btnSearch" layoutX="354.0" layoutY="68.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="61.0" styleClass="btn" text="Filtrar" onAction="#search" />
+    <Label fx:id="lblError" layoutX="23.0" layoutY="375.0" prefHeight="17.0" prefWidth="595.0" styleClass="lbl-error" />
+</children>
+</AnchorPane>
